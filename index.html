@@ -287,11 +287,11 @@
 		  
 		  <h2 id="wat-overthrow">What is Overthrow?</h2>
 		  
-		  <p>Overthrow.js is a conservative attempt at filling the gaps in <code>overflow</code> support, with an emphasis on letting native implementations do their thing. Out of necessity, Overthrow examines the user agent string to whitelist platforms that have <code>overflow</code> native support, but not before checking through more reliable means: namely, iOS5's touch scrolling CSS property, and a broad desktop browser inference test (no touch support with a screen greater than 1200px wide).  </p>
+		  <p>Overthrow.js is a conservative attempt at filling the gaps in <code>overflow</code> support, with an emphasis on letting native implementations do their thing. Out of necessity, Overthrow examines the user agent string to whitelist platforms that are known to have native <code>overflow</code> support, but not before checking through more reliable and agnostic means: namely, iOS5's (and now Chrome Android's too!) touch scrolling CSS property, and a broad desktop browser inference test (no touch event support with a screen greater than 1200px wide).  </p>
 		  
-		  <p>First and foremost, Overthrow is designed to simply enable native CSS <code>overflow</code> in browsers it deems to have native support, but it includes a touch-scrolling polyfill too! In platforms that don't appear to support <code>overflow</code> natively, and support touch events, Overflow will polyfill the feature, allowing smooth, momentum-based scrolling in browsers that'd otherwise be left with an innaccessible experience.</p>
+		  <p>First and foremost, Overthrow is designed to simply enable native CSS <code>overflow</code> in browsers it deems to have native support, but it includes a touch-scrolling polyfill too! In platforms that don't appear to support <code>overflow</code> natively, but do support touch events, Overthrow will polyfill the feature, allowing smooth, momentum-based scrolling in browsers that'd otherwise be left with an innaccessible experience.</p>
 		  
-		  <p>Perhaps most importantly, Overthrow enables <code>overflow</code> support as a qualified, progressive enhancement, meaning your content starts out tall and accessible, and properties like <code>width</code> and <code>height</code> are assigned only in browsers where overflow content can be scrolled (either natively or polyfilled). In browsers that don't support overflow natively, and also don't support touch events, the content will not receive dimensions at all.</p>
+		  <p>Perhaps most importantly, Overthrow enables <code>overflow</code> support as a qualified, progressive enhancement, meaning your content starts out tall and accessible, and properties like <code>width</code> and <code>height</code> are assigned only in browsers where overflow content can reliably be scrolled (either natively or polyfilled). In browsers that don't support overflow natively, and also don't support touch events, the content will not receive dimensions at all, leaving users with a slightly less-enhanced, but perfectly accessible experience.</p>
 
 		  
 		 <h2 id="features">Features</h2>
@@ -299,11 +299,11 @@
 		 <ul class="features">
 				 <li>Lightweight JavaScript: 1kb after min/gzip</li>
 				 <li>Dual MIT / GPLv2 license: use it wherever you want.</li>
-				 <li>Safe for use in cross-device development</li>
+				 <li>Designed for responsive design: safe for use in cross-device development</li>
 				 <li>Framework-independent: use with any JS library, or none at all!</li>
-				 <li>Rather than simulating scrolling with CSS properties, the native JavaScript <code>scrollTop</code> and <code>scrollLeft</code> properties are used. This means any you can use any standard web conventions for scrolling an overthrow element, such as <code>#fragment</code> anchor links, and so on.</li>
-				 <li>Form elements are safe: Overthrow doesn't interfere with form controls</li>
-				 <li>Embeddable: just like standard CSS overflow, you can embed overthrow elements inside one another.</li>
+				 <li>Native scrollTop: Rather than simulating scrolling with CSS properties, the native JavaScript <code>scrollTop</code> and <code>scrollLeft</code> properties are used. This means any you can use any standard web conventions for scrolling an overthrow element, such as <code>#fragment</code> anchor links, and so on.</li>
+				 <li>Safe for form elements: Overthrow doesn't interfere with form controls</li>
+				 <li>Nestable: just like standard CSS overflow, you can nest overthrow elements inside one another.</li>
 		</ul>
 		
 		<h2 id="support">Support</h2>

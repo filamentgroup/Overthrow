@@ -68,7 +68,7 @@
 		// options hash:
 			* left is the desired horizontal scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
 			* top is the desired vertical scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
-			* duration is the number of milliseconds the throw will take. Default is 200.
+			* duration is the number of milliseconds the throw will take. Default is 100.
 			* easing is an optional custom easing function. Default is w.overthrow.easing. Must follow the easing function signature 
 		*/
 		toss = function( elem, options ){
@@ -76,7 +76,7 @@
 				o = options || {},
 				top = o.top || "+0",
 				left = o.left || "+0",
-				duration = o.duration || 200,
+				duration = o.duration || 100,
 				easing = o.easing || w.overthrow.easing,
 				sLeft = elem.scrollLeft,
 				sTop = elem.scrollTop;

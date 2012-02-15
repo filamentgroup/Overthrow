@@ -12,7 +12,7 @@
 		// so we can enable it but not polyfill
 		overflowProbablyAlreadyWorks = 
 			// Features-first. iOS5 overflow scrolling property check - no UA needed here. thanks Apple :)
-			"WebkitOverflowScrolling" in doc.documentElement.style
+			"WebkitOverflowScrolling" in docElem.style
 			// Touch events aren't supported and screen width is greater than X
 			// ...basically, this is a loose "desktop browser" check. 
 			// It may wrongly opt-in very large tablets with no touch support.

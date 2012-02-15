@@ -1,0 +1,14 @@
+/*
+Styles for testing overthrow
+*/
+
+.overthrow .overthrow {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	height: 100px;
+	visibility: hidden;
+}
+
+.overthrow .overthrow * {
+	width: 200%;
+}

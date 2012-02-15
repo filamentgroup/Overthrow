@@ -24,7 +24,7 @@
 				var ua = w.navigator.userAgent,
 					// Webkit crosses platforms, and the browsers on our list run at least version 534
 					webkit = ua.match( /AppleWebKit\/([0-9]+)/ ),
-					wkversion = webkit && parseFloat( webkit[1] ),
+					wkversion = webkit && webkit[1],
 					wkLte534 = webkit && wkversion >= 534;
 					
 				return (

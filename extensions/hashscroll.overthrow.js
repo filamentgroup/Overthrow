@@ -30,7 +30,7 @@
 			}	
 		}, false);
 		
-		
+		/*
 		// this hashchange isn't working quite... :(
 		w.addEventListener( "hashchange", function(){
 			var elem = w.document.getElementById( location.hash.replace("#","") )
@@ -40,7 +40,7 @@
 				scrollToElem( elem );
 			}
 		});
-		
+		*/
 
 	}		
 })( this );

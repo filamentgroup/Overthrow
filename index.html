@@ -262,7 +262,7 @@
 		
 		<h2 id="support">Support</h2>
 		  
-		  <p>Overthrow's goal is to create an accessible experience in every browser, and if possible, an enhanced experience in modern browsers. As such, Overthrow has 3 potential support situations: native, polyfilled, or none. Here's where some popular browsers land on that spectrum:</p>
+		  <p>Overthrow's goal is to create an accessible experience in every browser, and if possible, an enhanced experience in modern browsers. As such, Overthrow has 3 potential support situations: native, polyfilled, or none (which simply means the content is left uncropped and tall/wide). Here's where some popular browsers land on that spectrum:</p>
 		  
 
 		  
@@ -321,9 +321,11 @@
 		<p>In browsers that Overthrow.js deems capable of scrolling overflowed content (either natively, or using its polyfill), it will add a class of <code>overflow</code> to the HTML element. Add this CSS to your stylesheet somewhere, enabling overflow on all elements in your document that have an <code>overthrow</code> class.</p>
 
 <pre class="overthrow"><code>
+/* Overthrow CSS:
+   Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
 .overthrow .overthrow {
-	overflow: auto;
-	-webkit-overflow-scrolling: touch;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 </code></pre>
 
@@ -340,17 +342,32 @@
 
 <ul>
 	<li><strong>overthrow.set</strong>: function to initialize overthrow behavior and style in the page. Adds "overthrow" class to <code>html</code> element, and touch listener for polyfilled browsers</li>
-	<li><strong>overthrow.forget</strong>: function to destroy overthrow behavior and style in the page. Removes "overthrow" class from HTML element, and touch listener for polyfilled browsers</li>
+	<li><strong>overthrow.forget</strong>: function to remove overthrow behavior and style in the page. Removes "overthrow" class from HTML element, and touch event listener in polyfilled browsers, and restores default easing.</li>
+	<li><strong>overthrow.easing</strong>: an overrideable property that stores the default easing function (using any of Robert Penner's easing equations.)</li>
+	<li><strong>overthrow.toss</strong>: function to programatically scroll an overthrow element.
+			<p>To call, pass a required first argument referencing the overthrow element to scroll, and a hash of optional configuration properties.</p>
+<pre><code>
+overthrow.toss( element, { top: 500 } );
+</code></pre>	
+<p>Options</p>			
+			<ul>
+				<li><strong>left</strong>: the desired horizontal scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.</li>
+				<li><strong>top</strong>: the desired vertical scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.</li>
+			<li><strong>duration</strong>: is the number of milliseconds the throw will take. Default is 100.
+			<li><strong>easing</strong>: an optional custom easing function. Default is the included ease-out cubic equation. Overrides must follow the easing function signature of Robert Penner easing equations, which have 4 arguments: t = current iteration, b = initial value, c = end value, d = total iterations.</li>
+			</ul>
+		</li>
+	<li><strong>overthrow.intercept</strong>: stop a toss that is currently iterating</li>	
 	<li><strong>overthrow.support</strong>: string representing the browser's overthrow support type: "native", "polyfilled", or "none"</li>
 	</ul>
 	
-	
+	<h3 id="issues">Issues</h3>
+	<p>For known issues with Overthrow, or to file a new one, please visit the <a href="http://github.com/filamentgroup/overthrow/issues">issue tracker</a>.</p>
 
 
 	<h2>That's about it.</h2>
-	<p><a href="#top">Back to top, then?</a></p>
 
-		<h3>If not, here's some extra content to scroll through...</h3>
+		<h3>Here's some extra demo content to scroll through...</h3>
 
 	    
 

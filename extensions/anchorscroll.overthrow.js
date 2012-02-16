@@ -29,18 +29,6 @@
 				}	
 			}	
 		}, false);
-		
-		/*
-		// this hashchange isn't working quite... :(
-		w.addEventListener( "hashchange", function(){
-			var elem = w.document.getElementById( location.hash.replace("#","") )
-			
-			if( elem ){
-				overthrow.closest( elem ).scrollTop = 0;
-				scrollToElem( elem );
-			}
-		});
-		*/
 
 	}		
 })( this );

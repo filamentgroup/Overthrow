@@ -172,11 +172,25 @@
 		#nav {
 			text-align: center;
 		}
+		#nav ul {
+		max-width: 43em;
+		padding: 0;
+		margin: 0 auto;
+		}
 		#nav ul, #nav li {
-			display: inline-block;
+			display: block;
 			list-style: none;
-			padding: .3em;
+		}	
+		#nav li {
+			font-size: .9em;
 			text-align: center;
+		}
+		#nav li a {
+			display: block;
+			text-decoration: none;
+			padding: .5em 0;
+			margin: 0 2%;
+			border-bottom: 1px solid #ddd;
 		}
 		.embedder {
 			height: 220px;
@@ -215,6 +229,18 @@
 			.project-sub {
 				padding: 1em 10%;
 			}
+			#nav ul {
+				margin: 1em auto;
+				padding: 0;
+				text-align: center;
+			}
+			#nav li, #nav li a {
+				display: inline-block;
+				padding: 0 .5em;
+				margin: 0;
+				border: 0;
+			}
+
 		}
 	</style>
 	<script src="overthrow.js"></script>

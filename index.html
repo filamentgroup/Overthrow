@@ -362,7 +362,7 @@
 &lt;div id=&quot;foo&quot; <strong>class=&quot;overthrow&quot;</strong>&gt;Content goes here!&lt;/div&gt;
 </code></pre>
 
-		<p>In browsers that Overthrow.js deems capable of scrolling overflowed content (either natively, or using its polyfill), it will add a class of <code>overflow</code> to the HTML element. Add this CSS to your stylesheet somewhere, enabling overflow on all elements in your document that have an <code>overflow</code> class.</p>
+		<p>In browsers that Overthrow.js deems capable of scrolling overflowed content (either natively, or using its polyfill), it will add a class of <code>overflow</code> to the HTML element. Add this CSS to your stylesheet somewhere, enabling overflow on all elements in your document that have an <code>overthrow</code> class.</p>
 
 <pre class="overthrow"><code>
 .overthrow .overthrow {
@@ -371,7 +371,7 @@
 }
 </code></pre>
 
-<p>Lastly, design away! Any time you want to set dimensions on an element to trigger overflow scrolling, just be sure to key off that <code>overflow</code> class on the HTML element.</p> 
+<p>Lastly, design away! Any time you want to set dimensions on an element to trigger overflow scrolling, just be sure to key off that <code>overthrow</code> class on the <code>html</code> element.</p> 
 <pre class="overthrow"><code>
 .overthrow #foo {
 	height: 280px;
@@ -383,7 +383,7 @@
 <p>Overflow adds one variable to the global namespace: <code>overthrow</code>. It has the following methods and properties:</p>
 
 <ul>
-	<li><strong>overthrow.set</strong>: function to initialize overthrow behavior and style in the page. Adds "overthrow" class to HTML element, and touch listener for polyfilled browsers</li>
+	<li><strong>overthrow.set</strong>: function to initialize overthrow behavior and style in the page. Adds "overthrow" class to <code>html</code> element, and touch listener for polyfilled browsers</li>
 	<li><strong>overthrow.forget</strong>: function to destroy overthrow behavior and style in the page. Removes "overthrow" class from HTML element, and touch listener for polyfilled browsers</li>
 	<li><strong>overthrow.support</strong>: string representing the browser's overthrow support type: "native", "polyfilled", or "none"</li>
 	</ul>

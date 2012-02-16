@@ -1,4 +1,4 @@
-/*! overthrow.js. An overflow:auto polyfill for responsive design. (c) 2012: Scott Jehl, Filament Group, Inc. Dual MIT/BSD license */
+/*! overthrow.js. An overflow:auto polyfill for responsive design. (c) 2012: Scott Jehl, Filament Group, Inc. Dual MIT/GPLv2 license */
 (function( w, undefined ){
 	
 	var doc = w.document,

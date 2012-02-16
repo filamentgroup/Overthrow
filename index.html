@@ -3,15 +3,14 @@
 <head>
 	<meta charset=utf-8 />
 	<title>Overthrow Demo</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1">	
-	
+	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<style>
-		/* generic overthrow styles */
-		.overthrow .overthrow {
-			overflow: auto;
-			-webkit-overflow-scrolling: touch;
-		}
-
+	    /* Overthrow CSS:
+		   Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
+	    .overthrow .overthrow {
+	        overflow: auto;
+	        -webkit-overflow-scrolling: touch;
+	    }
 		.overthrow #content.overthrow {
 			height: 15em;
 		}
@@ -51,9 +50,8 @@
 			font-size: 3em;
 			margin: .25em 0 -2px;
 			overflow: hidden;
-			height: .7em;
+			height: .8em;
 			line-height: .9;
-			
 		}
 		.project-hed i {
 			font-style: normal;
@@ -63,7 +61,6 @@
 			letter-spacing: -0.03em;
 			padding-right: .07em;
 		}
-		
 		.project-sub {
 			background: #fff;
 			font-size: 1em;
@@ -78,7 +75,6 @@
 			color: #fff;
 			padding: .2em .4em;
 			display: inline-block;
-			
 		}
 		#content {
 			margin: 0;
@@ -91,9 +87,9 @@
 			margin-top: 0;
 		}
 		.overthrow .overthrow #wat:after {
-			   content:  "\2193";
-			   font-size: .8em;
-			   padding: 0 .2em;
+			content:  "\2193";
+			font-size: .8em;
+			padding: 0 .2em;
 		}
 		pre {
 			border: 1px dotted #aaa;
@@ -103,37 +99,12 @@
 			display: block;
 			font-weight: normal;
 		}
-		#browserstatus {
-			text-align: center;
-			
-		}
-		#browserstatus p {
-			display: inline-block;
-			font-size: 1em;
-
-		}
-		#browserstatus p.native strong, td span {
-			color: #fff;
-			padding: .2em .5em;
-			font-weight: normal;
-		}
-		#browserstatus p.native strong, span.native {
-			background: green;
-		}
-		#browserstatus p.polyfilled strong, span.polyfilled {
-			background: orange;
-		}
-		#browserstatus p.none strong, span.none {
-			background: red;
-			
-		}
 		#content h2, #content h3, #content h4 {
 			text-align: center;
 			font-weight: bold;
 			padding-top: 2em;
 			margin-top: 1em;
 		}
-		
 		.code {
 			text-align: center;
 		}
@@ -169,9 +140,9 @@
 			border-collapse: collapse;
 		}
 		td, th {
-		border: 1px solid #ddd;
-		padding: .3em 1em;
-		text-align: left;
+			border: 1px solid #ddd;
+			padding: .3em 1em;
+			text-align: left;
 		}
 		tr.you td {
 			background: papayawhip; /* @wilto holla */
@@ -199,7 +170,7 @@
 			background: #eee;
 		}
 		#nav {
-		text-align: center;
+			text-align: center;
 		}
 		#nav ul, #nav li {
 			display: inline-block;
@@ -212,7 +183,10 @@
 			border: 1px solid #000;
 			margin: 1em;
 		}
-		@media (min-width: 460px){
+		#content {
+			margin: 0 auto;
+		}
+		@media (min-width: 40em){
 			#header {
 				margin-bottom: 2em;
 			}
@@ -235,43 +209,23 @@
 				margin: 0;
 				border: 0;
 			}
-			
-			
-		}
-		
-		@media (min-width: 620px){
-			
 			.project-hed {
 				font-size: 5em;
 			}
 			.project-sub {
 				padding: 1em 10%;
 			}
-			#content {
-				margin: 0 auto;
-			}
-			
 		}
-		
 	</style>
 	<script src="overthrow.js"></script>
-	<script src="extensions/hashscroll.overthrow.js"></script>
+	<script src="extensions/anchorscroll.overthrow.js"></script>
 </head>
 <body>
-	
-	
-
-
 	<div id="header">
-		<p>Crafted with care by Scott@<a href="#">Filament Group</a></p>
+		<p>Crafted with care by Scott@<a href="http://filamentgroup.com">Filament Group</a></p>
 	</div>
 	
- <h1 class="project-hed"><i>Overthrow</i></h1> 
-		 
-
-
-	 
-	
+ 	<h1 class="project-hed"><i>Overthrow</i></h1> 
 
 	<div id="content" class="overthrow">
 		  <p id="top" class="project-sub">A <em><span title="1kb min/gz">tiny</span>, no-frills, framework-independent, targeted</em> <code>overflow: auto</code> polyfill for use in responsive design.</p>
@@ -283,15 +237,15 @@
 		  
 		  <p>You want to use CSS <code>overflow</code> in your designs, but <code>overflow</code> doesn't work properly in many browsers, particularly mobile ones. Many popular mobile browsers treat <code>overflow: auto</code> the same as <code>overflow: hidden</code>, cropping overflow content from view, and leaving users no way to access it.</p>
 		  
-		  <p>However, many browsers support <code>overflow</code> very well! In particular, desktop browsers tend to support it without a hitch, and many of the latest versions of most mobile platforms do too. The trouble is, it's hard – perhaps impossible – to test for <code>overflow</code> support, and even if we could use it safely where supported, many popular browsers would be left with a less slick experience (<em>Android 2.1-2.3, BlackBerry 6, and iOS4, to name a few</em>).</p>
+		  <p>But wait - many browsers actually support <code>overflow</code> very well! In particular, desktop browsers tend to support it without a hitch, and many of the latest versions of most mobile platforms do too. The trouble is, it's hard – perhaps impossible – to test for <code>overflow</code> support, and even if we could use it safely where supported, many popular browsers lack that support and would be left with a degraded experience.</p>
 		  
 		  <h2 id="wat-overthrow">What is Overthrow?</h2>
 		  
-		  <p>Overthrow.js is a conservative attempt at filling the gaps in <code>overflow</code> support, with an emphasis on letting native implementations do their thing. Out of necessity, Overthrow examines the user agent string to whitelist platforms that are known to have native <code>overflow</code> support, but not before checking through more reliable and agnostic means: namely, iOS5's (and now Chrome Android's too!) touch scrolling CSS property, and a broad desktop browser inference test (no touch event support with a screen greater than 1200px wide).  </p>
+		  <p>Overthrow is a conservative attempt at filling the gaps in <code>overflow</code> support, with an emphasis on letting native implementations do their thing, and in touch-supporting browsers, providing a very minimal polyfill in browsers where native support is not available. Out of necessity, Overthrow examines the user agent string to whitelist the current and future versions of mobile platforms that are known to have native <code>overflow</code> support, but not before checking through more reliable and agnostic means: namely, iOS5's (and now Chrome Android's too!) touch scrolling CSS property, and a broad desktop browser inference test (no touch event support with a screen greater than 1200px wide).  </p>
 		  
-		  <p>First and foremost, Overthrow is designed to simply enable native CSS <code>overflow</code> in browsers it deems to have native support, but it includes a touch-scrolling polyfill too! In platforms that don't appear to support <code>overflow</code> natively, but do support touch events, Overthrow will polyfill the feature, allowing smooth, momentum-based scrolling in browsers that'd otherwise be left with an innaccessible experience.</p>
+		  <p>First and foremost, Overthrow is designed to simply enable native CSS <code>overflow</code> in browsers it deems to have native support, but it includes a touch-scrolling polyfill too! In platforms that don't appear to support <code>overflow</code> natively, but do support touch events, Overthrow will polyfill the feature, allowing momentum-based scrolling in browsers that might otherwise be left with an innaccessible experience.</p>
 		  
-		  <p>Perhaps most importantly, Overthrow enables <code>overflow</code> support as a qualified, progressive enhancement, meaning your content starts out tall and accessible, and properties like <code>width</code> and <code>height</code> are assigned only in browsers where overflow content can reliably be scrolled (either natively or polyfilled). In browsers that don't support overflow natively, and also don't support touch events, the content will not receive dimensions at all, leaving users with a slightly less-enhanced, but perfectly accessible experience.</p>
+		  <p>Perhaps most importantly, Overthrow enables <code>overflow</code> support as a qualified, progressive enhancement, meaning your content starts out uncropped and accessible, and properties like <code>width</code> and <code>height</code> are assigned only in browsers where overflow content can reliably be scrolled (either natively or with the polyfill). In browsers that don't support overflow natively, and also don't support touch events, the content will not receive dimensions at all, leaving users with a degraded but<em></em> accessible experience.</p>
 
 		  
 		 <h2 id="features">Features</h2>
@@ -319,6 +273,8 @@
 	  			<tr><td>Firefox (desktop)</td><td><span class="native">native</span></td></tr>
 				<tr><td>Internet Explorer (desktop)</td><td><span class="native">native</span></td></tr>
 				<tr><td>Opera (desktop)</td><td><span class="native">native</span></td></tr>
+				<tr><td>Safari (desktop)</td><td><span class="native">native</span></td></tr>
+				<tr><td>Any browser on screen > 1200px wide w/ no touch support</td><td><span class="native">native</span></td></tr>
 				
 				<tr><td>Mobile Safari on iOS5: iPhone, iPod, iPad</td><td><span class="native">native</span></td></tr>
 				<tr><td>Chrome on Android</td><td><span class="native">native</span></td></tr>
@@ -337,7 +293,7 @@
 				<tr><td>Opera Mobile</td><td><span class="none">none</span></td></tr>
 				<tr><td>Windows Phone 7 and 7.5</td><td><span class="none">none</span></td></tr>
 				<tr><td>BlackBerry 5 and under</td><td><span class="none">none</span></td></tr>
-				<tr><td>Nokia Devices without Touch</td><td><span class="none">none</span></td></tr>
+				<tr><td>Nokia Devices without touch event support</td><td><span class="none">none</span></td></tr>
 				<tr><td>Any non-touch supporting device</td><td><span class="none">none</span></td></tr>
 	  		</tbody>
 	  	</table>
@@ -397,11 +353,7 @@
 		<h3>If not, here's some extra content to scroll through...</h3>
 
 	    
-		
-		
-		
-		
-		
+
 		<h3>Example Embedded Overthrow Block</h3>
 		
 		<div class="overthrow embedder">
@@ -437,11 +389,6 @@
 					<option value="overnight">Overnight</option>
 				</select>
 			</div>
-
-
-
-		
-		
 
 		<h2>Header Level 2</h2>
 	       
@@ -492,7 +439,7 @@
 	</ul>
 	</div>
 	<script>
-	// DEMO behaviors
+	// DEMO scripting
 	(function(w){
 		var doc = w.document,
 			o = overthrow;

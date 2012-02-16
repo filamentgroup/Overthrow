@@ -11,6 +11,11 @@ Copyright 2012: Scott Jehl, Filament Group, Inc.
 
 See the project site for detailed documentation.
 
+## Project Goals
+
+The goals of Overthrow are simple: create a reliable way to safely use CSS overflow in responsive designs, polyfilling support in non-native environments where possible. As such, the scope is very tight, and we're mostly looking for contributions to make it do what it already does better, rather than add more features. That said, we are interested in exposing hooks and events to make it easy to extend so that Overthrow could be used for more custom behavior, like snapping to regions. If you have ideas for improvements, please send a pull request!
+
+
 ## Basic use
 
 First, download and reference overthrow.js from your document. Anywhere's fine.

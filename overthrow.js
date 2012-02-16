@@ -175,14 +175,14 @@
 					// Multipliers are tweaked to a comfortable balance across platforms
 					var top = ( lastTops[ 0 ] - lastTops[ lastTops.length -1 ] ) * 8,
 						left = ( lastLefts[ 0 ] - lastLefts[ lastLefts.length -1 ] ) * 8,
-						duration = Math.max( Math.abs( left ), Math.abs( top ) ) / 15;
+						duration = Math.max( Math.abs( left ), Math.abs( top ) ) / 14;
 					
 					// Make top and left relative-style strings (positive vals need "+" prefix)
 					top = ( top > 0 ? "+" : "" ) + top;
 					left = ( left > 0 ? "+" : "" ) + left;
 					
 					// Make sure there's a significant amount of throw involved, otherwise, just stay still
-					if( !isNaN( duration ) && duration > 0 && ( Math.abs( left ) > 15 || Math.abs( top ) > 15 ) ){
+					if( !isNaN( duration ) && duration > 0 && ( Math.abs( left ) > 80 || Math.abs( top ) > 80 ) ){
 						toss( elem, { left: left, top: top, duration: duration } );
 					}
 				},

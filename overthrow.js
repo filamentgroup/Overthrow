@@ -107,7 +107,7 @@
 		},
 			
 		// Enable and potentially polyfill overflow
-		polyfill = function(){
+		enable = function(){
 				
 			// If it's on, 
 			if( enabled ){
@@ -175,7 +175,7 @@
 					// Multipliers are tweaked to a comfortable balance across platforms
 					var top = ( lastTops[ 0 ] - lastTops[ lastTops.length -1 ] ) * 8,
 						left = ( lastLefts[ 0 ] - lastLefts[ lastLefts.length -1 ] ) * 8,
-						duration = Math.max( Math.abs( left ), Math.abs( top ) ) / 14;
+						duration = Math.max( Math.abs( left ), Math.abs( top ) ) / 8;
 					
 					// Make top and left relative-style strings (positive vals need "+" prefix)
 					top = ( top > 0 ? "+" : "" ) + top;
@@ -315,7 +315,7 @@
 		
 	// Expose overthrow API
 	w.overthrow = {
-		set: polyfill,
+		set: enable,
 		forget: function(){},
 		easing: defaultEasing,
 		toss: toss,
@@ -323,7 +323,8 @@
 		closest: closest,
 		support: overflowProbablyAlreadyWorks ? "native" : canBeFilledWithPoly && "polyfilled" || "none"
 	};
-		
-	polyfill();
+	
+	// Auto-init
+	enable();
 		
 })( this );

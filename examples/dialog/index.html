@@ -14,6 +14,7 @@
 		header, footer {
 			padding: 0;
 			display: block;
+			height: 20%;
 		}
 		header {
 			border-bottom: 1px solid #eee;
@@ -24,13 +25,14 @@
 		header h1, footer p {
 			margin: 0;	
 			font-size: 1em;
-			line-height: 1.5;
+			padding: 0;
 			text-align: center;
 			display: block;
 		}
 
 		article {
 			font-size: 80%;
+			padding: 0 5%;
 		}
 		.dialog {
 			background: #fff;
@@ -55,19 +57,12 @@
 	        overflow: auto;
 	        -webkit-overflow-scrolling: touch;
 	    }
-		html.overthrow, html.overthrow body, .overthrow .dialog {
-			height: 99.8%;
-			margin: 0;
-		}
 		.overthrow header,
 		.overthrow footer {
 			height: 15%;
 		}
-		.overthrow article {
-			height: 70%;
-			padding: 0;
-			position: relative;
-		}
+		
+		
 		#toggleContain a {
 			display: inline-block;
 			border: 1px solid #aaa;
@@ -80,6 +75,20 @@
 		
 		}
 		
+		
+		
+		@media (min-height: 15em) {
+			html.overthrow, html.overthrow body, .overthrow .dialog {
+				height: 99.8%;
+				margin: 0;
+			}
+			
+			.overthrow article {
+				height: 70%;
+				position: relative;
+			}
+		
+		}
 
 		@media (min-width: 30em) and (min-height: 20em){
 			.overthrow header,
@@ -132,7 +141,7 @@
 	<div class="dialog">
 	
 		<header>
-			<h1>A Responsively Overflowed Dialog</h1>
+			<h1>A Responsive Dialog</h1>
 
 			<button class="close">Close</button>
 		</header>

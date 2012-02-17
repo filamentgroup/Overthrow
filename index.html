@@ -151,6 +151,31 @@
 			padding: .3em;
 			color: #fff;
 		}
+		#browserstatus {
+			text-align: center;
+			
+		}
+		#browserstatus p {
+			display: inline-block;
+			font-size: 1em;
+
+		}
+		#browserstatus p.native strong, td span {
+			color: #fff;
+			padding: .2em .5em;
+			font-weight: normal;
+		}
+		#browserstatus p.native strong, span.native {
+			background: green;
+		}
+		#browserstatus p.polyfilled strong, span.polyfilled {
+			background: orange;
+		}
+		#browserstatus p.none strong, span.none {
+			background: red;
+			
+		}
+		
 		table {
 			width: 100%;
 			border-collapse: collapse;

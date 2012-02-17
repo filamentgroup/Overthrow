@@ -272,7 +272,13 @@
 		  <p>First and foremost, Overthrow is designed to simply enable native CSS <code>overflow</code> in browsers it deems to have native support, but it includes a touch-scrolling polyfill too! In platforms that don't appear to support <code>overflow</code> natively, but do support touch events, Overthrow will polyfill the feature, allowing momentum-based scrolling in browsers that might otherwise be left with an innaccessible experience.</p>
 		  
 		  <p>Perhaps most importantly, Overthrow enables <code>overflow</code> support as a qualified, progressive enhancement, meaning your content starts out uncropped and accessible, and properties like <code>width</code> and <code>height</code> are assigned only in browsers where overflow content can reliably be scrolled (either natively or with the polyfill). In browsers that don't support overflow natively, and also don't support touch events, the content will not receive dimensions at all, leaving users with a degraded but<em></em> accessible experience.</p>
-
+		  
+		  <h2 id="examples">A few example pages</h2>
+		  <p>The examples directory has some sample responsive layouts that use overthrow. If you're in a browser that supports overthrow, you'll find a link in the header to toggle it on and off, demonstrating the fallback experience for non-overflow browsers.</p>
+		 <ul>
+		 	 <li><a href="examples/2-column/">Responsive Columned Layout</a></li>
+			 <li><a href="examples/dialog/">Responsive Dialog Layout</a></li>
+		 </ul>
 		  
 		 <h2 id="features">Features</h2>
 		 
@@ -285,6 +291,8 @@
 				 <li>Safe for form elements: Overthrow doesn't interfere with form controls</li>
 				 <li>Nestable: just like standard CSS overflow, you can nest overthrow elements inside one another.</li>
 		</ul>
+		
+		
 		
 		<h2 id="support">Support</h2>
 		  
@@ -481,6 +489,7 @@ overthrow.toss( element, { top: 500 } );
 			<li><a href="#support" class="throw">Support</a></li>			
 	</ul>
 	</div>
+	<script src="examples/togglelink.js"></script>
 	<script>
 	// DEMO scripting
 	(function(w){
@@ -494,27 +503,6 @@ overthrow.toss( element, { top: 500 } );
 		tr.className = "you";
 		tr.innerHTML = "<td>Your Browser</td><td><span class='"+  o.support + "'>" + o.support + "</span></td>";
 		tbody.insertBefore( tr, tbody.firstChild );
-		
-		// add a link to toggle overthrow on/off on the content
-		if( o.support === "native" || o.support === "polyfilled" ){
-			var oToggleLink = doc.createElement( "a" );
-			oToggleLink.href = "#";
-			oToggleLink.className = "toggle";
-			oToggleLink.innerText = "Disable Overthrow";
-			oToggleLink.onclick = function(){
-				if( doc.documentElement.className.indexOf( "overthrow" ) > -1 ){
-					o.forget();
-					oToggleLink.innerText = "Enable Overthrow";
-				}
-				else{
-					o.set();
-					oToggleLink.innerText = "Disable Overthrow";
-				}
-			};
-		
-			doc.getElementById( "toggleContain" ).appendChild( oToggleLink );
-
-		}
 	
 		w.onload = function(){
 			setTimeout(function(){

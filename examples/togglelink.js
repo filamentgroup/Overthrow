@@ -12,7 +12,7 @@ if( o.support === "native" || o.support === "polyfilled" ){
 	if( toggleContain ){	
 		oToggleLink.href = "#";
 		oToggleLink.className = "toggle";
-		oToggleLink.innerText = "Disable Overthrow";
+		oToggleLink.innerHTML = "Disable Overthrow";
 		oToggleLink.onclick = function(){
 			if( doc.documentElement.className.indexOf( "overthrow" ) > -1 ){
 				o.forget();

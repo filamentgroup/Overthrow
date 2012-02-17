@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset=utf-8 />
-	<title>Overthrow Demo</title>
+	<title>Overthrow</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<style>
 	    /* Overthrow CSS:
@@ -12,7 +12,7 @@
 	        -webkit-overflow-scrolling: touch;
 	    }
 		.overthrow #content.overthrow {
-			height: 15em;
+			height: 14em;
 		}
 
 		/* DEMO CSS IS GROSS */
@@ -27,8 +27,8 @@
 		#header {
 			text-align: center;
 			background: #eee;
-			padding: .3em 5%;
-			margin-bottom: 2em;
+			padding: .1em 5%;
+			margin-bottom: 0;
 			font-size: .8em;
 			color: #777;
 			border-bottom: 1px solid #ddd;
@@ -52,6 +52,7 @@
 			overflow: hidden;
 			height: .8em;
 			line-height: .9;
+			position: relative;
 		}
 		.project-hed i {
 			font-style: normal;
@@ -60,6 +61,21 @@
 			display: inline-block;
 			letter-spacing: -0.03em;
 			padding-right: .07em;
+			
+		}
+		.version {
+			background: orange;
+			position: absolute;
+			font-size: .3em;
+			margin: 0;
+			padding: .4em;
+			color: #fff;
+			top: 0;
+			right: 0;
+			border: 1px solid darkorange;
+			font-weight: normal;
+			border-top-left-radius: .3em;
+			border-bottom-left-radius: .3em;
 		}
 		.project-sub {
 			background: #fff;
@@ -201,16 +217,11 @@
 			margin: 0 auto;
 		}
 		@media (min-width: 40em){
+			.version {
+				font-size: .2em;
+			}
 			#header {
 				margin-bottom: 2em;
-			}
-			.project-hed {
-				font-size: 4em;
-			}
-			.project-sub {
-				padding: 1em 10%;
-				margin: 0 auto;
-				font-size: 1.3em;
 			}
 			.gh-fork {
 				background: url("https://a248.e.akamai.net/assets.github.com/img/c641758e06304bc53ae7f633269018169e7e5851/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f77686974655f6666666666662e706e67");
@@ -228,6 +239,8 @@
 			}
 			.project-sub {
 				padding: 1em 10%;
+				margin: 0 auto;
+				font-size: 1.3em;
 			}
 			#nav ul {
 				margin: 1em auto;
@@ -249,11 +262,14 @@
 <body>
 	<div id="header">
 		<p>Crafted with care by Scott@<a href="http://filamentgroup.com">Filament Group</a></p>
+		
 	</div>
 	
- 	<h1 class="project-hed"><i>Overthrow</i></h1> 
+ 	<h1 class="project-hed"><i>Overthrow</i> <span class="version" title="Initial development release">0.1</span></h1> 
+	
 
 	<div id="content" class="overthrow">
+		
 		  <p id="top" class="project-sub">A <em><span title="1kb min/gz">tiny</span>, no-frills, framework-independent, targeted</em> <code>overflow: auto</code> polyfill for use in responsive design.</p>
 	
 		  
@@ -380,7 +396,7 @@
 	<li><strong>overthrow.easing</strong>: an overrideable property that stores the default easing function (using any of Robert Penner's easing equations.)</li>
 	<li><strong>overthrow.toss</strong>: function to programatically scroll an overthrow element.
 			<p>To call, pass a required first argument referencing the overthrow element to scroll, and a hash of optional configuration properties.</p>
-<pre><code>
+<pre class="overthrow"><code>
 overthrow.toss( element, { top: 500 } );
 </code></pre>	
 <p>Options</p>			

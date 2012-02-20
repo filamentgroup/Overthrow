@@ -44,6 +44,42 @@ window.onload = function(){
 			ok( typeof( overthrow.support ) === "string" );
 		});
 		
+		test( 'API Properties: overthrow.toss is defined', function() { 
+			ok( overthrow.toss );
+		});
+		
+		test( 'API Properties: overthrow.toss is a function', function() { 
+			ok( typeof( overthrow.toss ) === "function" );
+		});
+		
+		test( 'API Properties: overthrow.closest is defined', function() { 
+			ok( overthrow.closest );
+		});
+		
+		test( 'API Properties: overthrow.closest is a function', function() { 
+			ok( typeof( overthrow.closest ) === "function" );
+		});
+		
+		test( 'API Properties: overthrow.intercept is defined', function() { 
+			ok( overthrow.intercept );
+		});
+		
+		test( 'API Properties: overthrow.intercept is a function', function() { 
+			ok( typeof( overthrow.intercept ) === "function" );
+		});
+		
+		test( 'API Properties: overthrow.easing is defined', function() { 
+			ok( overthrow.intercept );
+		});
+		
+		test( 'API Properties: overthrow.easing is a function', function() { 
+			ok( typeof( overthrow.easing ) === "function" );
+		});
+		
+		
+		
+		
+		
 		test( 'HTML element overthrow class is applied depending on overthrow-supporting browser', function() { 
 			if(overthrow.support === "native" || overthrow.support === "polyfilled" ){
 				ok( document.documentElement.className.indexOf( "overthrow" ) > -1 );
@@ -105,6 +141,8 @@ window.onload = function(){
 			}	
 			overthrow.set();
 		});
+		
+		
 		
 		
 		

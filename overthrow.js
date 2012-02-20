@@ -82,7 +82,7 @@
 				sTop = elem.scrollTop;
 			
 			// top and left relative or positive distance
-			left = typeof left === "string" ? parseFloat( left ) : left - sLeft,
+			left = typeof left === "string" ? parseFloat( left ) : left - sLeft;
 			top = typeof top === "string" ? parseFloat( top ) : top - sTop;
 					
 			timeKeeper = setInterval(function(){					

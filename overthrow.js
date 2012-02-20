@@ -255,7 +255,7 @@
 								right = tx >= ( lastLefts.length ? lastLefts[ 0 ] : 0 );
 								
 							// If there's room to scroll the current container, prevent the default window scroll
-							if( ( ty > 0 && ty < scrollHeight - height ) || ( roomToScrollX = tx > 0 && tx < scrollWidth - width ) ){
+							if( ( ty > 0 && ty < scrollHeight - height ) || ( tx > 0 && tx < scrollWidth - width ) ){
 								e.preventDefault();
 							}
 							// This bubbling is dumb. Needs a rethink.

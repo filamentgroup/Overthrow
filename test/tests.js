@@ -143,12 +143,112 @@ window.onload = function(){
 		});
 		
 		
+		test( 'Overthrow.toss method returns object of values', function(){
+			var toss = overthrow.toss(testElem);
+			ok( typeof toss === "object", "Object returned from toss method" );			
+		});
+		
+		test( 'Overthrow.toss methods return includes top value', function(){
+			var toss = overthrow.toss(testElem);
+			ok( toss.top !== undefined, "Top is defined" );			
+		});
+		
+		test( 'Overthrow.toss methods return top value is a number', function(){
+			var toss = overthrow.toss(testElem);
+			ok( typeof toss.top === "number", "Top is a number" );			
+		});
+		
+		test( 'Overthrow.toss methods return includes left value', function(){
+			var toss = overthrow.toss(testElem);
+			ok( toss.left !== undefined, "Left is defined" );			
+		});
+		
+		test( 'Overthrow.toss methods return left value is a number', function(){
+			var toss = overthrow.toss(testElem);
+			ok( typeof toss.left === "number", "Left is a number" );			
+		});
+		
+		test( 'Overthrow.toss methods return includes duration value', function(){
+			var toss = overthrow.toss(testElem);
+			ok( toss.duration !== undefined, "Duration is defined" );			
+		});
+		
+		test( 'Overthrow.toss methods return duration value is a number', function(){
+			var toss = overthrow.toss(testElem);
+			ok( typeof toss.duration === "number", "Duration is a number" );			
+		});
+		
+		test( 'Overthrow.toss methods return includes easing property', function(){
+			var toss = overthrow.toss(testElem);
+			ok( toss.easing !== undefined, "Easing is defined" );			
+		});
+		
+		test( 'Overthrow.toss methods return easing property is a function', function(){
+			var toss = overthrow.toss(testElem);
+			ok( typeof toss.easing === "function", "Easing is a function" );			
+		});
+		
+		test( "Overthrow.toss returns overridden top absolute value", function(){
+			var toss = overthrow.toss( testElem, { top: 500 } );
+			ok(  toss.top === 500, "Top equals 500" );	
+		});
+		
+		test( "Overthrow.toss returns expected overridden top relative value", function(){
+			testElem.scrollTop = 10;
+			var newtop = "+10",
+				expected = testElem.scrollTop + 10;
+				
+			var toss = overthrow.toss( testElem, { top: newtop } );
+			ok(  toss.top === expected, "Top returns expected value" );	
+		});
+		
+		test( "Overthrow.toss returns expected overridden left relative value", function(){
+			testElem.scrollLeft = 10;
+			var newleft = "+10",
+				expected = testElem.scrollLeft + 10;
+				
+			var toss = overthrow.toss( testElem, { left: newleft } );
+			ok(  toss.left === expected, "Left returns expected value" );	
+		});
+		
+		test( "Overthrow.toss returns expected overridden top negative relative value", function(){
+			testElem.scrollTop = 10;
+			var newtop = "-10",
+				expected = testElem.scrollTop - 10;
+				
+			var toss = overthrow.toss( testElem, { top: newtop } );
+			ok(  toss.top === expected, "Top returns expected value" );	
+		});
+		
+		test( "Overthrow.toss returns expected overridden left negative relative value", function(){
+			testElem.scrollLeft = 10;
+			var newleft = "-10",
+				expected = testElem.scrollLeft - 10;
+				
+			var toss = overthrow.toss( testElem, { left: newleft } );
+			ok(  toss.left === expected, "Left returns expected value" );	
+		});
 		
 		
 		
 		
+		test( "Overthrow.toss returns overridden left absolute value", function(){
+			var toss = overthrow.toss( testElem, { left: 200 } );
+			ok(  toss.left === 200, "Left equals 200" );	
+		});
 		
+		test( "Overthrow.toss returns overridden duration value", function(){
+			var toss = overthrow.toss( testElem, { duration: 300 } );
+			ok(  toss.duration === 300, "Duration equals 300" );	
+		});
 		
+		test( "Overthrow.toss returns overridden easing value", function(){
+			var ease = function(a,b,c,d){return 10;},
+				toss = overthrow.toss( testElem, { easing: ease } );
+			ok(  toss.easing === ease, "Easing equals sample function" );	
+		});
+		
+
 
 	
 };

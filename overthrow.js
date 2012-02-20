@@ -73,27 +73,68 @@
 		*/
 		toss = function( elem, options ){
 			var i = 0,
-				o = options || {},
-				top = o.top || "+0",
-				left = o.left || "+0",
-				duration = o.duration || 100,
-				easing = o.easing || w.overthrow.easing,
 				sLeft = elem.scrollLeft,
-				sTop = elem.scrollTop;
+				sTop = elem.scrollTop,
+				// Toss defaults
+				o = {
+					top: "+0",
+					left: "+0",
+					duration: 100,
+					easing: w.overthrow.easing
+				},
+				endLeft, endTop;
 			
-			// top and left relative or positive distance
-			left = typeof left === "string" ? parseFloat( left ) : left - sLeft;
-			top = typeof top === "string" ? parseFloat( top ) : top - sTop;
-					
+			// Mixin based on predefined defaults
+			if( options ){
+				for( var j in o ){
+					if( options[ j ] !== undefined ){
+						o[ j ] = options[ j ];
+					}
+				}
+			}
+			
+			// Convert relative values to ints
+			// First the left val
+			if( typeof o.left === "string" ){
+				o.left = parseFloat( o.left );
+				endLeft = o.left + sLeft;
+			}
+			else {
+				endLeft = o.left;
+				o.left = o.left - sLeft;
+			}
+			// Then the top val
+			if( typeof o.top === "string" ){
+				o.top = parseFloat( o.top );
+				endTop = o.top + sTop;
+			}
+			else {
+				endTop = o.top;
+				o.top = o.top - sTop;
+			}
+
 			timeKeeper = setInterval(function(){					
-				if( i++ <= duration ){
-					elem.scrollLeft = easing( i, sLeft, left, duration );
-					elem.scrollTop = easing( i, sTop, top, duration );
+				if( i++ <= o.duration ){
+					elem.scrollLeft = o.easing( i, sLeft, o.left, o.duration );
+					elem.scrollTop = o.easing( i, sTop, o.top, o.duration );
 				}
 				else{
+					if( endLeft !== sLeft ){
+						elem.scrollLeft = endLeft;
+					}
+					if( endTop !== sTop ){
+						elem.scrollTop = endTop;
+					}
 					intercept();
 				}
 			}, 1 );
+			
+			// Return the values, post-mixin, with end values specified
+			return (function( o ){
+				o.left = endLeft;
+				o.top = endTop;
+				return o;
+			})( o );
 		},
 		
 		// find closest overthrow (elem or a parent)

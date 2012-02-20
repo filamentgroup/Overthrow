@@ -40,3 +40,7 @@ That's it. Design away! Any time you want to set dimensions on an element to use
     .overthrow #foo.overthrow {
         height: 280px;
     }
+
+## Tests
+
+Unit tests use QUnit and can be run from the /test/ directory.

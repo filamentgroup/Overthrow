@@ -130,11 +130,7 @@
 			}, 1 );
 			
 			// Return the values, post-mixin, with end values specified
-			return (function( o ){
-				o.left = endLeft;
-				o.top = endTop;
-				return o;
-			})( o );
+			return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing }
 		},
 		
 		// find closest overthrow (elem or a parent)

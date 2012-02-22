@@ -1,4 +1,4 @@
-/*! Overthrow v.0.1.0. An overflow:auto polyfill for responsive design. (c) 2012: Scott Jehl, Filament Group, Inc. Dual MIT/GPLv2 license */
+/*! Overthrow v.0.1.0. An overflow:auto polyfill for responsive design. (c) 2012: Scott Jehl, Filament Group, Inc. https://filamentgroup.github.com/overthrow/license.txt */
 (function( w, undefined ){
 	
 	var doc = w.document,
@@ -50,7 +50,7 @@
 				);
 			})(),
 			
-		// Easing uses any of Robert Penner's equations. By default, overthrow uses ease-out-cubic
+		// Easing can use any of Robert Penner's equations (http://www.robertpenner.com/easing_terms_of_use.html). By default, overthrow includes ease-out-cubic
 		// arguments: t = current iteration, b = initial value, c = end value, d = total iterations
 		// use w.overthrow.easing to provide a custom function externally, or pass an easing function as a callback to the toss method
 		defaultEasing = function (t, b, c, d) {

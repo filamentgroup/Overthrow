@@ -130,7 +130,7 @@
 			}, 1 );
 			
 			// Return the values, post-mixin, with end values specified
-			return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing }
+			return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
 		},
 		
 		// find closest overthrow (elem or a parent)

@@ -13,7 +13,7 @@ if( o.support === "native" || o.support === "polyfilled" ){
 		oToggleLink.href = "#";
 		oToggleLink.className = "toggle";
 		oToggleLink.innerHTML = "Disable Overthrow";
-		oToggleLink.onclick = function(){
+		oToggleLink.onclick = function( e ){
 			if( doc.documentElement.className.indexOf( "overthrow" ) > -1 ){
 				o.forget();
 				oToggleLink.innerText = "Enable Overthrow";
@@ -22,6 +22,7 @@ if( o.support === "native" || o.support === "polyfilled" ){
 				o.set();
 				oToggleLink.innerText = "Disable Overthrow";
 			}
+			e.preventDefault();
 		};
 	
 		doc.getElementById( "toggleContain" ).appendChild( oToggleLink );

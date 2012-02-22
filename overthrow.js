@@ -130,14 +130,14 @@
 			}, 1 );
 			
 			// Return the values, post-mixin, with end values specified
-			return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing }
+			return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
 		},
 		
 		// find closest overthrow (elem or a parent)
-		closest = function( target, ascend ){
-			return !ascend && target.className && target.className.indexOf( "overthrow" ) > -1 && target || closest( target.parentNode );
+		closest = function( elem ){
+			return elem.className && elem.className.indexOf( "overthrow" ) > -1 ? elem : closest( elem.parentNode );
 		},
-				
+			
 		// Intercept any throw in progress
 		intercept = function(){
 			clearInterval( timeKeeper );
@@ -180,34 +180,8 @@
 
 			// Fill 'er up!
 			// From here down, all logic is associated with touch scroll handling
-				// elem references the overthrow element in use
-			var elem,
-				
-				// The last several Y values are kept here
-				lastTops = [],
-		
-				// The last several X values are kept here
-				lastLefts = [],
-				
-				// lastDown will be true if the last scroll direction was down, false if it was up
-				lastDown,
-				
-				// lastRight will be true if the last scroll direction was right, false if it was left
-				lastRight,
-				
-				// For a new gesture, or change in direction, reset the values from last scroll
-				resetVertTracking = function(){
-					lastTops = [];
-					lastDown = null;
-				},
-				
-				resetHorTracking = function(){
-					lastLefts = [];
-					lastRight = null;
-				},
-				
-				// After releasing touchend, throw the overthrow element, depending on momentum
-				finishScroll = function(){
+			// After releasing touchend, throw the overthrow element, depending on momentum
+			var finishScroll = function( elem, lastLefts, lastTops ){
 					// Come up with a distance and duration based on how 
 					// Multipliers are tweaked to a comfortable balance across platforms
 					var top = ( lastTops[ 0 ] - lastTops[ lastTops.length -1 ] ) * 8,
@@ -228,59 +202,72 @@
 				// Disabling CSS pointer events makes sure they do, but it also makes the controls innaccessible
 				// Toggling pointer events at the right moments seems to do the trick
 				// Thanks Thomas Bachem http://stackoverflow.com/a/5798681 for the following
-				inputs,
-				setPointers = function( val ){
-					inputs = elem.querySelectorAll( "textarea, input" );
+				setPointers = function( elem, val ){
+					var inputs = elem.querySelectorAll( "textarea, input" );
 					for( var i = 0, il = inputs.length; i < il; i++ ) {
 						inputs[ i ].style.pointerEvents = val;
-					}
-				},
-				
-				// For nested overthrows, changeScrollTarget restarts a touch event cycle on a parent or child overthrow
-				changeScrollTarget = function( startEvent, ascend ){
-					if( doc.createEvent ){
-						var newTarget = ( !ascend || ascend === undefined ) && elem.parentNode || elem.touchchild || elem,
-							tEnd;
-								
-						if( newTarget !== elem ){
-							tEnd = doc.createEvent( "HTMLEvents" );
-							tEnd.initEvent( "touchend", true, true );
-							elem.dispatchEvent( tEnd );
-							newTarget.touchchild = elem;
-							elem = newTarget;
-							newTarget.dispatchEvent( startEvent );
-						}
 					}
 				},
 				
 				// Touchstart handler
 				// On touchstart, touchmove and touchend are freshly bound, and all three share a bunch of vars set by touchstart
 				// Touchend unbinds them again, until next time
-				start = function( e ){
+				start = function( e, xEnabled, yEnabled ){
 					
 					// Stop any throw in progress
 					intercept();
 					
-					// Reset the distance and direction tracking
-					resetVertTracking();
-					resetHorTracking();
-						
-					elem = closest( e.target );
+					var elem = closest( e.target );
 						
 					if( !elem || elem === docElem || e.touches.length > 1 ){
 						return;
-					}			
+					}
+										
+					var yElem = elem,
+						xElem = elem,
+						scrollT,
+						scrollL,
+						height,
+						width,
+						startY,
+						startX,
+						scrollHeight,
+						scrollWidth,
+						
+						// The last several Y values are kept here
+						lastTops,
+		
+						// The last several X values are kept here
+						lastLefts,
+				
+						// lastDown will be true if the last scroll direction was down, false if it was up
+						lastDown = null,
 
-					setPointers( "none" );
-					var touchStartE = e,
-						scrollT = elem.scrollTop,
-						scrollL = elem.scrollLeft,
-						height = elem.offsetHeight,
-						width = elem.offsetWidth,
-						startY = e.touches[ 0 ].pageY,
-						startX = e.touches[ 0 ].pageX,
-						scrollHeight = elem.scrollHeight,
-						scrollWidth = elem.scrollWidth,
+						// lastRight will be true if the last scroll direction was right, false if it was left
+						lastRight = null,
+				
+						// For a new gesture, or change in direction, reset the values from last scroll
+						resetVertTracking = function( e ){
+							if( e ){
+								scrollT = yElem.scrollTop;
+								height = yElem.offsetHeight;
+								startY = e.touches[ 0 ].pageY;
+								scrollHeight = yElem.scrollHeight;
+							}
+							lastTops = [];
+							lastDown = null;
+						},
+				
+						resetHorTracking = function( e ){
+							if( e ){
+								scrollL = xElem.scrollLeft;
+								width = xElem.offsetWidth;
+								startX = e.touches[ 0 ].pageX;
+								scrollWidth = xElem.scrollWidth;
+							}
+							lastLefts = [];
+							lastRight = null;
+						},
 					
 						// Touchmove handler
 						move = function( e ){
@@ -291,35 +278,59 @@
 								right = tx >= ( lastLefts.length ? lastLefts[ 0 ] : 0 );
 								
 							// If there's room to scroll the current container, prevent the default window scroll
-							if( ( ty > 0 && ty < scrollHeight - height ) || ( tx > 0 && tx < scrollWidth - width ) ){
+							if( ty > 0 && ty < scrollHeight - height || tx > 0 && tx < scrollWidth - width ){
 								e.preventDefault();
 							}
-							// This bubbling is dumb. Needs a rethink.
-							else {
-								changeScrollTarget( touchStartE );
+							
+							// If y direction is spent, move to parent
+							if( ty < 0 || ty > scrollHeight - height ){
+								var nextYParent = yElem.parentNode.nodeType === 1 && closest( yElem.parentNode );
+								if( nextYParent ){
+									yElem = nextYParent;
+									resetVertTracking( e );
+									return;
+								}
 							}
 							
-							// If down and lastDown are inequal, the y scroll has changed direction. Reset tracking.
-							if( lastDown && down !== lastDown ){
-								resetVertTracking();
+							// If x direction is spent, move to parent
+							if( tx < 0 || tx > scrollWidth - width ){
+								var nextXParent = xElem.parentNode.nodeType === 1 && closest( xElem.parentNode );
+								if( nextXParent ){
+									xElem = nextXParent;
+									resetHorTracking( e );
+									return;
+								}
 							}
 							
-							// If right and lastRight are inequal, the x scroll has changed direction. Reset tracking.
-							if( lastRight && right !== lastRight ){
-								resetHorTracking();
+							// If down and lastDown are inequal, the y scroll has changed direction. 
+							// Set y back to original elem and reset y tracking
+							if( lastDown !== null && down !== lastDown && yElem !== elem ){
+								yElem = elem;
+								resetVertTracking( e );
+								return;
 							}
 							
-							// remember the last direction in which we were headed
+							// If right and lastRight are inequal, the x scroll has changed direction.
+							// Set x back to original elem and reset x tracking
+							if( lastRight !== null && right !== lastRight && xElem !== elem ){
+								xElem = elem;
+								resetHorTracking( e );
+								return;
+							}
+							
+							// Cache the last direction in which we were headed
 							lastDown = down;
 							lastRight = right;							
 							
-							// set the container's scroll
-							elem.scrollTop = ty;
-							elem.scrollLeft = tx;
-						
+							// Set the containers' scrolls
+							yElem.scrollTop = ty;
+							xElem.scrollLeft = tx;
+							
+							// Remember the last few scrolls
 							lastTops.unshift( ty );
 							lastLefts.unshift( tx );
-						
+							
+							// Limit the last remembered distances to 3
 							if( lastTops.length > 3 ){
 								lastTops.pop();
 							}
@@ -331,16 +342,26 @@
 						// Touchend handler
 						end = function( e ){
 							// Apply momentum based easing for a graceful finish
-							finishScroll();	
+							if( xElem === yElem ){
+								finishScroll( yElem, lastLefts, lastTops );	
+							}
+							else {
+								var throwElem = Math.abs( lastTops[ 0 ] - lastTops[ lastTops.length -1 ] ) > Math.abs( lastLefts[ 0 ] - lastLefts[ lastLefts.length -1 ] ) ? yElem : xElem;
+								finishScroll( throwElem, lastLefts, lastTops );	
+							}
+							
 							// Bring the pointers back
-							setPointers( "auto" );
+							setPointers( elem, "auto" );
 							setTimeout( function(){
-								setPointers( "none" );
+								setPointers( elem, "none" );
 							}, 450 );
 							elem.removeEventListener( "touchmove", move, false );
 							elem.removeEventListener( "touchend", end, false );
 						};
 					
+					resetVertTracking( e );
+					resetHorTracking( e );
+					setPointers( elem, "none" );
 					elem.addEventListener( "touchmove", move, false );
 					elem.addEventListener( "touchend", end, false );
 				};

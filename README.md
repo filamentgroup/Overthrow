@@ -26,18 +26,18 @@ Then put a class of `overthrow` on any elements in which you'd like to apply `ov
 
 	<div id="foo" class="overthrow">Content goes here!</div>
 
-In browsers that Overthrow deems capable of scrolling overflow content (_either natively, or using its touch polyfill_), it will add a class of `overflow` to the `html` element. Add the following CSS to your stylesheet somewhere, enabling overflow on all elements in your document that have an `overthrow` class.
+In browsers that Overthrow deems capable of scrolling overflow content (_either natively, or using its touch polyfill_), it will add a class of `overthrow-enabled` to the `html` element. Add the following CSS to your stylesheet somewhere, enabling overflow on all elements in your document that have an `overthrow` class.
 
     /* Overthrow CSS:
 	   Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
-    .overthrow .overthrow {
+    .overthrow-enabled .overthrow {
         overflow: auto;
         -webkit-overflow-scrolling: touch;
     }
 
 That's it. Design away! Any time you want to set dimensions on an element to use overflow scrolling, just be sure to key off that `overthrow` class on the HTML element, and `overflow: auto` will apply.
 
-    .overthrow #foo.overthrow {
+    .overthrow-enabled #foo {
         height: 280px;
     }
 

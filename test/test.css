@@ -2,13 +2,13 @@
 Styles for testing overthrow
 */
 
-.overthrow .overthrow {
+.overthrow-enabled .overthrow {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
 	height: 100px;
 	visibility: hidden;
 }
 
-.overthrow .overthrow * {
+.overthrow-enabled .overthrow * {
 	width: 500%;
 }

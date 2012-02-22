@@ -53,12 +53,12 @@
 		
 		/* overthrow layout enhancements */
 	    /* Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
-		.overthrow .overthrow {
+		.overthrow-enabled .overthrow {
 	        overflow: auto;
 	        -webkit-overflow-scrolling: touch;
 	    }
-		.overthrow header,
-		.overthrow footer {
+		.overthrow-enabled header,
+		.overthrow-enabled footer {
 			height: 15%;
 		}
 		
@@ -78,12 +78,12 @@
 		
 		
 		@media (min-height: 15em) {
-			html.overthrow, html.overthrow body, .overthrow .dialog {
+			html.overthrow-enabled, html.overthrow-enabled body, .overthrow-enabled .dialog {
 				height: 99.8%;
 				margin: 0;
 			}
 			
-			.overthrow article {
+			.overthrow-enabled article {
 				height: 70%;
 				position: relative;
 			}
@@ -91,11 +91,11 @@
 		}
 
 		@media (min-width: 30em) and (min-height: 20em){
-			.overthrow header,
-			.overthrow footer {
+			.overthrow-enabled header,
+			.overthrow-enabled footer {
 				height: 8%;
 			}
-			.overthrow article {
+			.overthrow-enabled article {
 				height: 84%;
 			}
 			article {
@@ -113,7 +113,7 @@
 				border-radius: 2em;
 				
 			}
-			.overthrow body {
+			.overthrow-enabled body {
 				overflow: hidden;
 			}
 			.dialog {
@@ -128,7 +128,7 @@
 				width: 30em;
 				margin: 8% auto -8%;
 			}	
-			.overthrow .dialog {
+			.overthrow-enabled .dialog {
 				height: 70%;
 				margin: 8% auto -8%;
 			}		

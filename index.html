@@ -6,12 +6,12 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<style>
 	    /* Overthrow CSS:
-		   Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
-	    .overthrow .overthrow {
+		   Enable overflow: auto on elements with overthrow class when html element has overthrow-enabled class */
+	    .overthrow-enabled .overthrow {
 	        overflow: auto;
 	        -webkit-overflow-scrolling: touch;
 	    }
-		.overthrow #content.overthrow {
+		.overthrow-enabled #content.overthrow {
 			height: 14em;
 		}
 
@@ -102,7 +102,7 @@
 		#content #wat {
 			margin-top: 0;
 		}
-		.overthrow .overthrow #wat:after {
+		.overthrow-enabled .overthrow #wat:after {
 			content:  "\2193";
 			font-size: .8em;
 			padding: 0 .2em;
@@ -393,20 +393,20 @@
 &lt;div id=&quot;foo&quot; <strong>class=&quot;overthrow&quot;</strong>&gt;Content goes here!&lt;/div&gt;
 </code></pre>
 
-		<p>In browsers that Overthrow.js deems capable of scrolling overflowed content (either natively, or using its polyfill), it will add a class of <code>overflow</code> to the HTML element. Add this CSS to your stylesheet somewhere, enabling overflow on all elements in your document that have an <code>overthrow</code> class.</p>
+		<p>In browsers that Overthrow.js deems capable of scrolling overflowed content (either natively, or using its polyfill), it will add a class of <code>overthrow-enabled</code> to the HTML element. Add this CSS to your stylesheet somewhere, enabling overflow on all elements in your document that have an <code>overthrow</code> class.</p>
 
 <pre class="overthrow"><code>
 /* Overthrow CSS:
    Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
-.overthrow .overthrow {
+.overthrow-enabled .overthrow {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
 }
 </code></pre>
 
-<p>Lastly, design away! Any time you want to set dimensions on an element to trigger overflow scrolling, just be sure to key off that <code>overthrow</code> class on the <code>html</code> element.</p> 
+<p>Lastly, design away! Any time you want to set dimensions on an element to trigger overflow scrolling, just be sure to key off that <code>overthrow-enabled</code> class on the <code>html</code> element.</p> 
 <pre class="overthrow"><code>
-.overthrow #foo {
+.overthrow-enabled #foo {
 	height: 280px;
 }
 </code></pre>
@@ -416,8 +416,8 @@
 <p>Overflow adds one variable to the global namespace: <code>overthrow</code>. It has the following methods and properties:</p>
 
 <ul>
-	<li><strong>overthrow.set</strong>: function to initialize overthrow behavior and style in the page. Adds "overthrow" class to <code>html</code> element, and touch listener for polyfilled browsers</li>
-	<li><strong>overthrow.forget</strong>: function to remove overthrow behavior and style in the page. Removes "overthrow" class from HTML element, and touch event listener in polyfilled browsers, and restores default easing.</li>
+	<li><strong>overthrow.set</strong>: function to initialize overthrow behavior and style in the page. Adds "overthrow-enabled" class to <code>html</code> element, and touch listener for polyfilled browsers</li>
+	<li><strong>overthrow.forget</strong>: function to remove overthrow behavior and style in the page. Removes "overthrow-enabled" class from HTML element, and touch event listener in polyfilled browsers, and restores default easing.</li>
 	<li><strong>overthrow.easing</strong>: an overrideable property that stores the default easing function (using any of Robert Penner's easing equations.)</li>
 	<li><strong>overthrow.toss</strong>: function to programatically scroll an overthrow element.
 			<p>To call, pass a required first argument referencing the overthrow element to scroll, and a hash of optional configuration properties.</p>

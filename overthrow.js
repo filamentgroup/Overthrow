@@ -3,7 +3,7 @@
 	
 	var doc = w.document,
 		docElem = doc.documentElement,
-		classtext = "overthrow",
+		classtext = "overthrow-enabled",
 	
 		// Touch events are used in the polyfill, and thus are a prerequisite
 		canBeFilledWithPoly = "ontouchmove" in doc,

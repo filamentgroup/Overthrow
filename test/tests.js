@@ -80,25 +80,25 @@ window.onload = function(){
 		
 		
 		
-		test( 'HTML element overthrow class is applied depending on overthrow-supporting browser', function() { 
+		test( 'HTML element overthrow-enabled class is applied depending on overthrow-supporting browser', function() { 
 			if(overthrow.support === "native" || overthrow.support === "polyfilled" ){
-				ok( document.documentElement.className.indexOf( "overthrow" ) > -1 );
+				ok( document.documentElement.className.indexOf( "overthrow-enabled" ) > -1 );
 			}
 			else {
-				ok( document.documentElement.className.indexOf( "overthrow" ) === -1 );
+				ok( document.documentElement.className.indexOf( "overthrow-enabled" ) === -1 );
 			}
 		});
 		
 		test( 'overthrow.forget destroys HTML class', function() { 
 			overthrow.forget();
-			ok( document.documentElement.className.indexOf( "overthrow" ) === -1 );
+			ok( document.documentElement.className.indexOf( "overthrow-enabled" ) === -1 );
 			overthrow.set();
 		});
 		
 		test( 'overthrow.set adds HTML class', function() { 
 			overthrow.forget();
 			overthrow.set();
-			ok( document.documentElement.className.indexOf( "overthrow" ) > -1 );
+			ok( document.documentElement.className.indexOf( "overthrow-enabled" ) > -1 );
 		});
 		
 		test( 'When set in an overthrow-supporting browser, the test element height is less than scrollHeight', function() { 

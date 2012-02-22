@@ -62,29 +62,29 @@
 		
 		/* overthrow layout enhancements */
 	    /* Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
-		.overthrow .overthrow {
+		.overthrow-enabled .overthrow {
 	        overflow: auto;
 	        -webkit-overflow-scrolling: touch;
 	    }
-		html.overthrow, html.overthrow body {
+		html.overthrow-enabled, html.overthrow-enabled body {
 			height: 99.8%;
 			margin: 0;
 		}
-		.overthrow header,
-		.overthrow footer {
+		.overthrow-enabled header,
+		.overthrow-enabled footer {
 			height: 12%;
 		}
-		.overthrow article {
+		.overthrow-enabled article {
 			height: 76%;
 			padding: 0;
 			position: relative;
 		}
 		@media (min-height: 25em){
-			html.overthrow header,
-			html.overthrow footer {
+			html.overthrow-enabled header,
+			html.overthrow-enabled footer {
 				height: 8%;
 			}
-			html.overthrow article {
+			html.overthrow-enabled article {
 				height: 84%;
 			}
 			article {
@@ -92,7 +92,7 @@
 			}
 		}
 		@media (min-width: 35em){
-			html.overthrow nav, html.overthrow .primary {
+			html.overthrow-enabled nav, html.overthrow-enabled .primary {
 				height: 100%;
 			}
 			nav {

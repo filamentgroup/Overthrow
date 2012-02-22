@@ -114,15 +114,15 @@
 			}
 
 			timeKeeper = setInterval(function(){					
-				if( i++ <= o.duration ){
+				if( i++ < o.duration ){
 					elem.scrollLeft = o.easing( i, sLeft, o.left, o.duration );
 					elem.scrollTop = o.easing( i, sTop, o.top, o.duration );
 				}
 				else{
-					if( endLeft !== sLeft ){
+					if( endLeft !== elem.scrollLeft ){
 						elem.scrollLeft = endLeft;
 					}
-					if( endTop !== sTop ){
+					if( endTop !== elem.scrollTop ){
 						elem.scrollTop = endTop;
 					}
 					intercept();

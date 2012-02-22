@@ -334,7 +334,7 @@
 				 <li>Framework-independent: use with any JS library, or none at all!</li>
 				 <li>Native scrollTop: Rather than simulating scrolling with CSS properties, the native JavaScript <code>scrollTop</code> and <code>scrollLeft</code> properties are used. This means any you can use any standard web conventions for scrolling an overthrow element, such as <code>#fragment</code> anchor links, and so on.</li>
 				 <li>Safe for form elements: Overthrow doesn't interfere with form controls</li>
-				 <li>Nestable: just like standard CSS overflow, you can nest overthrow elements inside one another.</li>
+				 <li>Nestable (<em>partial support</em>): just like standard CSS overflow, overthrow elements can nest inside one another.</li>
 		</ul>
 		
 		
@@ -451,7 +451,7 @@ overthrow.toss( element, { top: 500 } );
 	    
 
 		<h3>Example Embedded Overthrow Block</h3>
-		
+		<p>Note: this may be a little clunky at the moment, as nesting isn't quite finished. Check out the nesting branch for progress.</p>
 		<div class="overthrow embedder">
 		
 		<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>

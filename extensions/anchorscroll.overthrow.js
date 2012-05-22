@@ -4,6 +4,7 @@
 	if( w.overthrow && w.addEventListener ){
 		
 		function scrollToElem ( elem ){
+		  overthrow.intercept();
 			var throwParent = overthrow.closest( elem );
 			if( throwParent ){
 				overthrow.toss(

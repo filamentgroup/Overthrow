@@ -197,12 +197,12 @@
 				
 				// For a new gesture, or change in direction, reset the values from last scroll
 				resetVertTracking = function(){
-					lastTops = [];
+					lastTops.length = 0;
 					lastDown = null;
 				},
 				
 				resetHorTracking = function(){
-					lastLefts = [];
+					lastLefts.length = 0;
 					lastRight = null;
 				},
 				

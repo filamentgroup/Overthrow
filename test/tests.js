@@ -88,6 +88,22 @@ window.onload = function(){
 				ok( document.documentElement.className.indexOf( "overthrow-enabled" ) === -1 );
 			}
 		});
+
+		test( 'overthrow.set adds HTML class with custom name', function() { 
+			overthrow.forget();
+			overthrow.configure({enabledClassName: "prefixed-overthrow-enabled"});
+			overthrow.set();
+			ok( document.documentElement.className.indexOf( "prefixed-overthrow-enabled" ) > -1 );
+		});
+
+		test( 'overthrow.forget destroys HTML class with custom name', function() { 
+			overthrow.forget();
+			ok( document.documentElement.className.indexOf( "prefixed-overthrow-enabled" ) === -1 );
+			
+			//since the following tests assume the class name to be the default, we set it back
+			overthrow.configure({enabledClassName: "overthrow-enabled"});
+			overthrow.set();
+		});
 		
 		test( 'overthrow.forget destroys HTML class', function() { 
 			overthrow.forget();
@@ -100,7 +116,8 @@ window.onload = function(){
 			overthrow.set();
 			ok( document.documentElement.className.indexOf( "overthrow-enabled" ) > -1 );
 		});
-		
+
+
 		test( 'When set in an overthrow-supporting browser, the test element height is less than scrollHeight', function() { 
 			if(overthrow.support === "native" || overthrow.support === "polyfilled" ){
 				ok( testElem.offsetHeight < testElem.scrollHeight );

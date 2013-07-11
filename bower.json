@@ -1,0 +1,11 @@
+{
+  "name": "overthrow",
+  "version": "0.1.0",
+  "main": "overthrow.js",
+  "ignore": [
+    "examples",
+    "extensions",
+    "test",
+    "index.html"
+  ]
+}

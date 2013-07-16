@@ -135,7 +135,14 @@
 
 	// find closest overthrow (elem or a parent)
 		closest = function (target, ascend) {
-			return !ascend && target.className && target.className.indexOf("overthrow") > -1 && target || closest(target.parentNode);
+			if (!target) {
+				return undefined;
+			}
+			return !ascend &&
+				target.className &&
+				target.className.indexOf("overthrow") > -1 &&
+				target.className.indexOf(classtext) === -1 &&
+				target || closest(target.parentNode);
 		},
 
 	// Intercept any throw in progress
@@ -237,13 +244,15 @@
 				},
 
 			// For nested overthrows, changeScrollTarget restarts a touch event cycle on a parent or child overthrow
-				changeScrollTarget = function (startEvent, ascend) {
+				changeScrollTarget = function (startEvent, ascend, e) {
 					if (doc.createEvent) {
 						var newTarget = ( !ascend || ascend === undefined ) && elem.parentNode || elem.touchchild || elem,
 							tEnd;
 
 						if (newTarget !== elem) {
 							tEnd = doc.createEvent("HTMLEvents");
+							// borrowing last touchmove touches so tEnd event behaves more or less like a real touch event
+							tEnd.touches = e.touches;
 							tEnd.initEvent("touchend", true, true);
 							elem.dispatchEvent(tEnd);
 							newTarget.touchchild = elem;
@@ -322,10 +331,15 @@
 							if (( ty > 0 && ty < scrollHeight - height ) || ( tx > 0 && tx < scrollWidth - width )) {
 								e.preventDefault();
 							}
+							// Has no parent element to scroll, maintain the target to allow inversion of scroll direction
+							else if (!closest(elem, true)) {
+								e.preventDefault();
+							}
 							// This bubbling is dumb. Needs a rethink.
 							else {
-								changeScrollTarget(touchStartE);
+								changeScrollTarget(touchStartE, undefined, e);
 							}
+
 						},
 
 					// Touchend handler

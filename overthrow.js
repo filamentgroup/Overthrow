@@ -3,7 +3,8 @@
 
 	var doc = w.document,
 		docElem = doc.documentElement,
-		classtext = "overthrow-enabled",
+		enabledClassName = "overthrow-enabled",
+		scrollIndicatorClassName = "overthrow",
 
 	// Touch events are used in the polyfill, and thus are a prerequisite
 		canBeFilledWithPoly = "ontouchmove" in doc,
@@ -64,6 +65,12 @@
 
 	// Keeper of intervals
 		timeKeeper,
+
+	//can be used to configure custom names for the css classes
+		configure = function (config) {
+			enabledClassName = config.enabledClassName || enabledClassName;
+			scrollIndicatorClassName = config.scrollIndicatorClassName || scrollIndicatorClassName;
+		},
 
 	/* toss scrolls and element with easing
 
@@ -143,8 +150,8 @@
 			}
 			return !ascend &&
 				target.className &&
-				target.className.indexOf("overthrow") > -1 &&
-				target.className.indexOf(classtext) === -1 &&
+				target.className.indexOf(scrollIndicatorClassName) > -1 &&
+				target.className.indexOf(enabledClassName) === -1 &&
 				target || closest(target.parentNode);
 		},
 
@@ -165,13 +172,13 @@
 
 			// If overflowProbablyAlreadyWorks or at least the element canBeFilledWithPoly, add a class to cue CSS that assumes overflow scrolling will work (setting height on elements and such)
 			if (overflowProbablyAlreadyWorks || canBeFilledWithPoly) {
-				docElem.className += " " + classtext;
+				docElem.className += " " + enabledClassName;
 			}
 
 			// Destroy everything later. If you want to.
 			w.overthrow.forget = function () {
 				// Strip the class name from docElem
-				docElem.className = docElem.className.replace(classtext, "");
+				docElem.className = docElem.className.replace(enabledClassName, "");
 				// Remove touch binding (check for method support since this part isn't qualified by touch support like the rest)
 				if (doc.removeEventListener) {
 					doc.removeEventListener("touchstart", start, false);
@@ -368,6 +375,7 @@
 
 	// Expose overthrow API
 	w.overthrow = {
+		configure: configure,
 		set: enable,
 		forget: function () {
 		},

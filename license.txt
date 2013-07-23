@@ -1,4 +1,4 @@
-Overthrow is dual-licensed under MIT. 
+Overthrow is licensed under MIT. 
 
 
 The MIT License (MIT)

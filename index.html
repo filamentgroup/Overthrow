@@ -329,7 +329,7 @@
 		 
 		 <ul class="features">
 				 <li>Lightweight JavaScript: 1.6kb after min/gzip</li>
-				 <li>Dual MIT / BSD license: use it wherever you want.</li>
+				 <li>MIT license: use it wherever you want.</li>
 				 <li>Designed for responsive design: safe for use in cross-device development</li>
 				 <li>Framework-independent: use with any JS library, or none at all!</li>
 				 <li>Native scrollTop: Rather than simulating scrolling with CSS properties, the native JavaScript <code>scrollTop</code> and <code>scrollLeft</code> properties are used. This means any you can use any standard web conventions for scrolling an overthrow element, such as <code>#fragment</code> anchor links, and so on.</li>
@@ -421,8 +421,7 @@
 
 <ul>
 	<li><strong>overthrow.set</strong>: function to initialize overthrow behavior and style in the page. Adds "overthrow-enabled" class to <code>html</code> element, and touch listener for polyfilled browsers</li>
-	<li><strong>overthrow.forget</strong>: function to remove overthrow behavior and style in the page. Removes "overthrow-enabled" class from HTML element, and touch event listener in polyfilled browsers, and restores default easing.</li>
-	<li><strong>overthrow.easing</strong>: an overrideable property that stores the default easing function (using any of Robert Penner's easing equations.)</li>
+	<li><strong>overthrow.forget</strong>: function to remove overthrow behavior and style in the page. Removes "overthrow-enabled" class from HTML element, and touch event listener in polyfilled browsers.</li>
 	<li><strong>overthrow.toss</strong>: function to programatically scroll an overthrow element.
 			<p>To call, pass a required first argument referencing the overthrow element to scroll, and a hash of optional configuration properties.</p>
 <pre class="overthrow"><code>
@@ -432,11 +431,8 @@ overthrow.toss( element, { top: 500 } );
 			<ul>
 				<li><strong>left</strong>: the desired horizontal scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.</li>
 				<li><strong>top</strong>: the desired vertical scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.</li>
-			<li><strong>duration</strong>: is the number of milliseconds the throw will take. Default is 100.
-			<li><strong>easing</strong>: an optional custom easing function. Default is the included ease-out cubic equation. Overrides must follow the easing function signature of Robert Penner easing equations, which have 4 arguments: t = current iteration, b = initial value, c = end value, d = total iterations.</li>
 			</ul>
 		</li>
-	<li><strong>overthrow.intercept</strong>: stop a toss that is currently iterating</li>	
 	<li><strong>overthrow.support</strong>: string representing the browser's overthrow support type: "native", "polyfilled", or "none"</li>
 	</ul>
 	

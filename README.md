@@ -5,9 +5,9 @@ A tiny, no-frills, framework-independent, targeted `overflow: auto` polyfill for
 - **Overthrow Site & Documentation:** [http://filamentgroup.github.com/Overthrow/](http://filamentgroup.github.com/Overthrow/)
 - **Filament Group Release Notes:** [Overthrow: An overflow: auto polyfill for responsive design](http://filamentgroup.com/lab/overthrow)
 
-License: [Open-source, Dual MIT/BSD license](http://filamentgroup.github.com/Overthrow/license.txt)
+License: [Open-source MIT license](http://filamentgroup.github.com/Overthrow/license.txt)
 
-Copyright 2012: Scott Jehl, Filament Group, Inc. 
+Copyright 2013: Scott Jehl, Filament Group, Inc. 
 
 See the project site for detailed documentation.
 

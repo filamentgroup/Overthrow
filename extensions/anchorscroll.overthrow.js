@@ -1,4 +1,4 @@
-/*! hashscroll overthrow.js extension: eased scroll to elements via hashchange, within an overthrow element. (c) 2012: Scott Jehl, Filament Group, Inc. Dual MIT/BSD license */
+/*! hashscroll overthrow.js extension:  scroll to elements via hashchange, within an overthrow element. (c) 2012: Scott Jehl, Filament Group, Inc. MIT license */
 (function( w, undefined ){
 	// set the hash-based links to scroll to a desired location
 	if( w.overthrow && w.addEventListener ){

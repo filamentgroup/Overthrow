@@ -50,18 +50,8 @@
 				);
 			})(),
 			
-		// Easing can use any of Robert Penner's equations (http://www.robertpenner.com/easing_terms_of_use.html). By default, overthrow includes ease-out-cubic
-		// arguments: t = current iteration, b = initial value, c = end value, d = total iterations
-		// use w.overthrow.easing to provide a custom function externally, or pass an easing function as a callback to the toss method
-		defaultEasing = function (t, b, c, d) {
-			return c*((t=t/d-1)*t*t + 1) + b;
-		},	
-			
 		enabled = false,
-		
-		// Keeper of intervals
-		timeKeeper,
-				
+
 		/* toss scrolls and element with easing
 		
 		// elem is the element to scroll
@@ -69,7 +59,6 @@
 			* left is the desired horizontal scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
 			* top is the desired vertical scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
 			* duration is the number of milliseconds the throw will take. Default is 100.
-			* easing is an optional custom easing function. Default is w.overthrow.easing. Must follow the easing function signature 
 		*/
 		toss = function( elem, options ){
 			var i = 0,
@@ -78,9 +67,7 @@
 				// Toss defaults
 				o = {
 					top: "+0",
-					left: "+0",
-					duration: 100,
-					easing: w.overthrow.easing
+					left: "+0"
 				},
 				endLeft, endTop;
 			
@@ -113,34 +100,20 @@
 				o.top = o.top - sTop;
 			}
 
-			timeKeeper = setInterval(function(){					
-				if( i++ < o.duration ){
-					elem.scrollLeft = o.easing( i, sLeft, o.left, o.duration );
-					elem.scrollTop = o.easing( i, sTop, o.top, o.duration );
-				}
-				else{
-					if( endLeft !== elem.scrollLeft ){
-						elem.scrollLeft = endLeft;
-					}
-					if( endTop !== elem.scrollTop ){
-						elem.scrollTop = endTop;
-					}
-					intercept();
-				}
-			}, 1 );
+			if( endLeft !== elem.scrollLeft ){
+				elem.scrollLeft = endLeft;
+			}
+			if( endTop !== elem.scrollTop ){
+				elem.scrollTop = endTop;
+			}
 			
 			// Return the values, post-mixin, with end values specified
-			return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
+			return { top: endTop, left: endLeft };
 		},
 		
 		// find closest overthrow (elem or a parent)
 		closest = function( target, ascend ){
 			return !ascend && target.className && target.className.indexOf( "overthrow" ) > -1 && target || closest( target.parentNode );
-		},
-				
-		// Intercept any throw in progress
-		intercept = function(){
-			clearInterval( timeKeeper );
 		},
 			
 		// Enable and potentially polyfill overflow
@@ -166,8 +139,6 @@
 				if( doc.removeEventListener ){
 					doc.removeEventListener( "touchstart", start, false );
 				}
-				// reset easing to default
-				w.overthrow.easing = defaultEasing;
 				
 				// Let 'em know
 				enabled = false;
@@ -205,24 +176,6 @@
 					lastLefts = [];
 					lastRight = null;
 				},
-				
-				// After releasing touchend, throw the overthrow element, depending on momentum
-				finishScroll = function(){
-					// Come up with a distance and duration based on how 
-					// Multipliers are tweaked to a comfortable balance across platforms
-					var top = ( lastTops[ 0 ] - lastTops[ lastTops.length -1 ] ) * 8,
-						left = ( lastLefts[ 0 ] - lastLefts[ lastLefts.length -1 ] ) * 8,
-						duration = Math.max( Math.abs( left ), Math.abs( top ) ) / 8;
-					
-					// Make top and left relative-style strings (positive vals need "+" prefix)
-					top = ( top > 0 ? "+" : "" ) + top;
-					left = ( left > 0 ? "+" : "" ) + left;
-					
-					// Make sure there's a significant amount of throw involved, otherwise, just stay still
-					if( !isNaN( duration ) && duration > 0 && ( Math.abs( left ) > 80 || Math.abs( top ) > 80 ) ){
-						toss( elem, { left: left, top: top, duration: duration } );
-					}
-				},
 			
 				// On webkit, touch events hardly trickle through textareas and inputs
 				// Disabling CSS pointer events makes sure they do, but it also makes the controls innaccessible
@@ -257,9 +210,6 @@
 				// On touchstart, touchmove and touchend are freshly bound, and all three share a bunch of vars set by touchstart
 				// Touchend unbinds them again, until next time
 				start = function( e ){
-					
-					// Stop any throw in progress
-					intercept();
 					
 					// Reset the distance and direction tracking
 					resetVertTracking();
@@ -330,8 +280,7 @@
 					
 						// Touchend handler
 						end = function( e ){
-							// Apply momentum based easing for a graceful finish
-							finishScroll();	
+
 							// Bring the pointers back
 							setPointers( "auto" );
 							setTimeout( function(){
@@ -353,9 +302,7 @@
 	w.overthrow = {
 		set: enable,
 		forget: function(){},
-		easing: defaultEasing,
 		toss: toss,
-		intercept: intercept,
 		closest: closest,
 		support: overflowProbablyAlreadyWorks ? "native" : canBeFilledWithPoly && "polyfilled" || "none"
 	};

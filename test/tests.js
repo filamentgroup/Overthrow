@@ -60,23 +60,6 @@ window.onload = function(){
 			ok( typeof( overthrow.closest ) === "function" );
 		});
 		
-		test( 'API Properties: overthrow.intercept is defined', function() { 
-			ok( overthrow.intercept );
-		});
-		
-		test( 'API Properties: overthrow.intercept is a function', function() { 
-			ok( typeof( overthrow.intercept ) === "function" );
-		});
-		
-		test( 'API Properties: overthrow.easing is defined', function() { 
-			ok( overthrow.intercept );
-		});
-		
-		test( 'API Properties: overthrow.easing is a function', function() { 
-			ok( typeof( overthrow.easing ) === "function" );
-		});
-		
-		
 		
 		
 		
@@ -168,26 +151,7 @@ window.onload = function(){
 			ok( typeof toss.left === "number", "Left is a number" );			
 		});
 		
-		test( 'Overthrow.toss methods return includes duration value', function(){
-			var toss = overthrow.toss(testElem);
-			ok( toss.duration !== undefined, "Duration is defined" );			
-		});
-		
-		test( 'Overthrow.toss methods return duration value is a number', function(){
-			var toss = overthrow.toss(testElem);
-			ok( typeof toss.duration === "number", "Duration is a number" );			
-		});
-		
-		test( 'Overthrow.toss methods return includes easing property', function(){
-			var toss = overthrow.toss(testElem);
-			ok( toss.easing !== undefined, "Easing is defined" );			
-		});
-		
-		test( 'Overthrow.toss methods return easing property is a function', function(){
-			var toss = overthrow.toss(testElem);
-			ok( typeof toss.easing === "function", "Easing is a function" );			
-		});
-		
+
 		test( "Overthrow.toss returns overridden top absolute value", function(){
 			var toss = overthrow.toss( testElem, { top: 500 } );
 			ok(  toss.top === 500, "Top equals 500" );	
@@ -237,17 +201,7 @@ window.onload = function(){
 			ok(  toss.left === 200, "Left equals 200" );	
 		});
 		
-		test( "Overthrow.toss returns overridden duration value", function(){
-			var toss = overthrow.toss( testElem, { duration: 300 } );
-			ok(  toss.duration === 300, "Duration equals 300" );	
-		});
-		
-		test( "Overthrow.toss returns overridden easing value", function(){
-			var ease = function(a,b,c,d){return 10;},
-				toss = overthrow.toss( testElem, { easing: ease } );
-			ok(  toss.easing === ease, "Easing equals sample function" );	
-		});
-		
+
 
 
 	

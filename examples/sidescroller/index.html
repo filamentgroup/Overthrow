@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Overthrow Demo</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<style>
+		/* DEMO CSS IS GROSS */
+		body {
+			font-family: Helvetica, sans-serif;
+			margin: 0;
+		}
+		
+		
+		/* overthrow layout enhancements */
+	    /* Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
+		.overthrow-enabled .overthrow {
+	        overflow: auto;
+	        -webkit-overflow-scrolling: touch;
+	    }
+	    body {
+	    	width: 30em;
+			max-width: 80%;
+			margin: 100px auto
+	    }
+	    
+
+
+	    
+	    .overthrow-enabled .sidescroll ul,
+	    .overthrow-enabled .sidescroll li {
+			float: left;
+			margin: 0;
+			padding: 0;
+		}
+		.overthrow-enabled .sidescroll.sidescroll-2 ul {
+			width: 200%;
+		}
+		.overthrow-enabled .sidescroll.sidescroll-2 li {
+			width: 50%;
+		}
+		.overthrow-enabled .sidescroll.sidescroll-3 ul {
+			width: 300%;
+		}
+		.overthrow-enabled .sidescroll.sidescroll-3 li {
+			width: 33.3333%
+		}
+		.overthrow-enabled .sidescroll.sidescroll-4 ul {
+			width: 400%;
+		}
+		.overthrow-enabled .sidescroll.sidescroll-4 li {
+			width: 25%
+		}
+		.overthrow-enabled .sidescroll.sidescroll-5 ul {
+			width: 500%;
+		}
+		.overthrow-enabled .sidescroll.sidescroll-5 li {
+			width: 20%
+		}
+		.overthrow-enabled .sidescroll.sidescroll-6 ul {
+			width: 600%;
+		}
+		.overthrow-enabled .sidescroll.sidescroll-6 li {
+			width: 16.666666667%
+		}
+		.overthrow-enabled .sidescroll.sidescroll-7 ul {
+			width: 700%;
+		}
+		.overthrow-enabled .sidescroll.sidescroll-7 li {
+			width: 14.285714286%
+		}
+		
+	    .overthrow-enabled .sidescroll li img {
+	    	margin: 0;
+	    	padding: 0;
+	    	width: 100%;
+	    }
+		
+		
+	</style>
+	<script src="../../overthrow.js"></script>
+</head>
+<body>
+	
+
+
+	
+		<p>Basic side-scroller</p>
+		
+		<nav class="overthrow sidescroll sidescroll-3">
+				<ul>
+					<li><img src="img/angkor.jpg"></li>
+					<li><img src="img/monkey.jpg"></li>
+					<li><img src="img/monks.jpg"></li>
+				</ul>
+		</nav>
+		
+		
+
+</body>
+</html>

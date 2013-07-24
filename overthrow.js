@@ -19,7 +19,7 @@
 			// Touch events aren't supported and screen width is greater than X
 			// ...basically, this is a loose "desktop browser" check. 
 			// It may wrongly opt-in very large tablets with no touch support.
-			( !canBeFilledWithPoly && w.screen.width > 1200 ) ||
+			( !canBeFilledWithPoly && w.screen.width > 800 ) ||
 			// Hang on to your hats.
 			// Whitelist some popular, overflow-supporting mobile browsers for now and the future
 			// These browsers are known to get overlow support right, but give us no way of detecting it.

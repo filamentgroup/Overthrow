@@ -69,6 +69,7 @@
 		configure = function(config){
 			enabledClassName = config.enabledClassName || enabledClassName;
 			scrollIndicatorClassName = config.scrollIndicatorClassName || scrollIndicatorClassName;
+			overflowProbablyAlreadyWorks = config.ignoreNative || scrollIndicatorClassName
 		},
 				
 		/* toss scrolls and element with easing
@@ -89,7 +90,7 @@
 				o = {
 					top: "+0",
 					left: "+0",
-					duration: 100,
+					duration: 50,
 					easing: w.overthrow.easing
 				},
 				endLeft, endTop;

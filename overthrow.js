@@ -52,8 +52,18 @@
 					ua.match( /NokiaBrowser\/([0-9\.]+)/ ) && parseFloat(RegExp.$1) === 7.3 && webkit && wkversion >= 533
 				);
 			})(),
+
+		// Easing can use any of Robert Penner's equations (http://www.robertpenner.com/easing_terms_of_use.html). By default, overthrow includes ease-out-cubic
+		// arguments: t = current iteration, b = initial value, c = end value, d = total iterations
+		// use w.overthrow.easing to provide a custom function externally, or pass an easing function as a callback to the toss method
+		defaultEasing = function (t, b, c, d) {
+			return c*((t=t/d-1)*t*t + 1) + b;
+		},
 			
 		enabled = false,
+
+		// Keeper of intervals
+		timeKeeper,
 
 		//can be used to configure custom names for the css classes
 		configure = function(config){
@@ -68,6 +78,8 @@
 			* left is the desired horizontal scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
 			* top is the desired vertical scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
 			* duration is the number of milliseconds the throw will take. Default is 100.
+			* easing is an optional custom easing function. Default is w.overthrow.easing. Must follow the easing function signature 
+
 		*/
 		toss = function( elem, options ){
 			var i = 0,
@@ -76,7 +88,9 @@
 				// Toss defaults
 				o = {
 					top: "+0",
-					left: "+0"
+					left: "+0",
+					duration: 100,
+					easing: w.overthrow.easing
 				},
 				endLeft, endTop;
 			
@@ -109,15 +123,29 @@
 				o.top = o.top - sTop;
 			}
 
-			if( endLeft !== elem.scrollLeft ){
-				elem.scrollLeft = endLeft;
-			}
-			if( endTop !== elem.scrollTop ){
-				elem.scrollTop = endTop;
-			}
+			timeKeeper = setInterval(function(){					
+				if( i++ < o.duration ){
+					elem.scrollLeft = o.easing( i, sLeft, o.left, o.duration );
+					elem.scrollTop = o.easing( i, sTop, o.top, o.duration );
+				}
+				else{
+					if( endLeft !== elem.scrollLeft ){
+						elem.scrollLeft = endLeft;
+					}
+					if( endTop !== elem.scrollTop ){
+						elem.scrollTop = endTop;
+					}
+					intercept();
+				}
+			}, 1 );
 			
 			// Return the values, post-mixin, with end values specified
-			return { top: endTop, left: endLeft };
+			return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
+		},
+
+		// Intercept any throw in progress
+		intercept = function(){
+			clearInterval( timeKeeper );
 		},
 		
 		// find closest overthrow (elem or a parent)
@@ -148,6 +176,9 @@
 				if( doc.removeEventListener ){
 					doc.removeEventListener( "touchstart", start, false );
 				}
+
+				// reset easing to default
+				w.overthrow.easing = defaultEasing;
 				
 				// Let 'em know
 				enabled = false;
@@ -219,6 +250,9 @@
 				// On touchstart, touchmove and touchend are freshly bound, and all three share a bunch of vars set by touchstart
 				// Touchend unbinds them again, until next time
 				start = function( e ){
+
+					// Stop any throw in progress
+					intercept();
 					
 					// Reset the distance and direction tracking
 					resetVertTracking();
@@ -312,6 +346,8 @@
 		configure: configure,
 		set: enable,
 		forget: function(){},
+		easing: defaultEasing,
+		intercept: intercept,
 		toss: toss,
 		closest: closest,
 		support: overflowProbablyAlreadyWorks ? "native" : canBeFilledWithPoly && "polyfilled" || "none"

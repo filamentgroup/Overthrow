@@ -11,7 +11,7 @@
 		
 		// The following attempts to determine whether the browser has native overflow support
 		// so we can enable it but not polyfill
-		overflowProbablyAlreadyWorks = 
+		nativeOverflow = 
 			// Features-first. iOS5 overflow scrolling property check - no UA needed here. thanks Apple :)
 			"WebkitOverflowScrolling" in docElem.style ||
 			// Test the windows scrolling property as well
@@ -163,8 +163,8 @@
 			// It's on.
 			enabled = true;
 				
-			// If overflowProbablyAlreadyWorks or at least the element canBeFilledWithPoly, add a class to cue CSS that assumes overflow scrolling will work (setting height on elements and such)
-			if( overflowProbablyAlreadyWorks || canBeFilledWithPoly ){
+			// If nativeOverflow or at least the element canBeFilledWithPoly, add a class to cue CSS that assumes overflow scrolling will work (setting height on elements and such)
+			if( nativeOverflow || canBeFilledWithPoly ){
 				docElem.className += " " + enabledClassName;
 			}
 				
@@ -184,8 +184,8 @@
 				enabled = false;
 			};
 	
-			// If overflowProbablyAlreadyWorks or it doesn't look like the browser canBeFilledWithPoly, our job is done here. Exit viewport left.
-			if( overflowProbablyAlreadyWorks || !canBeFilledWithPoly ){
+			// If nativeOverflow or it doesn't look like the browser canBeFilledWithPoly, our job is done here. Exit viewport left.
+			if( nativeOverflow || !canBeFilledWithPoly ){
 				return;
 			}
 
@@ -350,7 +350,7 @@
 		intercept: intercept,
 		toss: toss,
 		closest: closest,
-		support: overflowProbablyAlreadyWorks ? "native" : canBeFilledWithPoly && "polyfilled" || "none"
+		support: nativeOverflow ? "native" : canBeFilledWithPoly && "polyfilled" || "none"
 	};
 	
 	// Auto-init

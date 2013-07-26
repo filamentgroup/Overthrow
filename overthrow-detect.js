@@ -50,9 +50,7 @@
 					~: Note: the N9 doesn't have native overflow with one-finger touch. wtf */
 					ua.match( /NokiaBrowser\/([0-9\.]+)/ ) && parseFloat(RegExp.$1) === 7.3 && webkit && wkversion >= 533
 				);
-			})(),
-			
-		enabled = false;
+			})();
 
 	// Expose overthrow API
 	w.overthrow = {};
@@ -62,19 +60,22 @@
 		enabledClassName = config.enabledClassName || enabledClassName;
 	};
 
+	w.overthrow.addClass = function(){
+		if( docElem.className.indexOf( enabledClassName ) === -1 ){
+			docElem.className += " " + enabledClassName;
+		}
+	};
+
+	w.overthrow.removeClass = function(){
+		docElem.className = docElem.className.replace( enabledClassName, "" );
+	};
+
 	// Enable and potentially polyfill overflow
 	w.overthrow.set = function(){
 			
-		// If it's on, 
-		if( enabled ){
-			return;
-		}
-		// It's on.
-		enabled = true;
-			
 		// If nativeOverflow or at least the element canBeFilledWithPoly, add a class to cue CSS that assumes overflow scrolling will work (setting height on elements and such)
 		if( nativeOverflow ){
-			docElem.className += " " + enabledClassName;
+			w.overthrow.addClass();
 		}
 
 	};
@@ -85,15 +86,12 @@
 	// Destroy everything later. If you want to.
 	w.overthrow.forget = function(){
 
-		// Strip the class name from docElem
-		docElem.className = docElem.className.replace( enabledClassName, "" );
+		w.overthrow.removeClass();
 		
-		// Let 'em know
-		enabled = false;
 	};
 		
 	// Expose overthrow API
-	w.overthrow.support = nativeOverflow ? "native" : canBeFilledWithPoly && "polyfilled" || "none";
+	w.overthrow.support = nativeOverflow ? "native" : "none";
 	
 	// Auto-init
 	w.overthrow.set();

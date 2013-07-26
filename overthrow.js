@@ -39,7 +39,7 @@
 					ua.match( / Version\/([0-9]+)/ ) && RegExp.$1 >= 0 && w.blackberry && wkLte534 ||
 					/* Blackberry Playbook with webkit gte 534
 					~: Mozilla/5.0 (PlayBook; U; RIM Tablet OS 1.0.0; en-US) AppleWebKit/534.8+ (KHTML, like Gecko) Version/0.0.1 Safari/534.8+ */   
-					ua.indexOf( /PlayBook/ ) > -1 && RegExp.$1 >= 0 && wkLte534 ||
+					ua.indexOf( /PlayBook/ ) > -1 && RegExp.$1 >= 0 && wkLte534 && !ua.indexOf( "Android 2" ) === -1 ||
 					/* Firefox Mobile (Fennec) 4 and up
 					~: Mozilla/5.0 (Mobile; rv:15.0) Gecko/15.0 Firefox/15.0 */
 					ua.match(/Firefox\/([0-9]+)/) && RegExp.$1 >= 4 ||

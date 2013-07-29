@@ -55,11 +55,6 @@
 	// Expose overthrow API
 	w.overthrow = {};
 
-	//can be used to configure custom names for the css classes
-	w.overthrow.configure = function( config ){
-		enabledClassName = config.enabledClassName || enabledClassName;
-	};
-
 	w.overthrow.addClass = function(){
 		if( docElem.className.indexOf( enabledClassName ) === -1 ){
 			docElem.className += " " + enabledClassName;

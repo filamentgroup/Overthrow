@@ -29,96 +29,10 @@
 		// The following attempts to determine whether the browser has native overflow support
 		// so we can enable it but not polyfill
 
-		// Easing can use any of Robert Penner's equations (http://www.robertpenner.com/easing_terms_of_use.html). By default, overthrow includes ease-out-cubic
-		// arguments: t = current iteration, b = initial value, c = end value, d = total iterations
-		// use w.overthrow.easing to provide a custom function externally, or pass an easing function as a callback to the toss method
-		o.easing = function (t, b, c, d) {
-			return c*((t=t/d-1)*t*t + 1) + b;
-		};
-
-		// Keeper of intervals
-		var timeKeeper;
-				
-		/* toss scrolls and element with easing
-		
-		// elem is the element to scroll
-		// options hash:
-			* left is the desired horizontal scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
-			* top is the desired vertical scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
-			* duration is the number of milliseconds the throw will take. Default is 100.
-			* easing is an optional custom easing function. Default is w.overthrow.easing. Must follow the easing function signature 
-
-		*/
-		o.toss = function( elem, options ){
-			var i = 0,
-				sLeft = elem.scrollLeft,
-				sTop = elem.scrollTop,
-				// Toss defaults
-				o = {
-					top: "+0",
-					left: "+0",
-					duration: 50,
-					easing: o.easing
-				},
-				endLeft, endTop;
-			
-			// Mixin based on predefined defaults
-			if( options ){
-				for( var j in o ){
-					if( options[ j ] !== undefined ){
-						o[ j ] = options[ j ];
-					}
-				}
-			}
-			
-			// Convert relative values to ints
-			// First the left val
-			if( typeof o.left === "string" ){
-				o.left = parseFloat( o.left );
-				endLeft = o.left + sLeft;
-			}
-			else {
-				endLeft = o.left;
-				o.left = o.left - sLeft;
-			}
-			// Then the top val
-			if( typeof o.top === "string" ){
-				o.top = parseFloat( o.top );
-				endTop = o.top + sTop;
-			}
-			else {
-				endTop = o.top;
-				o.top = o.top - sTop;
-			}
-
-			timeKeeper = setInterval(function(){					
-				if( i++ < o.duration ){
-					elem.scrollLeft = o.easing( i, sLeft, o.left, o.duration );
-					elem.scrollTop = o.easing( i, sTop, o.top, o.duration );
-				}
-				else{
-					if( endLeft !== elem.scrollLeft ){
-						elem.scrollLeft = endLeft;
-					}
-					if( endTop !== elem.scrollTop ){
-						elem.scrollTop = endTop;
-					}
-					intercept();
-				}
-			}, 1 );
-			
-			// Return the values, post-mixin, with end values specified
-			return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
-		};
-
-		// Intercept any throw in progress
-		o.intercept = function(){
-			clearInterval( timeKeeper );
-		};
 		
 		// find closest overthrow (elem or a parent)
 		o.closest = function( target, ascend ){
-			return !ascend && target.className && target.className.indexOf( scrollIndicatorClassName ) > -1 && target || closest( target.parentNode );
+			return !ascend && target.className && target.className.indexOf( scrollIndicatorClassName ) > -1 && target || o.closest( target.parentNode );
 		};
 			
 		// polyfill overflow
@@ -210,13 +124,15 @@
 				start = function( e ){
 
 					// Stop any throw in progress
-					intercept();
+					if( o.intercept ){
+						o.intercept();
+					}
 					
 					// Reset the distance and direction tracking
 					resetVertTracking();
 					resetHorTracking();
-						
-					elem = closest( e.target );
+					
+					elem = o.closest( e.target );
 						
 					if( !elem || elem === docElem || e.touches.length > 1 ){
 						return;

@@ -67,6 +67,9 @@
 	        -webkit-overflow-scrolling: touch;
 	        z-index: 0
 	    }
+	    .overthrow .overthrow {
+	    	z-index: 1;
+	    }
 		html.overthrow-enabled, html.overthrow-enabled body {
 			height: 99.8%;
 			margin: 0;
@@ -106,7 +109,9 @@
 			}
 		}
 	</style>
-	<script src="../../overthrow.js"></script>
+	<script src="../../overthrow-detect.js"></script>
+	<script src="../../overthrow-polyfill.js"></script>
+	<script src="../../overthrow-toss.js"></script>
 </head>
 <body>
 	

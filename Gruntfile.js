@@ -17,7 +17,7 @@ module.exports = function(grunt) {
         stripBanners: true
       },
       dist: {
-        src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js'],
+        src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js'],
         dest: 'dist/<%= pkg.name %>.js'
       }
     },

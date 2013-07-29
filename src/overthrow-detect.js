@@ -87,8 +87,5 @@
 		
 	// Expose overthrow API
 	w.overthrow.support = nativeOverflow ? "native" : "none";
-	
-	// Auto-init
-	w.overthrow.set();
 		
 })( this );

@@ -202,11 +202,5 @@
 		// Bind to touch, handle move and end within
 		doc.addEventListener( "touchstart", start, false );
 	};
-
-	
-	// Auto-init
-	o.set();
-
-
 		
 })( this, this.overthrow );

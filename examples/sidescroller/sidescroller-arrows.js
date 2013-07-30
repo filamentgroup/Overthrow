@@ -18,11 +18,18 @@
 			e.preventDefault();
 			if( !handledRecently ){
 				handledRecently = true;
-				var slideWidth = thisScroll.querySelector( "li" ).offsetWidth;
+				var slideWidth = thisScroll.querySelector( "li" ).offsetWidth,
+					currScroll = thisScroll.scrollLeft,
+					slideNum = Math.round( currScroll / slideWidth ),
+					newSlide = slideNum + ( e.target.className.indexOf( "next" ) > 0 ? 1 : -1 ),
+					newScroll = slideWidth * newSlide;
+
 				setTimeout( function(){ handledRecently = false; }, 300 );
-				overthrow.toss( thisScroll, { left: ( e.target.className.indexOf( "next" ) > 0 ? "+" : "-" ) + slideWidth } );
+				overthrow.toss( thisScroll, { left: newScroll } );
 			}
 		}
+
+
 
 		nextPrev.addEventListener( "click", handleClick, false );
 		nextPrev.addEventListener( "touchend", handleClick, false );

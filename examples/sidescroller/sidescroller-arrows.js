@@ -18,8 +18,9 @@
 			e.preventDefault();
 			if( !handledRecently ){
 				handledRecently = true;
+				var slideWidth = thisScroll.querySelector( "li" ).offsetWidth;
 				setTimeout( function(){ handledRecently = false; }, 300 );
-				overthrow.toss( thisScroll, { left: ( e.target.className.indexOf( "next" ) > 0 ? "+" : "-" ) + thisScroll.offsetWidth } );
+				overthrow.toss( thisScroll, { left: ( e.target.className.indexOf( "next" ) > 0 ? "+" : "-" ) + slideWidth } );
 			}
 		}
 

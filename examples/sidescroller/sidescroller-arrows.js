@@ -14,9 +14,6 @@
 
 		nextPrev.innerHTML = "<a href='#' class='sidescroll-prev'>Previous</a><a href='#' class='sidescroll-next'>Next</a>";
 
-		nextPrev.addEventListener( "click", handleClick, false );
-		nextPrev.addEventListener( "touchend", handleClick, false );
-
 		function handleClick( e ){
 			e.preventDefault();
 			if( !handledRecently ){
@@ -25,6 +22,9 @@
 				overthrow.toss( thisScroll, { left: ( e.target.className.indexOf( "next" ) > 0 ? "+" : "-" ) + thisScroll.offsetWidth } );
 			}
 		}
+
+		nextPrev.addEventListener( "click", handleClick, false );
+		nextPrev.addEventListener( "touchend", handleClick, false );
 
 		scrolls[ i ].insertBefore( nextPrev, thisScroll )
 

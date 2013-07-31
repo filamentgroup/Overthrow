@@ -29,7 +29,7 @@
 					newSlide = slideNum + ( next ? 1 : -1 ),
 					newScroll = slideWidth * newSlide;
 
-				overthrow.toss( thisScroll, { left: newScroll } );
+				overthrow.toss( thisScroll, { left: newScroll, duration: 80 } );
 				setTimeout( function(){ handled = false; }, 100 );
 			}
 
@@ -40,7 +40,7 @@
 					currScroll = thisScroll.scrollLeft,
 					slideNum = Math.round( currScroll / slideWidth );
 
-			overthrow.toss( thisScroll, { left: slideWidth * slideNum } );
+			overthrow.toss( thisScroll, { left: slideWidth * slideNum, duration: 20 } );
 		}
 
 		var debounce;

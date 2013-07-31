@@ -23,13 +23,20 @@ module.exports = function(grunt) {
     },
     qunit: {
       files: ['test/**/*.html']
-    }
+    },
+    uglify: {
+      dist: {
+        src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js'],
+        dest: 'dist/<%= pkg.name %>.min.js'
+      },
+    },
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Default task.
   grunt.registerTask('default', ['concat']);

@@ -54,7 +54,7 @@
 		nextPrev.addEventListener( "touchend", handleClick, false );
 		w.addEventListener( "resize", handleResize, false );
 		thisScroll.addEventListener( "scroll", handleScroll, false );
-
+ 
 		scrolls[ i ].insertBefore( nextPrev, thisScroll )
 
 

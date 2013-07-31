@@ -6,9 +6,12 @@
 	var scrolls = w.document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" );
 
 	for( var i = 0; i < scrolls.length; i++ ){
+
 		var thisScroll = scrolls[ i ].querySelector( ".overthrow" ),
 			nextPrev = w.document.createElement( "div" ),
-			handledRecently = false;
+			handled;
+
+		scrolls[ i ].setAttribute( "tabindex", "0" );
 
 		nextPrev.className = "sidescroll-nextprev-links";
 
@@ -16,17 +19,20 @@
 
 		function handleClick( e ){
 			e.preventDefault();
-			if( !handledRecently ){
-				handledRecently = true;
+			if( e.type === "keydown" || !handled ){
+				handled = true;
+				
 				var slideWidth = thisScroll.querySelector( "li" ).offsetWidth,
 					currScroll = thisScroll.scrollLeft,
 					slideNum = Math.round( currScroll / slideWidth ),
-					newSlide = slideNum + ( e.target.className.indexOf( "next" ) > 0 ? 1 : -1 ),
+					next = (e.type !== "keydown" && e.target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
+					newSlide = slideNum + ( next ? 1 : -1 ),
 					newScroll = slideWidth * newSlide;
 
-				setTimeout( function(){ handledRecently = false; }, 300 );
 				overthrow.toss( thisScroll, { left: newScroll } );
+				setTimeout( function(){ handled = false; }, 100 );
 			}
+
 		}
 
 		function handleSnap(){
@@ -46,13 +52,20 @@
 		var debouncedos;
 		function handleScroll(){
 			clearTimeout(debouncedos);
-			debouncedos = setTimeout(handleSnap, 100);
+			debouncedos = setTimeout(handleSnap, 200);
+		}
+
+		function handleKey( e ){			
+			if( e.keyCode === 39 || e.keyCode === 37 ){
+				handleClick( e );
+			}
 		}
 
 
 		nextPrev.addEventListener( "click", handleClick, false );
 		nextPrev.addEventListener( "touchend", handleClick, false );
 		w.addEventListener( "resize", handleResize, false );
+		scrolls[ i ].addEventListener( "keydown", handleKey, false );
 		thisScroll.addEventListener( "scroll", handleScroll, false );
  
 		scrolls[ i ].insertBefore( nextPrev, thisScroll )

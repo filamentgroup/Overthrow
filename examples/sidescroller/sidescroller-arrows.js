@@ -43,10 +43,17 @@
 			debounce = setTimeout(handleSnap, 100);
 		}
 
+		var debouncedos;
+		function handleScroll(){
+			clearTimeout(debouncedos);
+			debouncedos = setTimeout(handleSnap, 100);
+		}
+
 
 		nextPrev.addEventListener( "click", handleClick, false );
 		nextPrev.addEventListener( "touchend", handleClick, false );
 		w.addEventListener( "resize", handleResize, false );
+		thisScroll.addEventListener( "scroll", handleScroll, false );
 
 		scrolls[ i ].insertBefore( nextPrev, thisScroll )
 

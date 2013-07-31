@@ -68,6 +68,8 @@
 			o.top = op.top - sTop;
 		}
 
+		o.intercept();
+
 		timeKeeper = setInterval(function(){					
 			if( i++ < op.duration ){
 				elem.scrollLeft = op.easing( i, sLeft, op.left, op.duration );

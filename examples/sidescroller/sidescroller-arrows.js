@@ -12,7 +12,8 @@
 	o.sidescroller = function( elems, options ){
 
 		var scrolls = elems,
-			roundedScroll = options && options.roundedScroll;
+			roundedScroll = options && options.roundedScroll,
+			rewind = options && options.rewind;
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
@@ -31,14 +32,28 @@
 				if( e.type === "keydown" || !handled ){
 					handled = true;
 					o.intercept();
-					var slideWidth = thisScroll.querySelector( "li" ).offsetWidth,
+					var slides = thisScroll.querySelectorAll( "li" ),
+						slideWidth = slides[ 0 ].offsetWidth,
 						currScroll = thisScroll.scrollLeft,
 						slideNum = Math.round( currScroll / slideWidth ),
 						next = (e.type !== "keydown" && e.target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
 						newSlide = slideNum + ( next ? 1 : -1 ),
 						newScroll = slideWidth * newSlide;
 
-					o.toss( thisScroll, { left: newScroll, duration: 60 } );
+					// if can't go left, go to end
+					if( rewind ){
+
+						var lastSlideLeft = slideWidth * ( slides.length - 2 );
+
+						if( newScroll < 0 ){
+							newScroll = lastSlideLeft;
+						}
+						else if( newScroll >= lastSlideLeft ){
+							newScroll = 0;
+						}
+					}
+
+					o.toss( thisScroll, { left: newScroll } );
 					setTimeout( function(){ handled = false; }, 100 );
 				}
 

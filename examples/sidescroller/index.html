@@ -118,6 +118,7 @@
 	<script src="../../src/overthrow-polyfill.js"></script>
 	<script src="../../src/overthrow-toss.js"></script>
 	<script src="../../src/overthrow-init.js"></script>
+	<script src="sidescroller-arrows.js"></script>
 	
 </head>
 <body>
@@ -152,7 +153,9 @@
 
 
 
-		<script src="sidescroller-arrows.js"></script>
+		<script>
+			overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {roundedScroll:true} );
+		</script>
 
 </body>
 </html>

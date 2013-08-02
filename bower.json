@@ -1,10 +1,10 @@
 {
   "name": "overthrow",
-  "version": "0.5.0",
-  "main": "overthrow.js",
+  "version": "0.6.0",
+  "main": "dist/overthrow.js",
+  "sidescroller": "dist/overthrow.sidescroller.js",
   "ignore": [
     "examples",
-    "extensions",
     "test",
     "index.html"
   ]

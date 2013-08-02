@@ -5,11 +5,8 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
-    banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
-      '<%= grunt.template.today("yyyy-mm-dd") %>\n' +
-      '<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
-      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-      ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
+    banner: '/*! <%= pkg.title || pkg.name %> - <%= pkg.description %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+      '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>; Licensed <%= pkg.license %> */\n',
     // Task configuration.
     concat: {
       options: {
@@ -29,6 +26,10 @@ module.exports = function(grunt) {
       files: ['test/**/*.html']
     },
     uglify: {
+      options: {
+        banner: '<%= banner %>',
+        stripBanners: true
+      },
       main: {
         src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js'],
         dest: 'dist/<%= pkg.name %>.min.js'

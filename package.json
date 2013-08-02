@@ -2,6 +2,10 @@
   "name": "overthrow",
   "version": "0.6.0",
   "description": "An overflow:auto polyfill for responsive design.",
+  "author": {
+    "name": "Scott Jehl, Filament Group, Inc.",
+    "url": "http://filamentgroup.com"
+  },
   "main": "overthrow-detect.js",
   "directories": {
     "example": "examples",
@@ -17,7 +21,6 @@
   "keywords": [
     "CSS"
   ],
-  "author": "Filament Group <thegroup@filamentgroup.com> (http://filamentgroup.com/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/filamentgroup/Overthrow/issues"

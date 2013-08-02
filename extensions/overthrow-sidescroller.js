@@ -14,7 +14,7 @@
 	o.sidescroller = function( elems, options ){
 
 		var scrolls = elems,
-			roundedScroll = options && options.roundedScroll,
+			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind;
 
 		for( var i = 0; i < scrolls.length; i++ ){
@@ -93,7 +93,7 @@
 			nextPrev.addEventListener( "touchend", handleClick, false );
 			w.addEventListener( "resize", handleResize, false );
 			scrolls[ i ].addEventListener( "keydown", handleKey, false );
-			if( roundedScroll ){
+			if( snapScroll ){
 				thisScroll.addEventListener( "scroll", handleScroll, false );
 			}
 	 

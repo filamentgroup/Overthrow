@@ -57,6 +57,8 @@
 	// Expose overthrow API
 	w.overthrow = {};
 
+	w.overthrow.enabledClassName = enabledClassName;
+
 	w.overthrow.addClass = function(){
 		if( docElem.className.indexOf( enabledClassName ) === -1 ){
 			docElem.className += " " + enabledClassName;

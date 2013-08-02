@@ -55,14 +55,16 @@
 	// Expose overthrow API
 	w.overthrow = {};
 
+	w.overthrow.enabledClassName = enabledClassName;
+
 	w.overthrow.addClass = function(){
-		if( docElem.className.indexOf( enabledClassName ) === -1 ){
-			docElem.className += " " + enabledClassName;
+		if( docElem.className.indexOf( w.overthrow.enabledClassName ) === -1 ){
+			docElem.className += " " + w.overthrow.enabledClassName;
 		}
 	};
 
 	w.overthrow.removeClass = function(){
-		docElem.className = docElem.className.replace( enabledClassName, "" );
+		docElem.className = docElem.className.replace( w.overthrow.enabledClassName, "" );
 	};
 
 	// Enable and potentially polyfill overflow

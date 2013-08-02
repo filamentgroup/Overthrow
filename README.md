@@ -79,6 +79,7 @@ Overthrow exposes various properties you can access via the `overthrow` object:
 
 Many `overthrow` settings are exposed and configurable via the `overthrow` object. If needed, you can redefine these before calling `set()`.
 
+- `overthrow.enabledClassName`: The class name added to the `html` element in supported browsers. Default is `overthrow-enabled`
 - `overthrow.scrollIndicatorClassName`: The class name used to identify scrollable `overthrow` elements. Default is `overthrow`
 
 ## Methods

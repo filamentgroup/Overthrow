@@ -74,7 +74,7 @@ window.onload = function(){
 
 		test( 'overthrow.set adds HTML class with custom name', function() { 
 			overthrow.forget();
-			overthrow.configure({enabledClassName: "prefixed-overthrow-enabled"});
+			overthrow.enabledClassName = "prefixed-overthrow-enabled";
 			overthrow.set();
 			ok( document.documentElement.className.indexOf( "prefixed-overthrow-enabled" ) > -1 );
 		});
@@ -84,7 +84,7 @@ window.onload = function(){
 			ok( document.documentElement.className.indexOf( "prefixed-overthrow-enabled" ) === -1 );
 			
 			//since the following tests assume the class name to be the default, we set it back
-			overthrow.configure({enabledClassName: "overthrow-enabled"});
+			overthrow.enabledClassName = "overthrow-enabled";
 			overthrow.set();
 		});
 		

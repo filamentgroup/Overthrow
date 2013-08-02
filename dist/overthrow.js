@@ -60,13 +60,13 @@
 	w.overthrow.enabledClassName = enabledClassName;
 
 	w.overthrow.addClass = function(){
-		if( docElem.className.indexOf( enabledClassName ) === -1 ){
-			docElem.className += " " + enabledClassName;
+		if( docElem.className.indexOf( w.overthrow.enabledClassName ) === -1 ){
+			docElem.className += " " + w.overthrow.enabledClassName;
 		}
 	};
 
 	w.overthrow.removeClass = function(){
-		docElem.className = docElem.className.replace( enabledClassName, "" );
+		docElem.className = docElem.className.replace( w.overthrow.enabledClassName, "" );
 	};
 
 	// Enable and potentially polyfill overflow
@@ -155,13 +155,14 @@
 			op.left = op.left - sLeft;
 		}
 		// Then the top val
-		if( typeof o.top === "string" ){
+		if( typeof op.top === "string" ){
+
 			op.top = parseFloat( op.top );
 			endTop = op.top + sTop;
 		}
 		else {
 			endTop = op.top;
-			o.top = op.top - sTop;
+			op.top = op.top - sTop;
 		}
 
 		o.intercept();

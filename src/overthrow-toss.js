@@ -59,13 +59,14 @@
 			op.left = op.left - sLeft;
 		}
 		// Then the top val
-		if( typeof o.top === "string" ){
+		if( typeof op.top === "string" ){
+
 			op.top = parseFloat( op.top );
 			endTop = op.top + sTop;
 		}
 		else {
 			endTop = op.top;
-			o.top = op.top - sTop;
+			op.top = op.top - sTop;
 		}
 
 		o.intercept();

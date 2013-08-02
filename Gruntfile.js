@@ -29,10 +29,14 @@ module.exports = function(grunt) {
       files: ['test/**/*.html']
     },
     uglify: {
-      dist: {
+      main: {
         src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js'],
         dest: 'dist/<%= pkg.name %>.min.js'
       },
+      sidescroller: {
+        src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js','extensions/overthrow-sidescroller.js'],
+        dest: 'dist/<%= pkg.name %>.sidescroller.min.js'
+      }
     },
   });
 
@@ -43,6 +47,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Default task.
-  grunt.registerTask('default', ['concat']);
+  grunt.registerTask('default', ['concat', 'uglify']);
 
 };

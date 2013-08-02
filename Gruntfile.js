@@ -16,9 +16,13 @@ module.exports = function(grunt) {
         banner: '<%= banner %>',
         stripBanners: true
       },
-      dist: {
+      main: {
         src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js'],
         dest: 'dist/<%= pkg.name %>.js'
+      },
+      sidescroller: {
+        src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js','extensions/overthrow-sidescroller.js'],
+        dest: 'dist/<%= pkg.name %>.sidescroller.js'
       }
     },
     qunit: {

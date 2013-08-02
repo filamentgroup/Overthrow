@@ -1,5 +1,7 @@
 /*
-	overthrow sidescroller extension
+	overthrow responsive sidescroller extension
+	(c) 2013: Scott Jehl, Filament Group, Inc.
+	MIT License
 */
 
 (function( w, o ){

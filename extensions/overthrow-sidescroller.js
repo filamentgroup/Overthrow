@@ -44,13 +44,13 @@
 
 					// if can't go left, go to end
 					if( rewind ){
-
-						var lastSlideLeft = slideWidth * ( slides.length - 2 );
+						
+						var scrollWidth = thisScroll.scrollWidth - thisScroll.offsetWidth;
 
 						if( newScroll < 0 ){
-							newScroll = lastSlideLeft;
+							newScroll = scrollWidth;
 						}
-						else if( newScroll >= lastSlideLeft ){
+						else if( newScroll > scrollWidth ){
 							newScroll = 0;
 						}
 					}

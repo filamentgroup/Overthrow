@@ -39,6 +39,19 @@ module.exports = function(grunt) {
         dest: 'dist/<%= pkg.name %>.sidescroller.min.js'
       }
     },
+    jshint: {
+      options: {
+        curly: true,
+        latedef: true,
+        trailing: true,
+        unused: 'vars'
+      },
+      all: ['examples/**/*.js', 'extensions/**/*.js', 'src/**/*.js', 'test/*.js', 'Gruntfile.js', 'package.json']
+    },
+    watch: {
+      files: ['**/*'],
+      tasks: ['jshint'],
+    }
   });
 
   // These plugins provide necessary tasks.
@@ -46,6 +59,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task.
   grunt.registerTask('default', ['concat', 'uglify']);

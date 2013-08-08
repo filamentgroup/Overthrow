@@ -9,7 +9,7 @@ if( o.support === "native" || o.support === "polyfilled" ){
 	var oToggleLink = doc.createElement( "a" ),
 		toggleContain = doc.getElementById( "toggleContain" );
 
-	if( toggleContain ){	
+	if( toggleContain ){
 		oToggleLink.href = "#";
 		oToggleLink.className = "toggle";
 		oToggleLink.innerHTML = "Disable Overthrow";
@@ -24,7 +24,7 @@ if( o.support === "native" || o.support === "polyfilled" ){
 			}
 			e.preventDefault();
 		};
-	
+
 		doc.getElementById( "toggleContain" ).appendChild( oToggleLink );
 	}
 }

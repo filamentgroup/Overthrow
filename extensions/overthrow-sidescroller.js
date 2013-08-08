@@ -89,7 +89,7 @@
 
 					// if can't go left, go to end
 					if( rewind ){
-						
+
 						if( newScroll < 0 ){
 							newScroll = scrollWidth;
 						}
@@ -165,7 +165,7 @@
 				}, 200);
 			}
 
-			function handleKey( e ){			
+			function handleKey( e ){
 				if( e.keyCode === 39 || e.keyCode === 37 ){
 					handleClick( e );
 				}
@@ -179,7 +179,7 @@
 			if( snapScroll ){
 				thisScroll.addEventListener( "scroll", handleScroll, false );
 			}
-	 
+
 			scrolls[ i ].insertBefore( nextPrev, thisScroll );
 
 

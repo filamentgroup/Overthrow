@@ -5,7 +5,7 @@
 	if( o === undefined ){
 		return;
 	}
-	
+
 	// Easing can use any of Robert Penner's equations (http://www.robertpenner.com/easing_terms_of_use.html). By default, overthrow includes ease-out-cubic
 	// arguments: t = current iteration, b = initial value, c = end value, d = total iterations
 	// use w.overthrow.easing to provide a custom function externally, or pass an easing function as a callback to the toss method
@@ -15,15 +15,15 @@
 
 	// Keeper of intervals
 	var timeKeeper;
-			
+
 	/* toss scrolls and element with easing
-	
+
 	// elem is the element to scroll
 	// options hash:
 		* left is the desired horizontal scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
 		* top is the desired vertical scroll. Default is "+0". For relative distances, pass a string with "+" or "-" in front.
 		* duration is the number of milliseconds the throw will take. Default is 100.
-		* easing is an optional custom easing function. Default is w.overthrow.easing. Must follow the easing function signature 
+		* easing is an optional custom easing function. Default is w.overthrow.easing. Must follow the easing function signature
 
 	*/
 	o.toss = function( elem, options ){
@@ -38,7 +38,7 @@
 				easing: o.easing
 			},
 			endLeft, endTop;
-		
+
 		// Mixin based on predefined defaults
 		if( options ){
 			for( var j in op ){
@@ -47,7 +47,7 @@
 				}
 			}
 		}
-		
+
 		// Convert relative values to ints
 		// First the left val
 		if( typeof op.left === "string" ){
@@ -71,7 +71,7 @@
 
 		o.intercept();
 
-		timeKeeper = setInterval(function(){					
+		timeKeeper = setInterval(function(){
 			if( i++ < op.duration ){
 				elem.scrollLeft = op.easing( i, sLeft, op.left, op.duration );
 				elem.scrollTop = op.easing( i, sTop, op.top, op.duration );
@@ -86,7 +86,7 @@
 				o.intercept();
 			}
 		}, 1 );
-		
+
 		// Return the values, post-mixin, with end values specified
 		return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
 	};
@@ -95,5 +95,5 @@
 	o.intercept = function(){
 		clearInterval( timeKeeper );
 	};
-	
+
 })( this, this.overthrow );

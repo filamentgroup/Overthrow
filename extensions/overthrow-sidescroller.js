@@ -209,7 +209,6 @@
 
 	o.sidescroller.onEvent = function( evt, elem, callback ){
 		function cb( args ){
-			console.log(args)
 			var e = {
 				type: evt,
 				target: elem,

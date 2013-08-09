@@ -19,6 +19,13 @@
 			event.overthrow = args;
 			elem.dispatchEvent( event );
 		}
+		else {
+			elem[ evt ].i++;
+			elem[ evt ].data = {
+				e: evt,
+				args: args
+			};
+		}
 	}
 
 	o.sidescroller = function( elems, options ){
@@ -33,11 +40,24 @@
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
-			var thisScroll = scrolls[ i ].querySelector( ".overthrow" ),
+			var thisSideScroll = scrolls[ i ],
+				thisScroll = scrolls[ i ].querySelector( ".overthrow" ),
 				nextPrev = w.document.createElement( "div" ),
 				handled;
 
 			scrolls[ i ].setAttribute( "tabindex", "0" );
+
+			// oldIE will need some expando event props
+			if( !document.createEvent ){
+				scrolls[ i ][ evtPrev ] = {
+					i: 0,
+					data: {}
+				};
+				scrolls[ i ][ evtNext ] = {
+					i: 0,
+					data: {}
+				};
+			}
 
 			nextPrev.className = "sidescroll-nextprev-links";
 
@@ -113,7 +133,7 @@
 						o.toss( thisScroll, { left: newScroll } );
 
 						sendEvent(
-							thisScroll, // elem to receive event
+							thisSideScroll, // elem to receive event
 							next ? evtNext : evtPrev, // evt name
 							{
 								active: newActive, // active slides
@@ -138,7 +158,7 @@
 
 				if( slideNum !== newSlide ){
 					sendEvent(
-						thisScroll, // elem to receive event
+						thisSideScroll, // elem to receive event
 						newSlide > slideNum ? evtNext : evtPrev, // evt name
 						{
 							active: getActiveSlides( newScroll ), // active slides
@@ -186,5 +206,29 @@
 		}
 
 	};
+
+	o.sidescroller.onEvent = function( evt, elem, callback ){
+		function cb( args ){
+			console.log(args)
+			var e = {
+				type: evt,
+				target: elem,
+				overthrow: args.overthrow
+			};
+			callback( e );
+		}
+		if( elem.addEventListener ){
+			elem.addEventListener( evt, cb );
+		}
+		else if( elem.attachEvent ){
+			elem.attachEvent( "onpropertychange", function( event ) {
+				if ( event.propertyName === evt ) {
+					cb( elem[ evt ].args );
+				}
+			});
+		}
+	};
+
+
 
 }( this, this.overthrow ));

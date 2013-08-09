@@ -92,17 +92,20 @@
 			// expose the getactiveslides function on the overthrow element
 			scrolls[ i ].getActiveSlides = getActiveSlides;
 
-			function handleClick( e ){
-				e.preventDefault();
+			function handleClick( evt ){
+
+				var e = evt || w.event;
+
 				if( e.type === "keydown" || !handled ){
 					handled = true;
 					o.intercept();
 					var slides = thisScroll.querySelectorAll( "li" ),
+						target = e.target || e.srcElement,
 						slidesWidth = thisScroll.offsetWidth,
 						slideWidth = slides[ 0 ].offsetWidth,
 						currScroll = thisScroll.scrollLeft,
 						slideNum = Math.round( currScroll / slideWidth ),
-						next = (e.type !== "keydown" && e.target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
+						next = (e.type !== "keydown" && target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
 						newSlide = slideNum + ( next ? 1 : -1 ),
 						newScroll = slideWidth * newSlide,
 						scrollWidth = thisScroll.scrollWidth - slidesWidth;
@@ -144,7 +147,7 @@
 
 					setTimeout( function(){ handled = false; }, 100 );
 				}
-
+				return false;
 			}
 
 			function handleSnap( e ){
@@ -191,15 +194,24 @@
 				}
 			}
 
-
-			nextPrev.addEventListener( "click", handleClick, false );
-			nextPrev.addEventListener( "touchend", handleClick, false );
-			w.addEventListener( "resize", handleResize, false );
-			scrolls[ i ].addEventListener( "keydown", handleKey, false );
-			if( snapScroll ){
-				thisScroll.addEventListener( "scroll", handleScroll, false );
+			if( w.document.addEventListener ){
+				nextPrev.addEventListener( "click", handleClick, false );
+				nextPrev.addEventListener( "touchend", handleClick, false );
+				w.addEventListener( "resize", handleResize, false );
+				scrolls[ i ].addEventListener( "keydown", handleKey, false );
+				if( snapScroll ){
+					thisScroll.addEventListener( "scroll", handleScroll, false );
+				}
 			}
-	 
+	 		else if( w.document.attachEvent ){
+	 			nextPrev.attachEvent( "onclick", handleClick, false );
+				w.attachEvent( "onresize", handleResize, false );
+				scrolls[ i ].attachEvent( "onkeydown", handleKey, false );
+				if( snapScroll ){
+					thisScroll.attachEvent( "onscroll", handleScroll, false );
+				}
+	 		}
+
 			scrolls[ i ].insertBefore( nextPrev, thisScroll );
 
 

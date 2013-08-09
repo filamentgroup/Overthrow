@@ -11,7 +11,7 @@
 		return;
 	}
 
-	function sendEvent( elem, evt, args ){
+	function sendEvent( elem, evt, args, ieID ){
 		// TODO needs IE8 support
 		if( document.createEvent ){
 			var event = document.createEvent( "Event" );
@@ -20,11 +20,11 @@
 			elem.dispatchEvent( event );
 		}
 		else {
-			elem[ evt ].i++;
-			elem[ evt ].data = {
+			w.document.documentElement[ieID][ evt ] = {
 				e: evt,
 				args: args
 			};
+			w.document.documentElement[ evt ]++;
 		}
 	}
 
@@ -35,6 +35,7 @@
 			evtNext = evtPrefix + "-next",
 			evtPrev = evtPrefix + "-prev",
 			slideNum = 0,
+			ieID = "overthrow" + (new Date().getTime()),
 			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind;
 
@@ -45,18 +46,18 @@
 				nextPrev = w.document.createElement( "div" ),
 				handled;
 
-			scrolls[ i ].setAttribute( "tabindex", "0" );
+			thisSideScroll.setAttribute( "tabindex", "0" );
 
 			// oldIE will need some expando event props
-			if( !document.createEvent ){
-				scrolls[ i ][ evtPrev ] = {
-					i: 0,
-					data: {}
-				};
-				scrolls[ i ][ evtNext ] = {
-					i: 0,
-					data: {}
-				};
+			if( w.document.attachEvent ){
+				// these are iterators to trigger a property mutate event in IE8
+				w.document.documentElement[ evtPrev ] = 0;
+				w.document.documentElement[ evtNext ] = 0;
+				// these for for the event data when that property iterates
+				w.document.documentElement[ ieID ] = {};
+				w.document.documentElement[ ieID ][ evtPrev ] = {};
+				w.document.documentElement[ ieID ][ evtNext ] = {};
+				thisSideScroll.ieID = ieID;
 			}
 
 			nextPrev.className = "sidescroll-nextprev-links";
@@ -90,7 +91,7 @@
 			}
 
 			// expose the getactiveslides function on the overthrow element
-			scrolls[ i ].getActiveSlides = getActiveSlides;
+			thisSideScroll.getActiveSlides = getActiveSlides;
 
 			function handleClick( evt ){
 
@@ -141,7 +142,8 @@
 							{
 								active: newActive, // active slides
 								originalEvent: e
-							}
+							},
+							ieID
 						);
 					}
 
@@ -166,7 +168,8 @@
 						{
 							active: getActiveSlides( newScroll ), // active slides
 							originalEvent: e
-						}
+						},
+						ieID
 					);
 					slideNum = newSlide;
 				}
@@ -212,8 +215,7 @@
 				}
 	 		}
 
-			scrolls[ i ].insertBefore( nextPrev, thisScroll );
-
+			thisSideScroll.insertBefore( nextPrev, thisScroll );
 
 		}
 
@@ -224,17 +226,17 @@
 			var e = {
 				type: evt,
 				target: elem,
-				overthrow: args.overthrow
+				overthrow: args
 			};
 			callback( e );
 		}
-		if( elem.addEventListener ){
+		if( w.document.addEventListener ){
 			elem.addEventListener( evt, cb );
 		}
-		else if( elem.attachEvent ){
-			elem.attachEvent( "onpropertychange", function( event ) {
-				if ( event.propertyName === evt ) {
-					cb( elem[ evt ].args );
+		else if( w.document.attachEvent ){
+			w.document.documentElement.attachEvent( "onpropertychange", function( event ) {
+				if( event.propertyName === evt ){
+					cb( w.document.documentElement[ elem.ieID ][ evt ] );
 				}
 			});
 		}

@@ -152,7 +152,7 @@ overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescro
 
 That call will inject the next/prev links and keyboard handling into the selected overthrow containers. There are two options as well:
 
-- `snapScroll`: this will enable snapping to the nearest slide after scroll (default false)
+- `snapscroll`: this will enable snapping to the nearest slide after scroll (default false)
 - `rewind`: this will cause the carousel to loop back to the beginning or the end if the user tries to advance in a direction in which there are no more slides.
 
 These can be specified in the second argument, like this:

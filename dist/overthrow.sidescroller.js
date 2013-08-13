@@ -1,4 +1,4 @@
-/*! overthrow - An overflow:auto polyfill for responsive design. - v0.6.5 - 2013-08-13
+/*! overthrow - An overflow:auto polyfill for responsive design. - v0.6.6 - 2013-08-13
 * Copyright (c) 2013 Scott Jehl, Filament Group, Inc.; Licensed MIT */
 /*! Overthrow. An overflow:auto polyfill for responsive design. (c) 2012: Scott Jehl, Filament Group, Inc. http://filamentgroup.github.com/Overthrow/license.txt */
 (function( w, undefined ){
@@ -109,6 +109,9 @@
 		return c*((t=t/d-1)*t*t + 1) + b;
 	};
 
+	// tossing property is true during a programatic scroll
+	o.tossing = false;
+
 	// Keeper of intervals
 	var timeKeeper;
 			
@@ -123,6 +126,7 @@
 
 	*/
 	o.toss = function( elem, options ){
+		o.intercept();
 		var i = 0,
 			sLeft = elem.scrollLeft,
 			sTop = elem.scrollTop,
@@ -164,9 +168,8 @@
 			endTop = op.top;
 			op.top = op.top - sTop;
 		}
-
-		o.intercept();
-
+		
+		o.tossing = true;
 		timeKeeper = setInterval(function(){					
 			if( i++ < op.duration ){
 				elem.scrollLeft = op.easing( i, sLeft, op.left, op.duration );
@@ -190,6 +193,7 @@
 	// Intercept any throw in progress
 	o.intercept = function(){
 		clearInterval( timeKeeper );
+		o.tossing = false;
 	};
 	
 })( this, this.overthrow );
@@ -438,7 +442,8 @@
 			evtNext = evtPrefix + "-next",
 			evtPrev = evtPrefix + "-prev",
 			snapScroll = options && options.snapScroll,
-			rewind = options && options.rewind;
+			rewind = options && options.rewind,
+			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30;
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
@@ -449,7 +454,7 @@
 					nextPrev = w.document.createElement( "div" ),
 					slideNum = 0,
 					ieID = "overthrow" + (new Date().getTime()),
-					handled;
+					handled = false;
 
 				// prevent re-init
 				if( thisSideScroll.initialized ){
@@ -523,8 +528,9 @@
 						e.returnValue = false;
 					}
 
-					if( e.type === "keydown" || !handled ){
-						handled = true;
+					if( e.type === "keydown" || ( handled === false || handled === e.type ) ){
+						handled = e.type;
+						
 						o.intercept();
 						var slides = thisScroll.querySelectorAll( "li" ),
 							target = e.target || e.srcElement,
@@ -573,16 +579,26 @@
 							);
 						}
 
-						setTimeout( function(){ handled = false; }, 100 );
+						setTimeout( function(){ handled = false; }, 900 );
 					}
 				}
 
+				var scrollStart = false;
 				function handleSnap( e ){
 					o.intercept();
 					var slideWidth = thisScroll.querySelector( "li" ).offsetWidth,
 						currScroll = thisScroll.scrollLeft,
-						newSlide = Math.round( currScroll / slideWidth ),
-						newScroll = slideWidth * newSlide;
+						newSlide = Math.round( currScroll / slideWidth );
+
+					if( scrollStart !== false ){
+						var distScrolled = currScroll - scrollStart;
+						if( Math.abs( distScrolled ) > snapTolerance ){
+							newSlide = slideNum + ( distScrolled > 0 ? 1 : -1 );
+						}
+
+					}
+
+					var newScroll = slideWidth * newSlide;
 
 					o.toss( thisScroll, { left: newScroll, duration: 20 } );
 
@@ -610,9 +626,16 @@
 
 				var debouncedos;
 				function handleScroll( e ){
-					clearTimeout(debouncedos);
+					if( overthrow.tossing ){
+						return;
+					}
+					if( scrollStart === false ){
+						scrollStart = thisScroll.scrollLeft;
+					}
+					clearTimeout( debouncedos );
 					debouncedos = setTimeout(function(){
 						handleSnap( e );
+						scrollStart = false;
 					}, 200);
 				}
 

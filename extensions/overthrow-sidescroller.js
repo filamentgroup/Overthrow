@@ -35,7 +35,8 @@
 			evtNext = evtPrefix + "-next",
 			evtPrev = evtPrefix + "-prev",
 			snapScroll = options && options.snapScroll,
-			rewind = options && options.rewind;
+			rewind = options && options.rewind,
+			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30;
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
@@ -174,12 +175,22 @@
 					}
 				}
 
+				var scrollStart = false;
 				function handleSnap( e ){
 					o.intercept();
 					var slideWidth = thisScroll.querySelector( "li" ).offsetWidth,
 						currScroll = thisScroll.scrollLeft,
-						newSlide = Math.round( currScroll / slideWidth ),
-						newScroll = slideWidth * newSlide;
+						newSlide = Math.round( currScroll / slideWidth );
+
+					if( scrollStart !== false ){
+						var distScrolled = currScroll - scrollStart;
+						if( Math.abs( distScrolled ) > snapTolerance ){
+							newSlide = slideNum + ( distScrolled > 0 ? 1 : -1 );
+						}
+
+					}
+
+					var newScroll = slideWidth * newSlide;
 
 					o.toss( thisScroll, { left: newScroll, duration: 20 } );
 
@@ -207,9 +218,16 @@
 
 				var debouncedos;
 				function handleScroll( e ){
-					clearTimeout(debouncedos);
+					if( overthrow.tossing ){
+						return;
+					}
+					if( scrollStart === false ){
+						scrollStart = thisScroll.scrollLeft;
+					}
+					clearTimeout( debouncedos );
 					debouncedos = setTimeout(function(){
 						handleSnap( e );
+						scrollStart = false;
 					}, 200);
 				}
 

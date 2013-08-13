@@ -1,5 +1,7 @@
 # Overthrow #
 
+[![Build Status](https://travis-ci.org/filamentgroup/Overthrow.png?branch=master)](https://travis-ci.org/filamentgroup/Overthrow)
+
 A framework-independent, `overflow: auto` polyfill for use in responsive design.
 
 - **Filament Group Release Notes:** [Overthrow: An overflow: auto polyfill for responsive design](http://filamentgroup.com/lab/overthrow)

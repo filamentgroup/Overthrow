@@ -1,9 +1,8 @@
 /* DEMO CSS IS GROSS */
 body {
 	font-family: Helvetica, sans-serif;
-	width: 30em;
-	max-width: 80%;
-	margin: 8em auto
+	max-width: 60em;
+	margin: 8em auto;
 }
 
 
@@ -14,8 +13,6 @@ body {
     z-index: 0
 }
 
-
-
 .overthrow-enabled .sidescroll ul,
 .overthrow-enabled .sidescroll li {
 	float: left;
@@ -23,58 +20,23 @@ body {
 	padding: 0;
 	list-style: none;
 }
-.overthrow-enabled .sidescroll.sidescroll-2 ul {
-	width: 200%;
-}
-.overthrow-enabled .sidescroll.sidescroll-2 li {
-	width: 50%;
-}
-.overthrow-enabled .sidescroll.sidescroll-3 ul {
-	width: 300%;
-}
-.overthrow-enabled .sidescroll.sidescroll-3 li {
-	width: 33.3333%
-}
-.overthrow-enabled .sidescroll.sidescroll-4 ul {
-	width: 200%;
-}
-.overthrow-enabled .sidescroll.sidescroll-4 li {
-	width: 25%
-}
-.overthrow-enabled .sidescroll.sidescroll-5 ul {
-	width: 500%;
-}
-.overthrow-enabled .sidescroll.sidescroll-5 li {
-	width: 20%
-}
-.overthrow-enabled .sidescroll.sidescroll-6 ul {
-	width: 600%;
-}
-.overthrow-enabled .sidescroll.sidescroll-6 li {
-	width: 16.666666667%
-}
-@media (min-width: 40em){
-	.overthrow-enabled .sidescroll.sidescroll-6 ul {
-		width: 300%;
-	}
-}
-@media (min-width: 60em){
-	.overthrow-enabled .sidescroll.sidescroll-6 ul {
-		width: 200%;
-	}
-}
-
-.overthrow-enabled .sidescroll.sidescroll-7 ul {
-	width: 700%;
-}
-.overthrow-enabled .sidescroll.sidescroll-7 li {
-	width: 14.285714286%
-}
-
 .overthrow-enabled .sidescroll li img {
 	margin: 0;
 	padding: 0;
 	width: 100%;
+}
+.overthrow-enabled .sidescroll ul {
+	width: 800%;
+}
+@media (min-width: 40em){
+	.overthrow-enabled .sidescroll ul {
+		width: 400%;
+	}
+}
+@media (min-width: 60em){
+	.overthrow-enabled .sidescroll ul {
+		width: 200%;
+	}
 }
 
 

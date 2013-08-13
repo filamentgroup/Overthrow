@@ -47,7 +47,7 @@
 					nextPrev = w.document.createElement( "div" ),
 					slideNum = 0,
 					ieID = "overthrow" + (new Date().getTime()),
-					handled;
+					handled = false;
 
 				// prevent re-init
 				if( thisSideScroll.initialized ){
@@ -121,8 +121,9 @@
 						e.returnValue = false;
 					}
 
-					if( e.type === "keydown" || !handled ){
-						handled = true;
+					if( e.type === "keydown" || ( handled === false || handled === e.type ) ){
+						handled = e.type;
+						
 						o.intercept();
 						var slides = thisScroll.querySelectorAll( "li" ),
 							target = e.target || e.srcElement,
@@ -171,7 +172,7 @@
 							);
 						}
 
-						setTimeout( function(){ handled = false; }, 100 );
+						setTimeout( function(){ handled = false; }, 900 );
 					}
 				}
 

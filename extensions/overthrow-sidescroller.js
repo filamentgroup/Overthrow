@@ -22,7 +22,7 @@
 		else {
 			w.document.documentElement[ieID][ evt ] = {
 				e: evt,
-				args: args
+				overthrow: args
 			};
 			w.document.documentElement[ evt ]++;
 		}
@@ -242,7 +242,7 @@
 			var e = {
 				type: evt,
 				target: elem,
-				overthrow: args
+				overthrow: args.overthrow
 			};
 			callback( e );
 		}

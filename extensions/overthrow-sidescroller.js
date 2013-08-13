@@ -97,6 +97,13 @@
 
 				var e = evt || w.event;
 
+				if( e.preventDefault ){
+					e.preventDefault();
+				}
+				else{
+					e.returnValue = false;
+				}
+
 				if( e.type === "keydown" || !handled ){
 					handled = true;
 					o.intercept();
@@ -149,7 +156,6 @@
 
 					setTimeout( function(){ handled = false; }, 100 );
 				}
-				return false;
 			}
 
 			function handleSnap( e ){

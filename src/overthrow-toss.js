@@ -13,6 +13,9 @@
 		return c*((t=t/d-1)*t*t + 1) + b;
 	};
 
+	// tossing property is true during a programatic scroll
+	o.tossing = false;
+
 	// Keeper of intervals
 	var timeKeeper;
 			
@@ -27,6 +30,7 @@
 
 	*/
 	o.toss = function( elem, options ){
+		o.intercept();
 		var i = 0,
 			sLeft = elem.scrollLeft,
 			sTop = elem.scrollTop,
@@ -68,9 +72,8 @@
 			endTop = op.top;
 			op.top = op.top - sTop;
 		}
-
-		o.intercept();
-
+		
+		o.tossing = true;
 		timeKeeper = setInterval(function(){					
 			if( i++ < op.duration ){
 				elem.scrollLeft = op.easing( i, sLeft, op.left, op.duration );
@@ -94,6 +97,7 @@
 	// Intercept any throw in progress
 	o.intercept = function(){
 		clearInterval( timeKeeper );
+		o.tossing = false;
 	};
 	
 })( this, this.overthrow );

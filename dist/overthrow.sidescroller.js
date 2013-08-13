@@ -1,4 +1,4 @@
-/*! overthrow - An overflow:auto polyfill for responsive design. - v0.6.2 - 2013-08-09
+/*! overthrow - An overflow:auto polyfill for responsive design. - v0.6.3 - 2013-08-13
 * Copyright (c) 2013 Scott Jehl, Filament Group, Inc.; Licensed MIT */
 /*! Overthrow. An overflow:auto polyfill for responsive design. (c) 2012: Scott Jehl, Filament Group, Inc. http://filamentgroup.github.com/Overthrow/license.txt */
 (function( w, undefined ){
@@ -500,6 +500,13 @@
 
 				var e = evt || w.event;
 
+				if( e.preventDefault ){
+					e.preventDefault();
+				}
+				else{
+					e.returnValue = false;
+				}
+
 				if( e.type === "keydown" || !handled ){
 					handled = true;
 					o.intercept();
@@ -552,7 +559,6 @@
 
 					setTimeout( function(){ handled = false; }, 100 );
 				}
-				return false;
 			}
 
 			function handleSnap( e ){

@@ -13,7 +13,11 @@
 	<script src="../../extensions/overthrow-sidescroller.js"></script>
 
 	<style>
-	.overthrow-enabled .sidescroll ul {
+		.overthrow-enabled {
+
+			margin: 3em;
+		}
+		.overthrow-enabled .sidescroll ul {
 			width: 800%;
 		}
 		@media (min-width: 40em){
@@ -26,29 +30,53 @@
 				width: 200%;
 			}
 		}
+
 		.eventlog p {
 			font-size: .8em;
+		}
+		.hidden-scrollbar {
+			overflow: hidden;
+		}
+		.hidden-scrollbar .sidescroll {
+			margin-top: -50px;
+			padding-bottom: 50px;
+			bottom: -50px;
+			position: relative;
 		}
 	</style>
 </head>
 <body>
 	
-		
+		<p>With <code>hidden-scrollbar</code> class</p>
+		<div class="sidescroll-nextprev hidden-scrollbar">
+			<div class="overthrow sidescroll sidescroll-6">
+				<ul>
+					<li><img src="img/angkor.jpg"></li>
+					<li><img src="img/monkey.jpg"></li>
+					<li><img src="img/monks.jpg"></li>
+					<li><img src="img/angkor.jpg"></li>
+					<li><img src="img/monkey.jpg"></li>
+					<li><img src="img/monks.jpg"></li>
+					<li><img src="img/angkor.jpg"></li>
+					<li><img src="img/monkey.jpg"></li>
+				</ul>
+			</div>
+		</div>
 
 		<p>Basic side-scroller w/arrows</p>
 		
-		<div class="sidescroll-nextprev" id="sidescroll">
-			<div class="overthrow sidescroll">
-					<ul>
-						<li><img src="img/angkor.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-					</ul>
+		<div class="sidescroll-nextprev" id="logged">
+			<div class="overthrow sidescroll sidescroll-6">
+				<ul>
+					<li><img src="img/angkor.jpg"></li>
+					<li><img src="img/monkey.jpg"></li>
+					<li><img src="img/monks.jpg"></li>
+					<li><img src="img/angkor.jpg"></li>
+					<li><img src="img/monkey.jpg"></li>
+					<li><img src="img/monks.jpg"></li>
+					<li><img src="img/angkor.jpg"></li>
+					<li><img src="img/monkey.jpg"></li>
+				</ul>
 			</div>
 		</div>
 
@@ -67,18 +95,15 @@
 							  "Active Slides: " + e.overthrow.active + "<br>",
 						para = document.createElement( "p" );
 
-					console.log( e );
-
 					para.innerHTML = log;
-
 					logging.appendChild( para );
 				};
 
 			logging.setAttribute( "class", "eventlog" );
 
 			document.getElementsByTagName( "body" )[ 0 ].appendChild( logging );
-			document.getElementsByTagName( "div" )[ 0 ].addEventListener( "overthrow-prev", logger );
-			document.getElementsByTagName( "div" )[ 0 ].addEventListener( "overthrow-next", logger );
+			document.getElementById( "logged" ).addEventListener( "overthrow-prev", logger );
+			document.getElementById( "logged" ).addEventListener( "overthrow-next", logger );
 
 		}( this ));
 	</script>

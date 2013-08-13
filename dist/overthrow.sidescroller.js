@@ -1,4 +1,4 @@
-/*! overthrow - An overflow:auto polyfill for responsive design. - v0.6.3 - 2013-08-13
+/*! overthrow - An overflow:auto polyfill for responsive design. - v0.6.4 - 2013-08-13
 * Copyright (c) 2013 Scott Jehl, Filament Group, Inc.; Licensed MIT */
 /*! Overthrow. An overflow:auto polyfill for responsive design. (c) 2012: Scott Jehl, Filament Group, Inc. http://filamentgroup.github.com/Overthrow/license.txt */
 (function( w, undefined ){
@@ -425,7 +425,7 @@
 		else {
 			w.document.documentElement[ieID][ evt ] = {
 				e: evt,
-				args: args
+				overthrow: args
 			};
 			w.document.documentElement[ evt ]++;
 		}
@@ -437,194 +437,204 @@
 			evtPrefix = "overthrow",
 			evtNext = evtPrefix + "-next",
 			evtPrev = evtPrefix + "-prev",
-			slideNum = 0,
-			ieID = "overthrow" + (new Date().getTime()),
 			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind;
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
-			var thisSideScroll = scrolls[ i ],
-				thisScroll = scrolls[ i ].querySelector( ".overthrow" ),
-				nextPrev = w.document.createElement( "div" ),
-				handled;
+			(function(){
 
-			thisSideScroll.setAttribute( "tabindex", "0" );
+				var thisSideScroll = scrolls[ i ],
+					thisScroll = scrolls[ i ].querySelector( ".overthrow" ),
+					nextPrev = w.document.createElement( "div" ),
+					slideNum = 0,
+					ieID = "overthrow" + (new Date().getTime()),
+					handled;
 
-			// oldIE will need some expando event props
-			if( w.document.attachEvent ){
-				// these are iterators to trigger a property mutate event in IE8
-				w.document.documentElement[ evtPrev ] = 0;
-				w.document.documentElement[ evtNext ] = 0;
-				// these for for the event data when that property iterates
-				w.document.documentElement[ ieID ] = {};
-				w.document.documentElement[ ieID ][ evtPrev ] = {};
-				w.document.documentElement[ ieID ][ evtNext ] = {};
-				thisSideScroll.ieID = ieID;
-			}
-
-			nextPrev.className = "sidescroll-nextprev-links";
-
-			nextPrev.innerHTML = "<a href='#' class='sidescroll-prev'>Previous</a><a href='#' class='sidescroll-next'>Next</a>";
-
-			function getActiveSlides( left ){
-				var slides = thisScroll.querySelectorAll( "li" ),
-					numSlides = slides.length,
-					slidesWidth = thisScroll.offsetWidth,
-					slideWidth = slides[ 0 ].offsetWidth,
-					scrollLeft = left !== undefined ? left : thisScroll.scrollLeft,
-					startSlide = Math.round( scrollLeft / slideWidth ),
-					valid = true,
-					ret = [];
-
-				startSlide = Math.max( 0, startSlide );
-				startSlide = Math.min( numSlides, startSlide );
-
-				ret[ 0 ] = startSlide;
-				for( var i = 1; i < numSlides; i++ ){
-					if( startSlide + (i * slideWidth) < slidesWidth){
-						ret.push( startSlide + i);
-					}
-					else{
-						valid = false;
-					}
+				// prevent re-init
+				if( thisSideScroll.initialized ){
+					return;
 				}
-				slideNum = startSlide;
-				return ret;
-			}
+				thisSideScroll.initialized = true;
 
-			// expose the getactiveslides function on the overthrow element
-			thisSideScroll.getActiveSlides = getActiveSlides;
+				thisSideScroll.setAttribute( "tabindex", "0" );
 
-			function handleClick( evt ){
-
-				var e = evt || w.event;
-
-				if( e.preventDefault ){
-					e.preventDefault();
-				}
-				else{
-					e.returnValue = false;
+				// oldIE will need some expando event props
+				if( w.document.attachEvent ){
+					// these are iterators to trigger a property mutate event in IE8
+					w.document.documentElement[ evtPrev ] = 0;
+					w.document.documentElement[ evtNext ] = 0;
+					// these for for the event data when that property iterates
+					w.document.documentElement[ ieID ] = {};
+					w.document.documentElement[ ieID ][ evtPrev ] = {};
+					w.document.documentElement[ ieID ][ evtNext ] = {};
+					thisSideScroll.ieID = ieID;
 				}
 
-				if( e.type === "keydown" || !handled ){
-					handled = true;
-					o.intercept();
+				nextPrev.className = "sidescroll-nextprev-links";
+
+				nextPrev.innerHTML = "<a href='#' class='sidescroll-prev'>Previous</a><a href='#' class='sidescroll-next'>Next</a>";
+
+				function getActiveSlides( left ){
 					var slides = thisScroll.querySelectorAll( "li" ),
-						target = e.target || e.srcElement,
+						numSlides = slides.length,
 						slidesWidth = thisScroll.offsetWidth,
 						slideWidth = slides[ 0 ].offsetWidth,
+						scrollLeft = left !== undefined ? left : thisScroll.scrollLeft,
+						startSlide = Math.round( scrollLeft / slideWidth ),
+						valid = true,
+						ret = [];
+
+					startSlide = Math.max( 0, startSlide );
+					startSlide = Math.min( numSlides, startSlide );
+
+					ret[ 0 ] = startSlide;
+					for( var i = 1; i < numSlides; i++ ){
+						if( startSlide + (i * slideWidth) < slidesWidth){
+							ret.push( startSlide + i);
+						}
+						else{
+							valid = false;
+						}
+					}
+					slideNum = startSlide;
+					return ret;
+				}
+
+				// expose the getactiveslides function on the overthrow element
+				thisSideScroll.getActiveSlides = getActiveSlides;
+
+				function handleClick( evt ){
+
+					var e = evt || w.event;
+
+					if( e.preventDefault ){
+						e.preventDefault();
+					}
+					else{
+						e.returnValue = false;
+					}
+
+					if( e.type === "keydown" || !handled ){
+						handled = true;
+						o.intercept();
+						var slides = thisScroll.querySelectorAll( "li" ),
+							target = e.target || e.srcElement,
+							slidesWidth = thisScroll.offsetWidth,
+							slideWidth = slides[ 0 ].offsetWidth,
+							currScroll = thisScroll.scrollLeft,
+							slideNum = Math.round( currScroll / slideWidth ),
+							next = (e.type !== "keydown" && target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
+							newSlide = slideNum + ( next ? 1 : -1 ),
+							newScroll = slideWidth * newSlide,
+							scrollWidth = thisScroll.scrollWidth - slidesWidth;
+
+						// if can't go left, go to end
+						if( rewind ){
+							
+							if( newScroll < 0 ){
+								newScroll = scrollWidth;
+							}
+							else if( newScroll > scrollWidth ){
+								newScroll = 0;
+							}
+						}
+						else {
+							if( newScroll < 0 ){
+								newScroll = 0;
+							}
+							else if( newScroll > scrollWidth ){
+								newScroll = scrollWidth;
+							}
+						}
+
+						var newActive = getActiveSlides( newScroll );
+
+						if( newActive[ 0 ] !== slideNum ){
+
+							o.toss( thisScroll, { left: newScroll } );
+
+							sendEvent(
+								thisSideScroll, // elem to receive event
+								next ? evtNext : evtPrev, // evt name
+								{
+									active: newActive, // active slides
+									originalEvent: e
+								},
+								ieID
+							);
+						}
+
+						setTimeout( function(){ handled = false; }, 100 );
+					}
+				}
+
+				function handleSnap( e ){
+					o.intercept();
+					var slideWidth = thisScroll.querySelector( "li" ).offsetWidth,
 						currScroll = thisScroll.scrollLeft,
-						slideNum = Math.round( currScroll / slideWidth ),
-						next = (e.type !== "keydown" && target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
-						newSlide = slideNum + ( next ? 1 : -1 ),
-						newScroll = slideWidth * newSlide,
-						scrollWidth = thisScroll.scrollWidth - slidesWidth;
+						newSlide = Math.round( currScroll / slideWidth ),
+						newScroll = slideWidth * newSlide;
 
-					// if can't go left, go to end
-					if( rewind ){
-						
-						if( newScroll < 0 ){
-							newScroll = scrollWidth;
-						}
-						else if( newScroll > scrollWidth ){
-							newScroll = 0;
-						}
-					}
-					else {
-						if( newScroll < 0 ){
-							newScroll = 0;
-						}
-						else if( newScroll > scrollWidth ){
-							newScroll = scrollWidth;
-						}
-					}
+					o.toss( thisScroll, { left: newScroll, duration: 20 } );
 
-					var newActive = getActiveSlides( newScroll );
-
-					if( newActive[ 0 ] !== slideNum ){
-
-						o.toss( thisScroll, { left: newScroll } );
-
+					if( slideNum !== newSlide ){
 						sendEvent(
 							thisSideScroll, // elem to receive event
-							next ? evtNext : evtPrev, // evt name
+							newSlide > slideNum ? evtNext : evtPrev, // evt name
 							{
-								active: newActive, // active slides
+								active: getActiveSlides( newScroll ), // active slides
 								originalEvent: e
 							},
 							ieID
 						);
+						slideNum = newSlide;
 					}
-
-					setTimeout( function(){ handled = false; }, 100 );
 				}
-			}
 
-			function handleSnap( e ){
-				o.intercept();
-				var slideWidth = thisScroll.querySelector( "li" ).offsetWidth,
-					currScroll = thisScroll.scrollLeft,
-					newSlide = Math.round( currScroll / slideWidth ),
-					newScroll = slideWidth * newSlide;
-
-				o.toss( thisScroll, { left: newScroll, duration: 20 } );
-
-				if( slideNum !== newSlide ){
-					sendEvent(
-						thisSideScroll, // elem to receive event
-						newSlide > slideNum ? evtNext : evtPrev, // evt name
-						{
-							active: getActiveSlides( newScroll ), // active slides
-							originalEvent: e
-						},
-						ieID
-					);
-					slideNum = newSlide;
+				var debounce;
+				function handleResize( e ){
+					clearTimeout(debounce);
+					debounce = setTimeout(function(){
+						handleSnap( e );
+					}, 100);
 				}
-			}
 
-			var debounce;
-			function handleResize( e ){
-				clearTimeout(debounce);
-				debounce = setTimeout(function(){
-					handleSnap( e );
-				}, 100);
-			}
-
-			var debouncedos;
-			function handleScroll( e ){
-				clearTimeout(debouncedos);
-				debouncedos = setTimeout(function(){
-					handleSnap( e );
-				}, 200);
-			}
-
-			function handleKey( e ){			
-				if( e.keyCode === 39 || e.keyCode === 37 ){
-					handleClick( e );
+				var debouncedos;
+				function handleScroll( e ){
+					clearTimeout(debouncedos);
+					debouncedos = setTimeout(function(){
+						handleSnap( e );
+					}, 200);
 				}
-			}
 
-			if( w.document.addEventListener ){
-				nextPrev.addEventListener( "click", handleClick, false );
-				nextPrev.addEventListener( "touchend", handleClick, false );
-				w.addEventListener( "resize", handleResize, false );
-				scrolls[ i ].addEventListener( "keydown", handleKey, false );
-				if( snapScroll ){
-					thisScroll.addEventListener( "scroll", handleScroll, false );
+				function handleKey( e ){			
+					if( e.keyCode === 39 || e.keyCode === 37 ){
+						handleClick( e );
+					}
 				}
-			}
-	 		else if( w.document.attachEvent ){
-	 			nextPrev.attachEvent( "onclick", handleClick, false );
-				w.attachEvent( "onresize", handleResize, false );
-				scrolls[ i ].attachEvent( "onkeydown", handleKey, false );
-				if( snapScroll ){
-					thisScroll.attachEvent( "onscroll", handleScroll, false );
-				}
-	 		}
 
-			thisSideScroll.insertBefore( nextPrev, thisScroll );
+				if( w.document.addEventListener ){
+					nextPrev.addEventListener( "click", handleClick, false );
+					nextPrev.addEventListener( "touchend", handleClick, false );
+					w.addEventListener( "resize", handleResize, false );
+					scrolls[ i ].addEventListener( "keydown", handleKey, false );
+					if( snapScroll ){
+						thisScroll.addEventListener( "scroll", handleScroll, false );
+					}
+				}
+		 		else if( w.document.attachEvent ){
+		 			nextPrev.attachEvent( "onclick", handleClick, false );
+					w.attachEvent( "onresize", handleResize, false );
+					scrolls[ i ].attachEvent( "onkeydown", handleKey, false );
+					if( snapScroll ){
+						thisScroll.attachEvent( "onscroll", handleScroll, false );
+					}
+		 		}
+
+				thisSideScroll.insertBefore( nextPrev, thisScroll );
+
+			}());
 
 		}
 
@@ -635,7 +645,7 @@
 			var e = {
 				type: evt,
 				target: elem,
-				overthrow: args
+				overthrow: args.overthrow
 			};
 			callback( e );
 		}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Overthrow Demo</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="demo.css" rel="stylesheet">
+	
+	<script src="../../src/overthrow-detect.js"></script>
+	<script src="../../src/overthrow-polyfill.js"></script>
+	<script src="../../src/overthrow-toss.js"></script>
+	<script src="../../src/overthrow-init.js"></script>
+	<script src="../../extensions/overthrow-sidescroller.js"></script>
+
+	<style>
+		.eventlog p {
+			font-size: .8em;
+		}
+	</style>
+</head>
+<body>
+	
+		
+
+		<p>Basic side-scroller w/arrows</p>
+		
+		<div class="sidescroll-nextprev" id="sidescroll">
+			<div class="overthrow sidescroll sidescroll-6">
+					<ul>
+						<li><img src="img/angkor.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/monks.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/monks.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+					</ul>
+			</div>
+		</div>
+
+		<script>
+			overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {snapScroll:true, rewind:true} );
+		</script>
+	
+	<script>
+		(function() {
+
+			var logging = document.createElement( "div" ),
+				logger = function( e ) {
+					var log = "Event: " + e.type + "<br>" +
+							  "Original Event: " + e.overthrow.originalEvent.type + "<br>" +
+							  "Event Target: #" + e.target.id + "<br>" +
+							  "Active Slides: " + e.overthrow.active + "<br>",
+						para = document.createElement( "p" );
+
+					console.log( e );
+
+					para.innerHTML = log;
+
+					logging.appendChild( para );
+				};
+
+			logging.setAttribute( "class", "eventlog" );
+
+			document.getElementsByTagName( "body" )[ 0 ].appendChild( logging );
+			document.getElementsByTagName( "div" )[ 0 ].addEventListener( "overthrow-prev", logger );
+			document.getElementsByTagName( "div" )[ 0 ].addEventListener( "overthrow-next", logger );
+
+		}( this ));
+	</script>
+
+</body>
+</html>

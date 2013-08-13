@@ -72,6 +72,14 @@
 
 				nextPrev.innerHTML = "<a href='#' class='sidescroll-prev'>Previous</a><a href='#' class='sidescroll-next'>Next</a>";
 
+				function setSlideWidths(){
+					var slides = thisScroll.querySelectorAll( "li" ),
+						percent = 100 / slides.length + "%";
+					for( var i = 0; i < slides.length; i++ ){
+						slides[ i ].style.width = percent;
+					}
+				}
+
 				function getActiveSlides( left ){
 					var slides = thisScroll.querySelectorAll( "li" ),
 						numSlides = slides.length,
@@ -230,6 +238,8 @@
 		 		}
 
 				thisSideScroll.insertBefore( nextPrev, thisScroll );
+
+				setSlideWidths();
 
 			}());
 

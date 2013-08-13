@@ -11,6 +11,12 @@
 	<script src="../../src/overthrow-toss.js"></script>
 	<script src="../../src/overthrow-init.js"></script>
 	<script src="../../extensions/overthrow-sidescroller.js"></script>
+
+	<style>
+		.eventlog p {
+			font-size: .8em;
+		}
+	</style>
 </head>
 <body>
 	
@@ -18,7 +24,7 @@
 
 		<p>Basic side-scroller w/arrows</p>
 		
-		<div class="sidescroll-nextprev">
+		<div class="sidescroll-nextprev" id="sidescroll">
 			<div class="overthrow sidescroll sidescroll-6">
 					<ul>
 						<li><img src="img/angkor.jpg"></li>
@@ -38,16 +44,24 @@
 	<script>
 		(function() {
 
-			var log = document.createElement( "div" ),
+			var logging = document.createElement( "div" ),
 				logger = function( e ) {
-					var logging = document.createTextNode( "Active Slides: " + e.overthrow.active ),
+					var log = "Event: " + e.type + "<br>" +
+							  "Original Event: " + e.overthrow.originalEvent.type + "<br>" +
+							  "Event Target: #" + e.target.id + "<br>" +
+							  "Active Slides: " + e.overthrow.active + "<br>",
 						para = document.createElement( "p" );
 
-					para.appendChild( logging );
-					log.appendChild( para );
+					console.log( e );
+
+					para.innerHTML = log;
+
+					logging.appendChild( para );
 				};
 
-			document.getElementsByTagName( "body" )[ 0 ].appendChild( log );	
+			logging.setAttribute( "class", "eventlog" );
+
+			document.getElementsByTagName( "body" )[ 0 ].appendChild( logging );
 			document.getElementsByTagName( "div" )[ 0 ].addEventListener( "overthrow-prev", logger );
 			document.getElementsByTagName( "div" )[ 0 ].addEventListener( "overthrow-next", logger );
 

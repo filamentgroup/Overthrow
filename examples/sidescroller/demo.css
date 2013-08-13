@@ -25,19 +25,6 @@ body {
 	padding: 0;
 	width: 100%;
 }
-.overthrow-enabled .sidescroll ul {
-	width: 800%;
-}
-@media (min-width: 40em){
-	.overthrow-enabled .sidescroll ul {
-		width: 400%;
-	}
-}
-@media (min-width: 60em){
-	.overthrow-enabled .sidescroll ul {
-		width: 200%;
-	}
-}
 
 
 

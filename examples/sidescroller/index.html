@@ -7,18 +7,21 @@
 	<link href="demo.css" rel="stylesheet">
 	<style>
 		.overthrow-enabled .overthrow {
-	        -webkit-overflow-scrolling: touch;
-	    }
-
+			-webkit-overflow-scrolling: touch;
+		}
 	    .overthrow-enabled .sidescroll ul {
-			width: 300%;
+			width: 800%;
+		}
+		@media (min-width: 40em){
+			.overthrow-enabled .sidescroll ul {
+				width: 400%;
+			}
 		}
 		@media (min-width: 60em){
 			.overthrow-enabled .sidescroll ul {
-				width: 100%;
+				width: 200%;
 			}
 		}
-		
 	</style>
 	<script src="../../src/overthrow-detect.js"></script>
 	<script src="../../src/overthrow-polyfill.js"></script>
@@ -40,10 +43,18 @@
 						<li><img src="img/angkor.jpg"></li>
 						<li><img src="img/monkey.jpg"></li>
 						<li><img src="img/monks.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/monks.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/angkor.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+	
+
 					</ul>
 			</div>
 		</div>
-		
+
+
 
 
 

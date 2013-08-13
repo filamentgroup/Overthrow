@@ -249,7 +249,19 @@ You'll need to style the arrows so that they're tap-friendly, such as this CSS b
 
 The sidescroller demos above in the readme follow this pattern, so check them out for reference.
 
+The horizontal scrollbar at the bottom of the scrollable area can be hidden using the following CSS:
 
+```
+.sidescroll-nextprev {
+  overflow: hidden;
+}
+.sidescroll-nextprev .sidescroll {
+  margin-top: -50px;
+  padding-bottom: 50px;
+  bottom: -50px;
+  position: relative;
+}
+```
 
 ## Source files
 

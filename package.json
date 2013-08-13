@@ -12,7 +12,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "overthrow.set()"
+    "test": "grunt qunit --verbose"
   },
   "repository": {
     "type": "git",

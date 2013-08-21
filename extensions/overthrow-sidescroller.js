@@ -222,11 +222,11 @@
 					if( overthrow.tossing ){
 						return;
 					}
-					if( scrollStart === false ){
-						scrollStart = thisScroll.scrollLeft;
-					}
 					clearTimeout( debouncedos );
 					debouncedos = setTimeout(function(){
+						if( scrollStart === false ){
+							scrollStart = thisScroll.scrollLeft;
+						}
 						handleSnap( e );
 						scrollStart = false;
 					}, 200);

@@ -91,6 +91,19 @@
 						valid = true,
 						ret = [];
 
+					function setActive( slides, startSlide ) {
+						for( var i = 0, l = slides.length; i < l; i++ ) {
+							var curr = slides[ i ],
+								slideClass = curr.getAttribute( "class" );
+
+							if( slideClass ) {
+								curr.setAttribute( "class", slideClass.replace( " sidescroller-active", "" ) );
+							}
+						}
+						slides[ startSlide ].setAttribute( "class", ( slides[ startSlide ].getAttribute( "class" ) || "" ) +  " sidescroller-active" );
+					}
+					setActive( slides, startSlide );
+
 					startSlide = Math.max( 0, startSlide );
 					startSlide = Math.min( numSlides, startSlide );
 
@@ -177,9 +190,11 @@
 				}
 
 				var scrollStart = false;
-				function handleSnap( e ){
+				function handleSnap( e, snapTo ){
 					o.intercept();
-					var slideWidth = thisScroll.querySelector( "li" ).offsetWidth,
+					var slides = thisScroll.querySelectorAll( "li" ),
+						slide = slides[ 0 ],
+						slideWidth = slide.offsetWidth,
 						currScroll = thisScroll.scrollLeft,
 						newSlide = Math.round( currScroll / slideWidth );
 
@@ -188,7 +203,12 @@
 						if( Math.abs( distScrolled ) > snapTolerance ){
 							newSlide = slideNum + ( distScrolled > 0 ? 1 : -1 );
 						}
+					}
 
+					if( snapTo ) {
+						var slidearr = Array.prototype.slice.call( slides, 0 );
+
+						newSlide = slidearr.indexOf( snapTo );
 					}
 
 					var newScroll = slideWidth * newSlide;
@@ -212,9 +232,14 @@
 				var debounce;
 				function handleResize( e ){
 					clearTimeout(debounce);
-					debounce = setTimeout(function(){
-						handleSnap( e );
-					}, 100);
+
+					function resizing() {
+						var curr = thisScroll.querySelector( ".sidescroller-active" );
+
+						handleSnap( e, curr );
+					};
+
+					debounce = setTimeout(resizing, 100);
 				}
 
 				var debouncedos;
@@ -232,7 +257,7 @@
 					}, 200);
 				}
 
-				function handleKey( e ){			
+				function handleKey( e ){
 					if( e.keyCode === 39 || e.keyCode === 37 ){
 						handleClick( e );
 					}

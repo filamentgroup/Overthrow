@@ -28,19 +28,7 @@
 		}
 	}
 
-	// NOTE not a general purpose add class, whitespace accounting done externally
-	function addClass( element, classStr ) {
-		element.setAttribute( "class", element.getAttribute( "class" ).replace( classStr, "" ));
-		element.setAttribute( "class", element.getAttribute( "class" ) + classStr );
-	}
-
-	// NOTE not a general purpose remove class, whitespace accounting done externally
-	function removeClass( element, classStr ) {
-		element.setAttribute( "class", element.getAttribute( "class" ).replace( classStr, "" ));
-	}
-
 	o.sidescroller = function( elems, options ){
-
 		var scrolls = elems,
 			evtPrefix = "overthrow",
 			evtNext = evtPrefix + "-next",
@@ -87,53 +75,11 @@
 				nextPrev.innerHTML = "<a href='#' class='sidescroll-prev" + (rewind ? "" : disabledClassStr) + "'>Previous</a>" +
 					"<a href='#' class='sidescroll-next'>Next</a>";
 
-				nextAnchor = nextPrev.querySelector( "a.sidescroll-next" );
-				prevAnchor = nextPrev.querySelector( "a.sidescroll-prev" );
-
-
 				function setSlideWidths(){
 					var slides = thisScroll.querySelectorAll( "li" ),
 						percent = 100 / slides.length + "%";
 					for( var i = 0; i < slides.length; i++ ){
 						slides[ i ].style.width = percent;
-					}
-				}
-
-				function toggleNavigation( event ) {
-					if( rewind ) {
-						return;
-					}
-
-					var disablePrev = false, disableNext = false,
-						active, slides, slidesWidth, currScroll, scrollWidth;
-
-					// if this comes from a click or a snap use the active pages
-					// calculation provided as an event property, otherwise use
-					// the scroll calculation
-					// NOTE the assignment is deliberate
-					if( active = (event && event.overthrow.active) ) {
-						slides = thisScroll.querySelectorAll( "li" );
-
-						disablePrev = (active[0] == 0);
-						disableNext = (active[active.length - 1] >= slides.length - 1);
-					} else {
-						slidesWidth = thisScroll.offsetWidth,
-						currScroll = thisScroll.scrollLeft,
-						scrollWidth = thisScroll.scrollWidth - slidesWidth;
-
-						disablePrev = currScroll < 5;
-						disableNext = currScroll > scrollWidth - 5;
-					}
-
-					removeClass( nextAnchor, disabledClassStr );
-					removeClass( prevAnchor, disabledClassStr );
-
-					if( disablePrev ) {
-						addClass( prevAnchor, disabledClassStr );
-					}
-
-					if( disableNext ) {
-						addClass( nextAnchor, disabledClassStr );
 					}
 				}
 
@@ -286,8 +232,7 @@
 						if( snapScroll ){
 							handleSnap( e );
 						} else {
-							// NOTE handleSnap triggers the nav events
-							toggleNavigation();
+							sendEvent( thisSideScroll,	evtPrefix + "-scroll", {}, ieID );
 						}
 
 						scrollStart = false;
@@ -307,8 +252,6 @@
 					scrolls[ i ].addEventListener( "keydown", handleKey, false );
 
 					thisScroll.addEventListener( "scroll", handleScroll, false );
-					thisSideScroll.addEventListener( evtNext, toggleNavigation, false );
-					thisSideScroll.addEventListener( evtPrev, toggleNavigation, false );
 				}
 		 		else if( w.document.attachEvent ){
 		 			nextPrev.attachEvent( "onclick", handleClick, false );
@@ -316,18 +259,21 @@
 					scrolls[ i ].attachEvent( "onkeydown", handleKey, false );
 
 					thisScroll.attachEvent( "onscroll", handleScroll, false );
-					thisSideScroll.attachEvent( evtNext, toggleNavigation, false );
-					thisSideScroll.attachEvent( evtPrev, toggleNavigation, false );
 		 		}
 
 				thisSideScroll.insertBefore( nextPrev, thisScroll );
 
 				setSlideWidths();
 
+				// side scroller init for plugins
+				sendEvent(
+					w.document,
+					evtPrefix + "-init",
+					{ sideScroll: thisSideScroll, options: options },
+					ieID
+				);
 			}());
-
 		}
-
 	};
 
 	o.sidescroller.onEvent = function( evt, elem, callback ){

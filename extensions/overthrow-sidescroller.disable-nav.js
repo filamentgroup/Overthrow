@@ -1,5 +1,5 @@
-(function(w) {
-	var rewind, disabledClassStr = " disabled";
+(function(w, overthrow) {
+	var rewind, disabledClassStr = " disabled", lib = overthrow.sidescroller;
 
 	// NOTE not a general purpose add class, whitespace accounting done externally
 	function addClass( element, classStr ) {
@@ -58,31 +58,16 @@
 		}
 	}
 
-	if( w.document.addEventListener ){
-		w.document.addEventListener( "overthrow-init", function( event ) {
-			var thisSideScroll = event.overthrow.sideScroll,
-				options = event.overthrow.options || {};
+	lib.onEvent( "overthrow-init", w.document, function( event ) {
+		var thisSideScroll = event.overthrow.sideScroll,
+			options = event.overthrow.options || {};
 
-			rewind = options.rewind;
+		rewind = options.rewind;
 
-			thisSideScroll.addEventListener( "overthrow-scroll", toggleNavigation, false );
-			thisSideScroll.addEventListener( "overthrow-next", toggleNavigation, false );
-			thisSideScroll.addEventListener( "overthrow-prev", toggleNavigation, false );
+		lib.onEvent( "overthrow-scroll", thisSideScroll, toggleNavigation);
+		lib.onEvent( "overthrow-next", thisSideScroll, toggleNavigation);
+		lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigation);
 
-			addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
-		}, false);
-	} else if( w.document.attachEvent ){
-		w.document.attachEvent( "overthrow-init", function( event ) {
-			var thisSideScroll = event.overthrow.sideScroll,
-				options = event.overthrow.options || {};
-
-			rewind = options.rewind;
-
-			thisSideScroll.attachEvent( "overthrow-scroll", toggleNavigation, false );
-			thisSideScroll.attachEvent( "overthrow-next", toggleNavigation, false );
-			thisSideScroll.attachEvent( "overthrow-prev", toggleNavigation, false );
-
-			addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
-		}, false);
-	}
-})(window);
+		addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
+	});
+})( this, this.overthrow );

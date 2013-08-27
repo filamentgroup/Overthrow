@@ -295,7 +295,4 @@
 			});
 		}
 	};
-
-
-
 }( this, this.overthrow ));

@@ -104,19 +104,22 @@
 						return;
 					}
 
-					var disablePrev = false, disableNext = false;
+					var disablePrev = false, disableNext = false,
+						active, slides, slidesWidth, currScroll, scrollWidth;
 
-					if( event ) {
-						// use the active slides value already caluculated when possible
-						var active = event && event.overthrow.active,
-							slides = thisScroll.querySelectorAll( "li" );
+					// if this comes from a click or a snap use the active pages
+					// calculation provided as an event property, otherwise use
+					// the scroll calculation
+					// NOTE the assignment is deliberate
+					if( active = (event && event.overthrow.active) ) {
+						slides = thisScroll.querySelectorAll( "li" );
 
 						disablePrev = (active[0] == 0);
 						disableNext = (active[active.length - 1] >= slides.length - 1);
 					} else {
-						var slidesWidth = thisScroll.offsetWidth,
-							currScroll = thisScroll.scrollLeft,
-							scrollWidth = thisScroll.scrollWidth - slidesWidth;
+						slidesWidth = thisScroll.offsetWidth,
+						currScroll = thisScroll.scrollLeft,
+						scrollWidth = thisScroll.scrollWidth - slidesWidth;
 
 						disablePrev = currScroll < 5;
 						disableNext = currScroll > scrollWidth - 5;

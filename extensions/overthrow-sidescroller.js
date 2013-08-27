@@ -91,19 +91,6 @@
 						valid = true,
 						ret = [];
 
-					function setActive( slides, startSlide ) {
-						for( var i = 0, l = slides.length; i < l; i++ ) {
-							var curr = slides[ i ],
-								slideClass = curr.getAttribute( "class" );
-
-							if( slideClass ) {
-								curr.setAttribute( "class", slideClass.replace( " sidescroller-active", "" ) );
-							}
-						}
-						slides[ startSlide ].setAttribute( "class", ( slides[ startSlide ].getAttribute( "class" ) || "" ) +  " sidescroller-active" );
-					}
-					setActive( slides, startSlide );
-
 					startSlide = Math.max( 0, startSlide );
 					startSlide = Math.min( numSlides, startSlide );
 
@@ -205,10 +192,8 @@
 						}
 					}
 
-					if( snapTo ) {
-						var slidearr = Array.prototype.slice.call( slides, 0 );
-
-						newSlide = slidearr.indexOf( snapTo );
+					if( snapTo !== undefined ) {
+						newSlide = snapTo;
 					}
 
 					var newScroll = slideWidth * newSlide;
@@ -234,7 +219,7 @@
 					clearTimeout(debounce);
 
 					function resizing() {
-						var curr = thisScroll.querySelector( ".sidescroller-active" );
+						var curr = getActiveSlides( thisScroll.scrollLeft )[ 0 ];
 
 						handleSnap( e, curr );
 					};

@@ -104,16 +104,32 @@
 						return;
 					}
 
-					// use the active slides value already caluculated when possible
-					var active = (event && event.overthrow.active) || getActiveSlides(),
-					slides = thisScroll.querySelectorAll( "li" );
+					var disablePrev = false, disableNext = false;
+
+					if( event ) {
+						// use the active slides value already caluculated when possible
+						var active = event && event.overthrow.active,
+							slides = thisScroll.querySelectorAll( "li" );
+
+						disablePrev = (active[0] == 0);
+						disableNext = (active[active.length - 1] >= slides.length - 1);
+					} else {
+						var slidesWidth = thisScroll.offsetWidth,
+							currScroll = thisScroll.scrollLeft,
+							scrollWidth = thisScroll.scrollWidth - slidesWidth;
+
+						disablePrev = currScroll < 5;
+						disableNext = currScroll > scrollWidth - 5;
+					}
 
 					removeClass( nextAnchor, disabledClassStr );
 					removeClass( prevAnchor, disabledClassStr );
 
-					if( active[0] == 0 ) {
+					if( disablePrev ) {
 						addClass( prevAnchor, disabledClassStr );
-					} else if( active[active.length - 1] >= slides.length - 1 ) {
+					}
+
+					if( disableNext ) {
 						addClass( nextAnchor, disabledClassStr );
 					}
 				}

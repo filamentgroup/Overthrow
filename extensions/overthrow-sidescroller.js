@@ -99,6 +99,23 @@
 					}
 				}
 
+				function toggleNavigation( event ) {
+					var slides = thisScroll.querySelectorAll( "li" ),
+						active = event.overthrow.active;
+
+					if( active[0] == 0 ) {
+						addClass( prevAnchor, disabledClassStr );
+					} else if( active[active.length - 1] >= slides.length - 1 ) {
+						addClass( nextAnchor, disabledClassStr );
+					} else {
+						removeClass( nextAnchor, disabledClassStr );
+						removeClass( prevAnchor, disabledClassStr );
+					}
+				}
+
+				thisSideScroll.addEventListener( evtNext, toggleNavigation, false );
+				thisSideScroll.addEventListener( evtPrev, toggleNavigation, false );
+
 				function getActiveSlides( left ){
 					var slides = thisScroll.querySelectorAll( "li" ),
 						numSlides = slides.length,
@@ -171,15 +188,6 @@
 							else if( newScroll > scrollWidth ){
 								newScroll = scrollWidth;
 							}
-						}
-
-						if( newScroll == scrollWidth ) {
-							addClass( nextAnchor, disabledClassStr );
-						} else if( newScroll == 0 ) {
-							addClass( prevAnchor, disabledClassStr );
-						} else {
-							removeClass( nextAnchor, disabledClassStr );
-							removeClass( prevAnchor, disabledClassStr );
 						}
 
 						var newActive = getActiveSlides( newScroll );

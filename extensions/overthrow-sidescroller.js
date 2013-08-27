@@ -214,14 +214,22 @@
 					}
 				}
 
-				var debounce;
+				var debounce,
+					stickTo;
+
 				function handleResize( e ){
+					if( stickTo === null ) {
+						var currScroll = thisScroll.scrollLeft,
+							slideWidth = thisScroll.querySelector( "li" ).offsetWidth;
+
+						stickTo = Math.round( currScroll / slideWidth );
+					}
+
 					clearTimeout(debounce);
 
 					function resizing() {
-						var curr = getActiveSlides( thisScroll.scrollLeft )[ 0 ];
-
-						handleSnap( e, curr );
+						handleSnap( e, slideNum );
+						stickTo = null;
 					};
 
 					debounce = setTimeout(resizing, 100);

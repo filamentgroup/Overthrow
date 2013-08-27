@@ -28,12 +28,24 @@
 		}
 	}
 
+	// NOTE not a general purpose add class, whitespace accounting done externally
+	function addClass( element, classStr ) {
+		element.setAttribute( "class", element.getAttribute( "class" ).replace( classStr, "" ));
+		element.setAttribute( "class", element.getAttribute( "class" ) + classStr );
+	}
+
+	// NOTE not a general purpose remove class, whitespace accounting done externally
+	function removeClass( element, classStr ) {
+		element.setAttribute( "class", element.getAttribute( "class" ).replace( classStr, "" ));
+	}
+
 	o.sidescroller = function( elems, options ){
 
 		var scrolls = elems,
 			evtPrefix = "overthrow",
 			evtNext = evtPrefix + "-next",
 			evtPrev = evtPrefix + "-prev",
+			disabledClassStr = " disabled",
 			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind,
 			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30;
@@ -47,7 +59,8 @@
 					nextPrev = w.document.createElement( "div" ),
 					slideNum = 0,
 					ieID = "overthrow" + (new Date().getTime()),
-					handled = false;
+					handled = false,
+					nextAnchor, prevAnchor;
 
 				// prevent re-init
 				if( thisSideScroll.initialized ){
@@ -71,7 +84,12 @@
 
 				nextPrev.className = "sidescroll-nextprev-links";
 
-				nextPrev.innerHTML = "<a href='#' class='sidescroll-prev'>Previous</a><a href='#' class='sidescroll-next'>Next</a>";
+				nextPrev.innerHTML = "<a href='#' class='sidescroll-prev" + (rewind ? "" : disabledClassStr) + "'>Previous</a>" +
+					"<a href='#' class='sidescroll-next'>Next</a>";
+
+				nextAnchor = nextPrev.querySelector( "a.sidescroll-next" );
+				prevAnchor = nextPrev.querySelector( "a.sidescroll-prev" );
+
 
 				function setSlideWidths(){
 					var slides = thisScroll.querySelectorAll( "li" ),
@@ -123,7 +141,7 @@
 
 					if( e.type === "keydown" || ( handled === false || handled === e.type ) ){
 						handled = e.type;
-						
+
 						o.intercept();
 						var slides = thisScroll.querySelectorAll( "li" ),
 							target = e.target || e.srcElement,
@@ -138,7 +156,7 @@
 
 						// if can't go left, go to end
 						if( rewind ){
-							
+
 							if( newScroll < 0 ){
 								newScroll = scrollWidth;
 							}
@@ -153,6 +171,15 @@
 							else if( newScroll > scrollWidth ){
 								newScroll = scrollWidth;
 							}
+						}
+
+						if( newScroll == scrollWidth ) {
+							addClass( nextAnchor, disabledClassStr );
+						} else if( newScroll == 0 ) {
+							addClass( prevAnchor, disabledClassStr );
+						} else {
+							removeClass( nextAnchor, disabledClassStr );
+							removeClass( prevAnchor, disabledClassStr );
 						}
 
 						var newActive = getActiveSlides( newScroll );
@@ -232,7 +259,7 @@
 					}, 200);
 				}
 
-				function handleKey( e ){			
+				function handleKey( e ){
 					if( e.keyCode === 39 || e.keyCode === 37 ){
 						handleClick( e );
 					}

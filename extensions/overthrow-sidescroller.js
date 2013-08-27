@@ -100,16 +100,17 @@
 				}
 
 				function toggleNavigation( event ) {
-					var slides = thisScroll.querySelectorAll( "li" ),
-						active = event.overthrow.active;
+					// use the active slides value already caluculated when possible
+					var active = (event && event.overthrow.active) || getActiveSlides(),
+					slides = thisScroll.querySelectorAll( "li" );
+
+					removeClass( nextAnchor, disabledClassStr );
+					removeClass( prevAnchor, disabledClassStr );
 
 					if( active[0] == 0 ) {
 						addClass( prevAnchor, disabledClassStr );
 					} else if( active[active.length - 1] >= slides.length - 1 ) {
 						addClass( nextAnchor, disabledClassStr );
-					} else {
-						removeClass( nextAnchor, disabledClassStr );
-						removeClass( prevAnchor, disabledClassStr );
 					}
 				}
 
@@ -259,7 +260,13 @@
 					}
 					clearTimeout( debouncedos );
 					debouncedos = setTimeout(function(){
-						handleSnap( e );
+						if( snapScroll ){
+							handleSnap( e );
+						} else {
+							// NOTE handleSnap triggers the nav events
+							toggleNavigation();
+						}
+
 						scrollStart = false;
 					}, 200);
 				}
@@ -276,10 +283,7 @@
 					w.addEventListener( "resize", handleResize, false );
 					scrolls[ i ].addEventListener( "keydown", handleKey, false );
 
-					if( snapScroll ){
-						thisScroll.addEventListener( "scroll", handleScroll, false );
-					}
-
+					thisScroll.addEventListener( "scroll", handleScroll, false );
 					thisSideScroll.addEventListener( evtNext, toggleNavigation, false );
 					thisSideScroll.addEventListener( evtPrev, toggleNavigation, false );
 				}
@@ -288,10 +292,7 @@
 					w.attachEvent( "onresize", handleResize, false );
 					scrolls[ i ].attachEvent( "onkeydown", handleKey, false );
 
-					if( snapScroll ){
-						thisScroll.attachEvent( "onscroll", handleScroll, false );
-					}
-
+					thisScroll.attachEvent( "onscroll", handleScroll, false );
 					thisSideScroll.attachEvent( evtNext, toggleNavigation, false );
 					thisSideScroll.attachEvent( evtPrev, toggleNavigation, false );
 		 		}

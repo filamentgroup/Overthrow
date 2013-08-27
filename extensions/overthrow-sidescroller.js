@@ -47,8 +47,7 @@
 					nextPrev = w.document.createElement( "div" ),
 					slideNum = 0,
 					ieID = "overthrow" + (new Date().getTime()),
-					handled = false,
-					nextAnchor, prevAnchor;
+					handled = false;
 
 				// prevent re-init
 				if( thisSideScroll.initialized ){
@@ -72,7 +71,7 @@
 
 				nextPrev.className = "sidescroll-nextprev-links";
 
-				nextPrev.innerHTML = "<a href='#' class='sidescroll-prev" + (rewind ? "" : disabledClassStr) + "'>Previous</a>" +
+				nextPrev.innerHTML = "<a href='#' class='sidescroll-prev'>Previous</a>" +
 					"<a href='#' class='sidescroll-next'>Next</a>";
 
 				function setSlideWidths(){

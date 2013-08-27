@@ -1,4 +1,6 @@
 (function(w) {
+	var rewind, disabledClassStr = " disabled";
+
 	// NOTE not a general purpose add class, whitespace accounting done externally
 	function addClass( element, classStr ) {
 		element.setAttribute( "class", element.getAttribute( "class" ).replace( classStr, "" ));
@@ -17,7 +19,7 @@
 
 		var disablePrev = false, disableNext = false,
 				active, slides, slidesWidth, currScroll, scrollWidth,
-				target, nextAnchor, prevAnchor, thisScroll, disabledClassStr = " disabled";
+				target, nextAnchor, prevAnchor, thisScroll;
 
 		event = event || w.event;
 		target = event.target || event.srcElement;
@@ -33,7 +35,6 @@
 		if( active = (event && event.overthrow.active) ) {
 			slides = thisScroll.querySelectorAll( "li" );
 
-			debugger;
 			disablePrev = (active[0] == 0);
 			disableNext = (active[active.length - 1] >= slides.length - 1);
 		} else {
@@ -41,7 +42,6 @@
 			currScroll = thisScroll.scrollLeft,
 			scrollWidth = thisScroll.scrollWidth - slidesWidth;
 
-			debugger;
 			disablePrev = currScroll < 5;
 			disableNext = currScroll > scrollWidth - 5;
 		}
@@ -58,8 +58,6 @@
 		}
 	}
 
-	var rewind;
-
 	if( w.document.addEventListener ){
 		w.document.addEventListener( "overthrow-init", function( event ) {
 			var thisSideScroll = event.overthrow.sideScroll,
@@ -70,6 +68,8 @@
 			thisSideScroll.addEventListener( "overthrow-scroll", toggleNavigation, false );
 			thisSideScroll.addEventListener( "overthrow-next", toggleNavigation, false );
 			thisSideScroll.addEventListener( "overthrow-prev", toggleNavigation, false );
+
+			addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
 		}, false);
 	} else if( w.document.attachEvent ){
 		w.document.attachEvent( "overthrow-init", function( event ) {
@@ -81,6 +81,8 @@
 			thisSideScroll.attachEvent( "overthrow-scroll", toggleNavigation, false );
 			thisSideScroll.attachEvent( "overthrow-next", toggleNavigation, false );
 			thisSideScroll.attachEvent( "overthrow-prev", toggleNavigation, false );
+
+			addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
 		}, false);
 	}
 })(window);

@@ -113,9 +113,6 @@
 					}
 				}
 
-				thisSideScroll.addEventListener( evtNext, toggleNavigation, false );
-				thisSideScroll.addEventListener( evtPrev, toggleNavigation, false );
-
 				function getActiveSlides( left ){
 					var slides = thisScroll.querySelectorAll( "li" ),
 						numSlides = slides.length,
@@ -278,17 +275,25 @@
 					nextPrev.addEventListener( "touchend", handleClick, false );
 					w.addEventListener( "resize", handleResize, false );
 					scrolls[ i ].addEventListener( "keydown", handleKey, false );
+
 					if( snapScroll ){
 						thisScroll.addEventListener( "scroll", handleScroll, false );
 					}
+
+					thisSideScroll.addEventListener( evtNext, toggleNavigation, false );
+					thisSideScroll.addEventListener( evtPrev, toggleNavigation, false );
 				}
 		 		else if( w.document.attachEvent ){
 		 			nextPrev.attachEvent( "onclick", handleClick, false );
 					w.attachEvent( "onresize", handleResize, false );
 					scrolls[ i ].attachEvent( "onkeydown", handleKey, false );
+
 					if( snapScroll ){
 						thisScroll.attachEvent( "onscroll", handleScroll, false );
 					}
+
+					thisSideScroll.attachEvent( evtNext, toggleNavigation, false );
+					thisSideScroll.attachEvent( evtPrev, toggleNavigation, false );
 		 		}
 
 				thisSideScroll.insertBefore( nextPrev, thisScroll );

@@ -62,10 +62,12 @@
 					// these are iterators to trigger a property mutate event in IE8
 					w.document.documentElement[ evtPrev ] = 0;
 					w.document.documentElement[ evtNext ] = 0;
+
 					// these for for the event data when that property iterates
 					w.document.documentElement[ ieID ] = {};
 					w.document.documentElement[ ieID ][ evtPrev ] = {};
 					w.document.documentElement[ ieID ][ evtNext ] = {};
+
 					thisSideScroll.ieID = ieID;
 				}
 
@@ -265,18 +267,26 @@
 				setSlideWidths();
 
 				// TODO this seems really fragile
-				w.document.ieID = w.document.ieID || evtPrefix + "-init" + (new Date().getTime());
-
 				// side scroller init for plugins
 				sendEvent(
-					w.document,
+					w.document.documentElement,
 					evtPrefix + "-init",
 					{ sideScroll: thisSideScroll, options: options },
-					w.document.ieID
+					w.document.documentElement.ieID
 				);
 			}());
 		}
 	};
+
+	// setup the document element to work with overthrow init
+	// TODO use the body element, this feels super iffy
+	if( w.document.attachEvent ){
+		var initId = "overthrow-init" + (new Date().getTime());
+
+		w.document.documentElement[ initId ] = {};
+		w.document.documentElement[ initId ][ "overthrow-init" ] = 0;
+		w.document.documentElement.ieID = initId;
+	}
 
 	o.sidescroller.onEvent = function( evt, elem, callback ){
 		function cb( args ){

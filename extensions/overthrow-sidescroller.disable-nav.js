@@ -58,18 +58,12 @@
 		}
 	}
 
-	// TODO this seems really fragile
-	w.document.ieID = w.document.ieID || "overthrow-init" + (new Date().getTime()),
-
-	lib.onEvent( "overthrow-init", w.document, function( event ) {
+	lib.onEvent( "overthrow-init", w.document.documentElement, function( event ) {
 		var thisSideScroll = event.overthrow.sideScroll,
 			options = event.overthrow.options || {};
 
 		// alert the toggle nav function that it should be disabled on rewind
 		rewind = options.rewind;
-
-		// set the ieID so the ie events can happen sanely
-		thisSideScroll.ieID = event.overthrow.ieID;
 
 		lib.onEvent( "overthrow-scroll", thisSideScroll, toggleNavigation);
 		lib.onEvent( "overthrow-next", thisSideScroll, toggleNavigation);

@@ -100,6 +100,10 @@
 				}
 
 				function toggleNavigation( event ) {
+					if( rewind ) {
+						return;
+					}
+
 					// use the active slides value already caluculated when possible
 					var active = (event && event.overthrow.active) || getActiveSlides(),
 					slides = thisScroll.querySelectorAll( "li" );

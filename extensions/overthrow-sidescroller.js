@@ -264,12 +264,15 @@
 
 				setSlideWidths();
 
+				// TODO this seems really fragile
+				w.document.ieID = w.document.ieID || evtPrefix + "-init" + (new Date().getTime());
+
 				// side scroller init for plugins
 				sendEvent(
 					w.document,
 					evtPrefix + "-init",
 					{ sideScroll: thisSideScroll, options: options },
-					ieID
+					w.document.ieID
 				);
 			}());
 		}

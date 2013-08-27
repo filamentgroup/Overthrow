@@ -59,7 +59,7 @@
 	}
 
 	// TODO this seems really fragile
-	w.document.ieID = w.document.ieID || "overthrow-init-document" + (new Date().getTime()),
+	w.document.ieID = w.document.ieID || "overthrow-init" + (new Date().getTime()),
 
 	lib.onEvent( "overthrow-init", w.document, function( event ) {
 		var thisSideScroll = event.overthrow.sideScroll,

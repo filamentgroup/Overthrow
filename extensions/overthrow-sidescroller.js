@@ -84,6 +84,13 @@
 					}
 				}
 
+				function setScrollableWidth(){
+					var slides = thisScroll.querySelectorAll( "li" ),
+					  container = thisScroll.querySelector( "ul" );
+
+					container.style.width = (slides[0].offsetWidth * slides.length) + "px";
+				}
+
 				function getActiveSlides( left ){
 					var slides = thisScroll.querySelectorAll( "li" ),
 						numSlides = slides.length,
@@ -264,9 +271,13 @@
 
 				thisSideScroll.insertBefore( nextPrev, thisScroll );
 
-				setSlideWidths();
+				if( !options.fixedSlideWidth ) {
+					setSlideWidths();
+				} else {
+					setScrollableWidth();
+				}
 
-				// TODO this seems really fragile
+				// Todo this seems really fragile
 				// side scroller init for plugins
 				sendEvent(
 					w.document.documentElement,

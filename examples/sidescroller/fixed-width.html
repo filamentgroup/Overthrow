@@ -7,9 +7,13 @@
 	<link href="demo.css" rel="stylesheet">
 	<style>
 		.overthrow-enabled .overthrow {
-		  overflow-x: scroll;
-		  overflow-y: hidden;
+			overflow-x: scroll;
+			overflow-y: hidden;
 			-webkit-overflow-scrolling: touch;
+		}
+
+		.overthrow.sidescroll li {
+			width: 200px;
 		}
 
 		.sidescroll-nextprev .sidescroll-nextprev-links a {
@@ -20,10 +24,6 @@
 			opacity: 0.7;
 			pointer-events: none;
 			background-color: gray;
-		}
-
-		.overthrow.sidescroll li {
-		  width: 200px;
 		}
 	</style>
 	<script src="../../src/overthrow-detect.js"></script>

@@ -138,21 +138,19 @@
 						slideWidth = slides[ 0 ].offsetWidth,
 						scrollLeft = left !== undefined ? left : thisScroll.scrollLeft,
 						startSlide = Math.round( scrollLeft / slideWidth ),
-						valid = true,
+						tollerance = 10,
 						ret = [];
 
 					startSlide = Math.max( 0, startSlide );
 					startSlide = Math.min( numSlides, startSlide );
 
-					ret[ 0 ] = startSlide;
-					for( var i = 1; i < numSlides; i++ ){
-						if( startSlide + (i * slideWidth) < slidesWidth){
-							ret.push( startSlide + i);
-						}
-						else{
-							valid = false;
+					ret.push(startSlide);
+					for( var i = 2; i < numSlides; i++ ){
+						if( i * slideWidth < slidesWidth + tollerance ) {
+							ret.push( startSlide + i - 1 );
 						}
 					}
+
 					slideNum = startSlide;
 					return ret;
 				}
@@ -235,8 +233,19 @@
 
 						var newActive = getActiveSlides( newScroll );
 
-						if( newActive[ 0 ] !== slideNum ){
+						// if we're planning to show the last slide, force the scroll out to the
+						// end of the scrollable area. Necessary to force partially displayed
+						// elements when the scroll is manual (not snapped) or the elements are
+						// fixed width
 
+						// TODO might be jarring, consider sorting the active slides as a right
+						//			offset instead of just forcing the last distance.
+						if( newActive[newActive.length - 1] == slides.length - 1 ) {
+							newScroll = thisScroll.querySelector( "ul" ).offsetWidth - slidesWidth;
+						}
+
+						// TODO probably only need the second condition1
+						if( newActive[ 0 ] !== slideNum || newScroll !== currScroll ){
 							o.toss( thisScroll, { left: newScroll } );
 
 							sendEvent(

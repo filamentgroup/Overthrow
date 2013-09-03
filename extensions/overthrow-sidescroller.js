@@ -167,6 +167,18 @@
 
 						var newActive = getActiveSlides( newScroll );
 
+						// if the slides are fixed width we want to make sure to show all
+						// of the last slide when it's included in the active set. By default
+						// the plugin assumes the slidewidth is set to match the width of the
+						// scroller, here we have to force the extra scroll distance
+
+						// TODO might be jarring, consider sorting the active slides as a right
+						//      offset instead of just forcing the last distance.
+						if( options.fixedSlideWidth && next
+							&& newActive[newActive.length - 1] == slides.length - 1	) {
+							newScroll = thisScroll.querySelector( "ul" ).offsetWidth - slidesWidth;
+						}
+
 						if( newActive[ 0 ] !== slideNum ){
 
 							o.toss( thisScroll, { left: newScroll } );
@@ -271,7 +283,7 @@
 
 				thisSideScroll.insertBefore( nextPrev, thisScroll );
 
-				if( !options.fixedSlideWidth ) {
+				if( !options || !options.fixedSlideWidth ) {
 					setSlideWidths();
 				} else {
 					setScrollableWidth();

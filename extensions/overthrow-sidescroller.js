@@ -174,7 +174,7 @@
 
 						// TODO might be jarring, consider sorting the active slides as a right
 						//      offset instead of just forcing the last distance.
-						if( options.fixedSlideWidth && next
+						if( options.fixedItemWidth && next
 							&& newActive[newActive.length - 1] == slides.length - 1	) {
 							newScroll = thisScroll.querySelector( "ul" ).offsetWidth - slidesWidth;
 						}
@@ -283,7 +283,7 @@
 
 				thisSideScroll.insertBefore( nextPrev, thisScroll );
 
-				if( !options || !options.fixedSlideWidth ) {
+				if( !options || !options.fixedItemWidth ) {
 					setSlideWidths();
 				} else {
 					setScrollableWidth();

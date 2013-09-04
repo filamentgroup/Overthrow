@@ -68,6 +68,7 @@
 		lib.onEvent( "overthrow-scroll", thisSideScroll, toggleNavigation);
 		lib.onEvent( "overthrow-next", thisSideScroll, toggleNavigation);
 		lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigation);
+		lib.onEvent( "overthrow-refresh", thisSideScroll, toggleNavigation);
 
 		addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
 	});

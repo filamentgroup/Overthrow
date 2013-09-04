@@ -36,12 +36,12 @@
 			disabledClassStr = " disabled",
 			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind,
-			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30;
+			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30,
+			args = arguments;
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
 			(function(){
-
 				var thisSideScroll = scrolls[ i ],
 					thisScroll = scrolls[ i ].querySelector( ".overthrow" ),
 					nextPrev = w.document.createElement( "div" ),
@@ -49,12 +49,25 @@
 					ieID = "overthrow" + (new Date().getTime()),
 					handled = false;
 
+				if( typeof options === "string"	&& thisSideScroll.initialized ) {
+					sendEvent(
+						thisSideScroll, // elem to receive event
+						evtPrefix + "-method",
+						{ name: options, arguments: Array.prototype.slice.call(args, 2) },
+						ieID
+					);
+
+					refresh( options );
+
+					return;
+				}
+
 				// prevent re-init
 				if( thisSideScroll.initialized ){
 					return;
 				}
-				thisSideScroll.initialized = true;
 
+				thisSideScroll.initialized = true;
 				thisSideScroll.setAttribute( "tabindex", "0" );
 
 				// oldIE will need some expando event props
@@ -89,6 +102,22 @@
 					  container = thisScroll.querySelector( "ul" );
 
 					container.style.width = (slides[0].offsetWidth * slides.length) + "px";
+				}
+
+				function refresh( options ) {
+					if( !options || !options.fixedItemWidth ) {
+						setSlideWidths();
+					} else {
+						setScrollableWidth();
+					}
+
+					sendEvent(
+						thisSideScroll, // elem to receive event
+						evtPrefix + "-refresh",
+						{},
+						ieID
+					);
+
 				}
 
 				function getActiveSlides( left ){
@@ -282,11 +311,7 @@
 
 				thisSideScroll.insertBefore( nextPrev, thisScroll );
 
-				if( !options || !options.fixedItemWidth ) {
-					setSlideWidths();
-				} else {
-					setScrollableWidth();
-				}
+				refresh( options );
 
 				// Todo this seems really fragile
 				// side scroller init for plugins

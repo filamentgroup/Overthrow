@@ -123,7 +123,7 @@
 						thisSideScroll, // elem to receive event
 						evtRefresh,
 						{},
-						ieID
+						thisSideScroll.ieID
 					);
 
 				}

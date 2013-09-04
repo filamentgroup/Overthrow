@@ -33,6 +33,8 @@
 			evtPrefix = "overthrow",
 			evtNext = evtPrefix + "-next",
 			evtPrev = evtPrefix + "-prev",
+			evtMethod = evtPrefix + "-method",
+			evtRefresh = evtPrefix + "-refresh",
 			disabledClassStr = " disabled",
 			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind,
@@ -52,7 +54,7 @@
 				if( typeof options === "string"	&& thisSideScroll.options ) {
 					sendEvent(
 						thisSideScroll, // elem to receive event
-						evtPrefix + "-method",
+						evtMethod,
 						{ name: thisSideScroll.options, arguments: Array.prototype.slice.call(args, 2) },
 						ieID
 					);
@@ -72,15 +74,20 @@
 				thisSideScroll.setAttribute( "tabindex", "0" );
 
 				// oldIE will need some expando event props
+				// TODO move to method
 				if( w.document.attachEvent ){
 					// these are iterators to trigger a property mutate event in IE8
 					w.document.documentElement[ evtPrev ] = 0;
 					w.document.documentElement[ evtNext ] = 0;
+					w.document.documentElement[ evtMethod ] = 0;
+					w.document.documentElement[ evtRefresh ] = 0;
 
 					// these for for the event data when that property iterates
 					w.document.documentElement[ ieID ] = {};
 					w.document.documentElement[ ieID ][ evtPrev ] = {};
 					w.document.documentElement[ ieID ][ evtNext ] = {};
+					w.document.documentElement[ ieID ][ evtMethod ] = {};
+					w.document.documentElement[ ieID ][ evtRefresh ] = {};
 
 					thisSideScroll.ieID = ieID;
 				}
@@ -114,7 +121,7 @@
 
 					sendEvent(
 						thisSideScroll, // elem to receive event
-						evtPrefix + "-refresh",
+						evtRefresh,
 						{},
 						ieID
 					);

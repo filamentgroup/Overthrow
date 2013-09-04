@@ -69,6 +69,10 @@
 				img.src = "img/monkey.jpg";
 				li.appendChild( img );
 
+				// NOTE ie will add the width and height because of the assigned src
+				img.removeAttribute( "width" );
+				img.removeAttribute( "height" );
+
 				overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), "append", li );
 			}
 

@@ -49,15 +49,15 @@
 					ieID = "overthrow" + (new Date().getTime()),
 					handled = false;
 
-				if( typeof options === "string"	&& thisSideScroll.initialized ) {
+				if( typeof options === "string"	&& thisSideScroll.options ) {
 					sendEvent(
 						thisSideScroll, // elem to receive event
 						evtPrefix + "-method",
-						{ name: options, arguments: Array.prototype.slice.call(args, 2) },
+						{ name: thisSideScroll.options, arguments: Array.prototype.slice.call(args, 2) },
 						ieID
 					);
 
-					refresh( options );
+					refresh( thisSideScroll.options );
 
 					return;
 				}
@@ -68,6 +68,7 @@
 				}
 
 				thisSideScroll.initialized = true;
+				thisSideScroll.options = options;
 				thisSideScroll.setAttribute( "tabindex", "0" );
 
 				// oldIE will need some expando event props

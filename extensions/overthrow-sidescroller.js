@@ -56,7 +56,7 @@
 						thisSideScroll, // elem to receive event
 						evtMethod,
 						{ name: thisSideScroll.options, arguments: Array.prototype.slice.call(args, 2) },
-						ieID
+						thisSideScroll.ieID
 					);
 
 					refresh( thisSideScroll.options );

@@ -17,7 +17,7 @@ The sidescroller provides a horizontally scrollable region with navigation ancho
 
 
 	<div class="sidescroll">
-  	<div class="overthrow">
+		<div class="overthrow">
 			<ul>
 				<li><img src="img.jpg"></li>
 				<li><img src="img.jpg"></li>
@@ -41,7 +41,7 @@ The default sidescroller can be configured on creation using the following optio
 
 ```javascript
 overthrow.sidescroller( document.querySelectorAll(".sidescroll"), {
-  rewind: false,
+	rewind: false,
 	snapScroll: false,
 	snapTolerance: 30,
 	fixedItemWidth: false
@@ -100,6 +100,7 @@ You can view a demo at `$PROJECT_ROOT/examples/sidescroller/append.html`.
 No extension is required for removing elements from the sidescroller. Simply remove the elements from the DOM and call refresh:
 
 ```javascript
+toRemove.parentNode.removeChild( toRemove );
 overthrow.sidescroller( scrollerElement, "refresh" );
 ```
 

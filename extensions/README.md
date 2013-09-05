@@ -90,7 +90,7 @@ Including the `append` extension provides a method for gracefully handling the a
 The calling convention for the `append` method is as follows:
 
 ```javascript
-overthrow.sidescroller( scrollerElement, "append", newLi );
+overthrow.sidescroller( scrollerElements, "append", newLi );
 ```
 
 You can view a demo at `$PROJECT_ROOT/examples/sidescroller/append.html`.
@@ -101,7 +101,7 @@ No extension is required for removing elements from the sidescroller. Simply rem
 
 ```javascript
 toRemove.parentNode.removeChild( toRemove );
-overthrow.sidescroller( scrollerElement, "refresh" );
+overthrow.sidescroller( scrollerElements, "refresh" );
 ```
 
 This is demonstrated in the append demo.

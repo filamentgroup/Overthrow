@@ -32,7 +32,7 @@
 		// calculation provided as an event property, otherwise use
 		// the scroll calculation
 		// NOTE the assignment is deliberate
-		if( active = (event && event.overthrow.active) ) {
+		if( active = (event && event.overthrow && event.overthrow.active) ) {
 			slides = thisScroll.querySelectorAll( "li" );
 
 			disablePrev = (active[0] == 0);

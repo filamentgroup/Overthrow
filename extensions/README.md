@@ -67,7 +67,7 @@ Providing an `easing` callback allows the user to dictate how the scroll value i
 By default the easing function is cubic. To setup a direct snap to the final scrolling value simply return `initialVal + distance`.
 
 ```javascript
-overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {
+overthrow.sidescroller( scrollerElements ), {
   easing: function( currentItter, initialVal, distance, totalItter ) {
     return initialVal + distance;
 	}

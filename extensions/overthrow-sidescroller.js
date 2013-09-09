@@ -39,7 +39,8 @@
 			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind,
 			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30,
-			args = arguments;
+			args = arguments,
+			options = options || {};
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
@@ -217,7 +218,10 @@
 						// TODO probably only need the second condition1
 						if( newActive[ 0 ] !== slideNum || newScroll !== currScroll ){
 
-							o.toss( thisScroll, { left: newScroll } );
+							o.toss( thisScroll, {
+								left: newScroll,
+								easing: options.easing
+							});
 
 							sendEvent(
 								thisSideScroll, // elem to receive event
@@ -251,7 +255,11 @@
 
 					var newScroll = slideWidth * newSlide;
 
-					o.toss( thisScroll, { left: newScroll, duration: 20 } );
+					o.toss( thisScroll, {
+						left: newScroll,
+						duration: 20,
+						easing: options.easing
+					});
 
 					if( slideNum !== newSlide ){
 						sendEvent(

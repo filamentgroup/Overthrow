@@ -70,7 +70,7 @@ By default the easing function is cubic. To setup a direct snap to the final scr
 overthrow.sidescroller( scrollerElements, {
   easing: function( currentItter, initialVal, distance, totalItter ) {
     return initialVal + distance;
-	}
+  }
 });
 ```
 

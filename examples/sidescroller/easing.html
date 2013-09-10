@@ -49,10 +49,20 @@
 		</div>
 
 		<script>
-			overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {
-				easing: function( currentItter, initialVal, distance, totalItter ) {
+			var easing,
+				browser = /(msie) ([\w.]+)/i.exec( navigator.userAgent.toLowerCase() );
+
+			if( browser && browser[1] == "msie" && parseFloat(browser[2], 10) <= 8 ) {
+				easing = function( currentItter, initialVal, distance, totalItter ) {
 					return initialVal + distance;
-				}
+				};
+			} else {
+				easing = overthrow.easing;
+			}
+
+			overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {
+				snapScroll: true,
+				easing: easing
 			});
 		</script>
 </body>

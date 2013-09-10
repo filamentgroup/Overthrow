@@ -45,7 +45,7 @@ overthrow.sidescroller( document.querySelectorAll(".sidescroll"), {
 	snapScroll: false,
 	snapTolerance: 30,
 	fixedItemWidth: false,
-	easing: function( currentItter, initialVal, distance, totalItter ) { /* ... */ }
+	easing: function( currentIter, initialVal, distance, totalIter ) { /* ... */ }
 });
 ```
 
@@ -59,16 +59,16 @@ Setting `fixedItemWidth` to `true` allows the user to set the item width withing
 
 Providing an `easing` callback allows the user to dictate how the scroll value is updated across fifty iterations. It is called once per iteration for both the left and top offset. The value returned will be the new scroll position of the sidescroller. The parameter values in the example above are as follows:
 
-* `currentIttr` - is the value incremented over iterations between 0 and `totalItter`.
+* `currentItr` - is the value incremented over iterations between 0 and `totalIter`.
 * `initialVal` - the initial value when the easing began
 * `distance` - the distance being scrolled.
-* `totalIttr` - the total number of times the function will be called.
+* `totalItr` - the total number of times the function will be called.
 
 By default the easing function is cubic. To setup a direct snap to the final scrolling value simply return `initialVal + distance`.
 
 ```javascript
 overthrow.sidescroller( scrollerElements, {
-  easing: function( currentItter, initialVal, distance, totalItter ) {
+  easing: function( currentIter, initialVal, distance, totalIter ) {
     return initialVal + distance;
   }
 });

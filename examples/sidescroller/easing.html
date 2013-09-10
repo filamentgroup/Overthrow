@@ -53,7 +53,7 @@
 				browser = /(msie) ([\w.]+)/i.exec( navigator.userAgent.toLowerCase() );
 
 			if( browser && browser[1] == "msie" && parseFloat(browser[2], 10) <= 8 ) {
-				easing = function( currentItter, initialVal, distance, totalItter ) {
+				easing = function( currentIter, initialVal, distance, totalIter ) {
 					return initialVal + distance;
 				};
 			} else {

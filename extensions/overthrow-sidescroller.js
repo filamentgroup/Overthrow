@@ -35,6 +35,7 @@
 			evtPrev = evtPrefix + "-prev",
 			evtMethod = evtPrefix + "-method",
 			evtRefresh = evtPrefix + "-refresh",
+			evtResize = evtPrefix + "-resize",
 			disabledClassStr = " disabled",
 			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind,
@@ -82,6 +83,7 @@
 					w.document.documentElement[ evtNext ] = 0;
 					w.document.documentElement[ evtMethod ] = 0;
 					w.document.documentElement[ evtRefresh ] = 0;
+					w.document.documentElement[ evtResize ] = 0;
 
 					// these for for the event data when that property iterates
 					w.document.documentElement[ ieID ] = {};
@@ -89,6 +91,7 @@
 					w.document.documentElement[ ieID ][ evtNext ] = {};
 					w.document.documentElement[ ieID ][ evtMethod ] = {};
 					w.document.documentElement[ ieID ][ evtRefresh ] = {};
+					w.document.documentElement[ ieID ][ evtResize ] = {};
 
 					thisSideScroll.ieID = ieID;
 				}
@@ -279,6 +282,7 @@
 				function handleResize( e ){
 					clearTimeout(debounce);
 					debounce = setTimeout(function(){
+						sendEvent( thisSideScroll, evtPrefix + "-resize", {}, thisSideScroll.ieID );
 						handleSnap( e );
 					}, 100);
 				}

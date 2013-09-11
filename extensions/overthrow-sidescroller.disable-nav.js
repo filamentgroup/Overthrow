@@ -69,7 +69,11 @@
 		lib.onEvent( "overthrow-next", thisSideScroll, toggleNavigation);
 		lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigation);
 		lib.onEvent( "overthrow-refresh", thisSideScroll, toggleNavigation);
-		toggleNavigation();
+		lib.onEvent( "overthrow-resize", thisSideScroll, toggleNavigation);
+
+		// toggle on init to account for a small number of initial elements
+		// in fixed width scrollers
+		toggleNavigation({ target: thisSideScroll });
 
 		addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
 	});

@@ -139,6 +139,9 @@
 							newScroll = slideWidth * newSlide,
 							scrollWidth = thisScroll.scrollWidth - slidesWidth;
 
+						if( target && target.nodeName !== "A" ){
+							return;
+						}
 						// if can't go left, go to end
 						if( rewind ){
 

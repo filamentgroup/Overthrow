@@ -110,6 +110,22 @@
 					return ret;
 				}
 
+				function determineSlideLength( activeSlides, opts ){
+					var slideLength = 1;
+					if( opts && opts.slideLength ){
+						if( opts.slideLength === "all" ){
+							slideLength = activeSlides.length;
+						} else {
+							slideLength = parseInt( opts.slideLength, 10 );
+						}
+					}
+
+					if( isNaN( slideLength ) ){
+						slideLength = 1;
+					}
+					return slideLength;
+				}
+
 				// expose the getactiveslides function on the overthrow element
 				thisSideScroll.getActiveSlides = getActiveSlides;
 
@@ -135,7 +151,8 @@
 							currScroll = thisScroll.scrollLeft,
 							slideNum = Math.round( currScroll / slideWidth ),
 							next = (e.type !== "keydown" && target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
-							newSlide = slideNum + ( next ? 1 : -1 ),
+							slideLength = determineSlideLength( getActiveSlides(), options ),
+							newSlide = slideNum + ( next ? slideLength : -slideLength ),
 							newScroll = slideWidth * newSlide,
 							scrollWidth = thisScroll.scrollWidth - slidesWidth;
 

@@ -64,3 +64,11 @@ body {
   background-image: url(img/arrow-left.png);
   left: 1em;
 }
+.sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-rwd {
+  background: #fff url(img/arrow-rwd.png) center center no-repeat;
+  left: .25em;
+}
+.sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-ff {
+  background: #fff url(img/arrow-ff.png) center center no-repeat;
+  right: .25em;
+}

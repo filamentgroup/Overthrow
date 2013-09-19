@@ -37,6 +37,7 @@
 			evtRefresh = evtPrefix + "-refresh",
 			disabledClassStr = " disabled",
 			snapScroll = options && options.snapScroll,
+			skip = options && options.skipLinks,
 			rewind = options && options.rewind,
 			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30,
 			args = arguments;
@@ -52,7 +53,11 @@
 					nextPrev = w.document.createElement( "div" ),
 					slideNum = 0,
 					ieID = "overthrow" + (new Date().getTime()),
-					handled = false;
+					handled = false,
+					controls = "<a href='#' class='sidescroll-prev'>Previous</a>" +
+						"<a href='#' class='sidescroll-next'>Next</a>",
+					skiplinks = "<a href='#' class='sidescroll-rwd'>First</a>" +
+						"<a href='#' class='sidescroll-ff'>Last</a>";
 
 				//Custom event
 				if( typeof options === "string" ) {
@@ -91,8 +96,10 @@
 
 				nextPrev.className = "sidescroll-nextprev-links";
 
-				nextPrev.innerHTML = "<a href='#' class='sidescroll-prev'>Previous</a>" +
-					"<a href='#' class='sidescroll-next'>Next</a>";
+				if( skip ) {
+					controls = controls + skiplinks;
+				}
+				nextPrev.innerHTML = controls;
 
 				function setSlideWidths(){
 					var slides = thisScroll.querySelectorAll( "li" ),
@@ -190,6 +197,8 @@
 							slideWidth = slides[ 0 ].offsetWidth,
 							currScroll = thisScroll.scrollLeft,
 							slideNum = Math.round( currScroll / slideWidth ),
+							ff = target.className.indexOf( "ff" ) > -1,
+							rwd = target.className.indexOf( "rwd" ) > -1,
 							next = (e.type !== "keydown" && target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
 							slideLength = determineSlideLength( getActiveSlides(), options ),
 							newSlide = slideNum + ( next ? slideLength : -slideLength ),
@@ -198,6 +207,12 @@
 
 						if( target && target.nodeName !== "A" ){
 							return;
+						}
+						if( rwd ) {
+							newScroll = 0;
+						}
+						if( ff ) {
+							newScroll = scrollWidth;
 						}
 						// if can't go left, go to end
 						if( rewind ){

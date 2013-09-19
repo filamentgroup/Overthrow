@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Overthrow Demo</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="demo.css" rel="stylesheet">
+	
+	<script src="../../src/overthrow-detect.js"></script>
+	<script src="../../src/overthrow-polyfill.js"></script>
+	<script src="../../src/overthrow-toss.js"></script>
+	<script src="../../src/overthrow-init.js"></script>
+	<script src="../../extensions/overthrow-sidescroller.js"></script>
+	<script src="../../extensions/overthrow-sidescroller.disable-nav.js"></script>
+
+	<style>
+		.overthrow-enabled .sidescroll ul {
+			width: 800%;
+		}
+		@media (min-width: 40em){
+			.overthrow-enabled .sidescroll ul {
+				width: 400%;
+			}
+		}
+		@media (min-width: 60em){
+			.overthrow-enabled .sidescroll ul {
+				width: 200%;
+			}
+		}
+
+		.sidescroll-nextprev .sidescroll-nextprev-links a {
+			opacity: 0.9;
+		}
+
+		.sidescroll-nextprev .sidescroll-nextprev-links a.disabled {
+			opacity: 0.7;
+			pointer-events: none;
+			background-color: gray;
+		}
+
+		.sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-prev {
+			left: 2.5em;
+		}
+		.sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-next {
+			right: 2.5em;
+		}
+	</style>
+	
+</head>
+<body>
+	
+		
+
+		<p>Basic side-scroller w/arrows</p>
+		
+		<div class="sidescroll-nextprev">
+			<div class="overthrow sidescroll">
+					<ul>
+						<li><img src="img/angkor.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/monks.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/monks.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/angkor.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+					</ul>
+			</div>
+		</div>
+
+
+		
+
+
+
+
+		
+		<script>
+			overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), { skipLinks: true } );
+		</script>
+
+</body>
+</html>

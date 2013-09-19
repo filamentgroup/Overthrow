@@ -26,6 +26,9 @@
 
 		nextAnchor = target.querySelector( "a.sidescroll-next" );
 		prevAnchor = target.querySelector( "a.sidescroll-prev" );
+		rwdAnchor = target.querySelector( "a.sidescroll-rwd" );
+		ffAnchor = target.querySelector( "a.sidescroll-ff" );
+
 		thisScroll = target.querySelector( ".overthrow" );
 
 		// if this comes from a click or a snap use the active pages
@@ -48,13 +51,23 @@
 
 		removeClass( nextAnchor, disabledClassStr );
 		removeClass( prevAnchor, disabledClassStr );
+		removeClass( ffAnchor, disabledClassStr );
+		removeClass( rwdAnchor, disabledClassStr );
 
 		if( disablePrev ) {
 			addClass( prevAnchor, disabledClassStr );
+
+			if( rwdAnchor ) {
+				addClass( rwdAnchor, disabledClassStr );
+			}
 		}
 
 		if( disableNext ) {
 			addClass( nextAnchor, disabledClassStr );
+
+			if( ffAnchor ) {
+				addClass( ffAnchor, disabledClassStr );
+			}
 		}
 	}
 
@@ -70,5 +83,6 @@
 		lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigation);
 
 		addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
+		addClass(thisSideScroll.querySelector( "a.sidescroll-rwd"), disabledClassStr );
 	});
 })( this, this.overthrow );

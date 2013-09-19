@@ -33,10 +33,15 @@
 			evtPrefix = "overthrow",
 			evtNext = evtPrefix + "-next",
 			evtPrev = evtPrefix + "-prev",
+			evtMethod = evtPrefix + "-method",
+			evtRefresh = evtPrefix + "-refresh",
 			disabledClassStr = " disabled",
 			snapScroll = options && options.snapScroll,
 			rewind = options && options.rewind,
-			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30;
+			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30,
+			args = arguments;
+
+		options = options || {};
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
@@ -95,6 +100,28 @@
 					for( var i = 0; i < slides.length; i++ ){
 						slides[ i ].style.width = percent;
 					}
+				}
+
+				function setScrollableWidth(){
+					var slides = thisScroll.querySelectorAll( "li" ),
+					  container = thisScroll.querySelector( "ul" );
+
+					container.style.width = (slides[0].offsetWidth * slides.length) + "px";
+				}
+
+				function refresh( options ) {
+					if( !options || !options.fixedItemWidth ) {
+						setSlideWidths();
+					} else {
+						setScrollableWidth();
+					}
+
+					sendEvent(
+						thisSideScroll, // elem to receive event
+						evtRefresh,
+						{},
+						thisSideScroll.ieID
+					);
 				}
 
 				function getActiveSlides( left ){

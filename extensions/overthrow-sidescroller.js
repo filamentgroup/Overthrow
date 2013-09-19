@@ -49,6 +49,19 @@
 					ieID = "overthrow" + (new Date().getTime()),
 					handled = false;
 
+				//Custom event
+				if( typeof options === "string" ) {
+					sendEvent(
+						thisSideScroll, // elem to receive event
+						evtMethod,
+						{ name: options, arguments: Array.prototype.slice.call(args, 2) },
+						thisSideScroll.ieID
+					);
+
+					refresh( thisSideScroll.options );
+
+					return;
+				}
 				// prevent re-init
 				if( thisSideScroll.initialized ){
 					return;

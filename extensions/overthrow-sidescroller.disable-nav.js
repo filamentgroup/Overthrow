@@ -19,7 +19,7 @@
 
 		var disablePrev = false, disableNext = false,
 				active, slides, slidesWidth, currScroll, scrollWidth,
-				target, nextAnchor, prevAnchor, thisScroll;
+				target, nextAnchor, prevAnchor, thisScroll, rwdAnchor, ffAnchor;
 
 		event = event || w.event;
 		target = event.target || event.srcElement;
@@ -51,8 +51,14 @@
 
 		removeClass( nextAnchor, disabledClassStr );
 		removeClass( prevAnchor, disabledClassStr );
-		removeClass( ffAnchor, disabledClassStr );
-		removeClass( rwdAnchor, disabledClassStr );
+
+		if( ffAnchor ) {
+			removeClass( ffAnchor, disabledClassStr );
+		}
+
+		if( rwdAnchor ) {
+			removeClass( rwdAnchor, disabledClassStr );
+		}
 
 		if( disablePrev ) {
 			addClass( prevAnchor, disabledClassStr );
@@ -73,7 +79,7 @@
 
 	lib.onEvent( "overthrow-init", w.document.documentElement, function( event ) {
 		var thisSideScroll = event.overthrow.sideScroll,
-			options = event.overthrow.options || {};
+			options = event.overthrow.options || {}, rewind;
 
 		// alert the toggle nav function that it should be disabled on rewind
 		rewind = options.rewind;
@@ -83,6 +89,9 @@
 		lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigation);
 
 		addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
-		addClass(thisSideScroll.querySelector( "a.sidescroll-rwd"), disabledClassStr );
+
+		if( rewind = thisSideScroll.querySelector("a.sidescroll-rwd") ) {
+			addClass( rewind, disabledClassStr );
+		}
 	});
 })( this, this.overthrow );

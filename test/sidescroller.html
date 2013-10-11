@@ -11,6 +11,7 @@
 	<script src="../src/overthrow-toss.js"></script>
 	<script src="../src/overthrow-init.js"></script>
 	<script src="../extensions/overthrow-sidescroller.js"></script>
+	<script src="../extensions/overthrow-sidescroller.disable-nav.js"></script>
 	<script src="tests-sidescroller.js"></script>
 
 	<style>
@@ -123,11 +124,11 @@ body {
   opacity: 1;
 }
 .sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-next {
-  background-image: url(img/arrow-right.png);
+  background-image: url(../examples/sidescroller/img/arrow-right.png);
   right: 1em;
 }
 .sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-prev {
-  background-image: url(img/arrow-left.png);
+  background-image: url(../examples/sidescroller/img/arrow-left.png);
   left: 1em;
 }
 	</style>
@@ -139,47 +140,20 @@ body {
 	<div id="qunit-testrunner-toolbar"></div>
 	<h2 id="qunit-userAgent"></h2>
 	<ol id="qunit-tests"></ol>
-	
-	
-	<div id="testelem" class="sidescroll-nextprev">
-			<div class="overthrow sidescroll sidescroll-6">
-					<ul>
-						<li><img src="img/angkor.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-					</ul>
-			</div>
-		</div>
 
-	<div id="testelem2" class="sidescroll-nextprev">
+	<div id="qunit-fixture">
+	  <div id="testelem" class="sidescroll-nextprev">
 			<div class="overthrow sidescroll sidescroll-6">
 					<ul>
-						<li><img src="img/angkor.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
+						<li><img src="../examples/sidescroller/img/angkor.jpg"></li>
+						<li><img src="../examples/sidescroller/img/monkey.jpg"></li>
+						<li><img src="../examples/sidescroller/img/monks.jpg"></li>
+						<li><img src="../examples/sidescroller/img/monkey.jpg"></li>
+						<li><img src="../examples/sidescroller/img/monks.jpg"></li>
+						<li><img src="../examples/sidescroller/img/monkey.jpg"></li>
 					</ul>
 			</div>
 		</div>
-
-	<div id="testelem3" class="sidescroll-nextprev">
-			<div class="overthrow sidescroll sidescroll-6">
-					<ul>
-						<li><img src="img/angkor.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-					</ul>
-			</div>
-		</div>
-		
-	
+  </div>
 </body>
 </html>

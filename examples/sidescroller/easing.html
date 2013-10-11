@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>Overthrow Demo</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link href="demo.css" rel="stylesheet">
+	<style>
+		.overthrow-enabled .overthrow {
+			-webkit-overflow-scrolling: touch;
+		}
+	    .overthrow-enabled .sidescroll ul {
+			width: 800%;
+		}
+		@media (min-width: 40em){
+			.overthrow-enabled .sidescroll ul {
+				width: 400%;
+			}
+		}
+		@media (min-width: 60em){
+			.overthrow-enabled .sidescroll ul {
+				width: 200%;
+			}
+		}
+	</style>
+	<script src="../../src/overthrow-detect.js"></script>
+	<script src="../../src/overthrow-polyfill.js"></script>
+	<script src="../../src/overthrow-toss.js"></script>
+	<script src="../../src/overthrow-init.js"></script>
+	<script src="../../extensions/overthrow-sidescroller.js"></script>
+
+</head>
+<body>
+		<p>Easing disabled with a callback</p>
+
+		<div class="sidescroll-nextprev">
+			<div class="overthrow sidescroll">
+					<ul>
+						<li><img src="img/angkor.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/monks.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/monks.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+						<li><img src="img/angkor.jpg"></li>
+						<li><img src="img/monkey.jpg"></li>
+					</ul>
+			</div>
+		</div>
+
+		<script>
+			var easing,
+				browser = /(msie) ([\w.]+)/i.exec( navigator.userAgent.toLowerCase() );
+
+			if( browser && browser[1] == "msie" && parseFloat(browser[2], 10) <= 8 ) {
+				easing = function( currentIter, initialVal, distance, totalIter ) {
+					return initialVal + distance;
+				};
+			} else {
+				easing = overthrow.easing;
+			}
+
+			overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {
+				snapScroll: true,
+				easing: easing
+			});
+		</script>
+</body>
+</html>

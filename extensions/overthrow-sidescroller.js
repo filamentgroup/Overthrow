@@ -35,6 +35,7 @@
 			evtPrev = evtPrefix + "-prev",
 			evtMethod = evtPrefix + "-method",
 			evtRefresh = evtPrefix + "-refresh",
+			evtResize = evtPrefix + "-resize",
 			disabledClassStr = " disabled",
 			snapScroll = options && options.snapScroll,
 			skip = options && options.skipLinks,
@@ -42,12 +43,11 @@
 			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30,
 			args = arguments;
 
-		options = options || {};
+			options = options || {};
 
 		for( var i = 0; i < scrolls.length; i++ ){
 
 			(function(){
-
 				var thisSideScroll = scrolls[ i ],
 					thisScroll = scrolls[ i ].querySelector( ".overthrow" ),
 					nextPrev = w.document.createElement( "div" ),
@@ -59,12 +59,11 @@
 					skiplinks = "<a href='#' class='sidescroll-rwd'>First</a>" +
 						"<a href='#' class='sidescroll-ff'>Last</a>";
 
-				//Custom event
-				if( typeof options === "string" ) {
+				if( typeof options === "string"	&& thisSideScroll.options ) {
 					sendEvent(
 						thisSideScroll, // elem to receive event
 						evtMethod,
-						{ name: options, arguments: Array.prototype.slice.call(args, 2) },
+						{ name: thisSideScroll.options, arguments: Array.prototype.slice.call(args, 2) },
 						thisSideScroll.ieID
 					);
 
@@ -72,24 +71,33 @@
 
 					return;
 				}
+
 				// prevent re-init
 				if( thisSideScroll.initialized ){
 					return;
 				}
-				thisSideScroll.initialized = true;
 
+				thisSideScroll.initialized = true;
+				thisSideScroll.options = options;
 				thisSideScroll.setAttribute( "tabindex", "0" );
 
 				// oldIE will need some expando event props
+				// TODO move to method
 				if( w.document.attachEvent ){
 					// these are iterators to trigger a property mutate event in IE8
 					w.document.documentElement[ evtPrev ] = 0;
 					w.document.documentElement[ evtNext ] = 0;
+					w.document.documentElement[ evtMethod ] = 0;
+					w.document.documentElement[ evtRefresh ] = 0;
+					w.document.documentElement[ evtResize ] = 0;
 
 					// these for for the event data when that property iterates
 					w.document.documentElement[ ieID ] = {};
 					w.document.documentElement[ ieID ][ evtPrev ] = {};
 					w.document.documentElement[ ieID ][ evtNext ] = {};
+					w.document.documentElement[ ieID ][ evtMethod ] = {};
+					w.document.documentElement[ ieID ][ evtRefresh ] = {};
+					w.document.documentElement[ ieID ][ evtResize ] = {};
 
 					thisSideScroll.ieID = ieID;
 				}
@@ -246,7 +254,11 @@
 
 						// TODO probably only need the second condition1
 						if( newActive[ 0 ] !== slideNum || newScroll !== currScroll ){
-							o.toss( thisScroll, { left: newScroll } );
+
+							o.toss( thisScroll, {
+								left: newScroll,
+								easing: options.easing
+							});
 
 							sendEvent(
 								thisSideScroll, // elem to receive event
@@ -280,7 +292,11 @@
 
 					var newScroll = slideWidth * newSlide;
 
-					o.toss( thisScroll, { left: newScroll, duration: 20 } );
+					o.toss( thisScroll, {
+						left: newScroll,
+						duration: 20,
+						easing: options.easing
+					});
 
 					if( slideNum !== newSlide ){
 						sendEvent(
@@ -300,6 +316,7 @@
 				function handleResize( e ){
 					clearTimeout(debounce);
 					debounce = setTimeout(function(){
+						sendEvent( thisSideScroll, evtPrefix + "-resize", {}, thisSideScroll.ieID );
 						handleSnap( e );
 					}, 100);
 				}
@@ -348,9 +365,9 @@
 
 				thisSideScroll.insertBefore( nextPrev, thisScroll );
 
-				setSlideWidths();
+				refresh( options );
 
-				// TODO this seems really fragile
+				// Todo this seems really fragile
 				// side scroller init for plugins
 				sendEvent(
 					w.document.documentElement,

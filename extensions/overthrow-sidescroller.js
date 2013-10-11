@@ -59,6 +59,8 @@
 					skiplinks = "<a href='#' class='sidescroll-rwd'>First</a>" +
 						"<a href='#' class='sidescroll-ff'>Last</a>";
 
+				// The second check for options prevents methods from being run on
+				// uninitialized overthrow elements
 				if( typeof options === "string"	&& thisSideScroll.options ) {
 					sendEvent(
 						thisSideScroll, // elem to receive event

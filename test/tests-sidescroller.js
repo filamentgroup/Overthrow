@@ -6,14 +6,14 @@ window.onload = function(){
 
 	var scroller, testElem, overkill = 10000;
 
-	module( "disabled nav", {
-		setup: function(){
-      testElem = document.querySelector( "#testelem" );
-			scroller = testElem.querySelector( ".overthrow.sidescroll" );
-			scroller.scrollLeft = 0;
-			overthrow.sidescroller( [testElem], {fixedItemWidth: true} );
-		}
-	});
+	function setup() {
+		testElem = document.querySelector( "#testelem" );
+		scroller = testElem.querySelector( ".overthrow.sidescroll" );
+		scroller.scrollLeft = 0;
+		overthrow.sidescroller( [testElem], {fixedItemWidth: true} );
+	}
+
+	module( "disabled nav", { setup: setup });
 
 	function nextDisabled(){
 		return testElem.querySelectorAll(".sidescroll-next.disabled");
@@ -34,6 +34,8 @@ window.onload = function(){
 	});
 
 	asyncTest( "nav next should be disabled after scroll", function() {
+		expect( 2 );
+
 		var next;
 
 		next = nextDisabled();
@@ -50,6 +52,8 @@ window.onload = function(){
 	});
 
 	asyncTest( "both should be active in center", function() {
+		expect( 4 );
+
 		var next, prev;
 
 		next = nextDisabled();
@@ -77,10 +81,7 @@ window.onload = function(){
 
 	module( "append method", {
 		setup: function(){
-			testElem = document.querySelector( "#testelem" );
-			scroller = testElem.querySelector( ".overthrow.sidescroll" );
-			scroller.scrollLeft = 0;
-			overthrow.sidescroller( [testElem], {fixedItemWidth: true} );
+			setup();
 
 			var img = document.createElement( "img");
 
@@ -100,6 +101,8 @@ window.onload = function(){
 
 	// TODO these set timeouts are getting scarry now :(
 	asyncTest( "disabled next nav is enabled when new element is appended", function() {
+		expect( 3 );
+
 		next = nextDisabled();
 		equal( next.length, 0 );
 

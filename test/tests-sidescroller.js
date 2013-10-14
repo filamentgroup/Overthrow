@@ -128,4 +128,19 @@ window.onload = function(){
 			}, 500);
 		}, 500);
 	});
+
+	module( "goTo method", { setup: setup });
+
+	asyncTest( "changing slides changes scroll position", function() {
+		expect( 2 );
+
+		equal( scroller.scrollLeft, 0 );
+
+		overthrow.sidescroller( [testElem], "goTo", "2" );
+
+		setTimeout(function() {
+			ok( scroller.scrollLeft !== 0 );
+			start();
+		}, 500);
+	});
 };

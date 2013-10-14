@@ -69,9 +69,9 @@
 			});
 
 			sendEvent( scroller,
-								"goto.overthrow",
-								goto,
-								thisScroll.ieID );
+				"goto.overthrow",
+				goto,
+				thisScroll.ieID );
 	}
 
 	lib.onEvent( "overthrow-init", w.document.documentElement, function( event ) {

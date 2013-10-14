@@ -72,4 +72,26 @@ window.onload = function(){
 			start();
 		}, 500);
 	});
+
+	module( "append method", {
+		setup: function(){
+			testElem = document.querySelector( "#testelem" );
+			scroller = testElem.querySelector( ".overthrow.sidescroll" );
+			scroller.scrollLeft = 0;
+			overthrow.sidescroller( [testElem], {fixedItemWidth: true} );
+		}
+	});
+
+	test( "adds elements to the scrolling region", function(){
+		var li = document.createElement( "li" ),
+			img = document.createElement( "img"),
+			currentSlides = testElem.querySelectorAll( "li" );
+
+		img.src = "../examples/sidescroller/img/monkey.jpg";
+		li.appendChild( img );
+
+		overthrow.sidescroller( [testElem], "append", li );
+
+		equal( currentSlides.length + 1, testElem.querySelectorAll( "li" ).length );
+	});
 };

@@ -65,7 +65,7 @@
 					sendEvent(
 						thisSideScroll, // elem to receive event
 						evtMethod,
-						{ name: options, arguments: Array.prototype.slice.call(args, 2) },
+						{ "name": options, "arguments": Array.prototype.slice.call(args, 2) },
 						thisSideScroll.ieID
 					);
 

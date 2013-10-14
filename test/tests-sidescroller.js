@@ -4,7 +4,7 @@
 
 window.onload = function(){
 
-	var scroller, testElem;
+	var scroller, testElem, overkill = 10000;
 
 	module( "disabled nav", {
 		setup: function(){
@@ -39,7 +39,7 @@ window.onload = function(){
 		next = nextDisabled();
 		equal( next.length, 0 );
 
-		scroller.scrollLeft = 10000;
+		scroller.scrollLeft = overkill;
 
 		setTimeout(function() {
 			next = nextDisabled();
@@ -73,25 +73,51 @@ window.onload = function(){
 		}, 500);
 	});
 
+  var newSlide, currentSlides;
+
 	module( "append method", {
 		setup: function(){
 			testElem = document.querySelector( "#testelem" );
 			scroller = testElem.querySelector( ".overthrow.sidescroll" );
 			scroller.scrollLeft = 0;
 			overthrow.sidescroller( [testElem], {fixedItemWidth: true} );
+
+			var img = document.createElement( "img");
+
+			newSlide = document.createElement( "li" );
+			currentSlides = testElem.querySelectorAll( "li" );
+
+			img.src = "../examples/sidescroller/img/monkey.jpg";
+			newSlide.appendChild( img );
 		}
 	});
 
 	test( "adds elements to the scrolling region", function(){
-		var li = document.createElement( "li" ),
-			img = document.createElement( "img"),
-			currentSlides = testElem.querySelectorAll( "li" );
-
-		img.src = "../examples/sidescroller/img/monkey.jpg";
-		li.appendChild( img );
-
-		overthrow.sidescroller( [testElem], "append", li );
+		overthrow.sidescroller( [testElem], "append", newSlide );
 
 		equal( currentSlides.length + 1, testElem.querySelectorAll( "li" ).length );
+	});
+
+	// TODO these set timeouts are getting scarry now :(
+	asyncTest( "disabled next nav is enabled when new element is appended", function() {
+		next = nextDisabled();
+		equal( next.length, 0 );
+
+		scroller.scrollLeft = overkill;
+
+		setTimeout(function() {
+			next = nextDisabled();
+
+			equal( next.length, 1 );
+
+			overthrow.sidescroller( [testElem], "append", newSlide );
+
+			setTimeout(function() {
+				next = nextDisabled();
+				equal( next.length, 0 );
+
+				start();
+			}, 500);
+		}, 500);
 	});
 };

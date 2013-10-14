@@ -129,9 +129,34 @@ window.onload = function(){
 		}, 500);
 	});
 
-	module( "goTo method", { setup: setup });
+	var li;
+
+	function within( value, exact, range ) {
+		ok( value < exact + range && value > exact - range,
+			value + " should be between " + exact - range + " and " + exact + range );
+	}
+
+	module( "goTo method", {
+		setup: function() {
+			setup();
+			li = testElem.querySelector( "li" );
+		}
+	});
 
 	asyncTest( "changing slides changes scroll position", function() {
+		expect( 2 );
+
+		equal( scroller.scrollLeft, 0 );
+
+		overthrow.sidescroller( [testElem], "goTo", "1" );
+
+		setTimeout(function() {
+			within( scroller.scrollLeft, li.offsetWidth, 5 );
+			start();
+		}, 500);
+	});
+
+	asyncTest( "using -1 reduces scroll position", function() {
 		expect( 2 );
 
 		equal( scroller.scrollLeft, 0 );
@@ -139,8 +164,28 @@ window.onload = function(){
 		overthrow.sidescroller( [testElem], "goTo", "2" );
 
 		setTimeout(function() {
-			ok( scroller.scrollLeft !== 0 );
-			start();
+			overthrow.sidescroller( [testElem], "goTo", "-1" );
+
+			setTimeout(function() {
+				within( scroller.scrollLeft, li.offsetWidth, 5 );
+				start();
+			}, 500);
 		}, 500);
 	});
+
+	asyncTest( "using +1 reduces scroll position", function() {
+		expect( 2 );
+
+		equal( scroller.scrollLeft, 0 );
+
+		setTimeout(function() {
+			overthrow.sidescroller( [testElem], "goTo", "+1" );
+
+			setTimeout(function() {
+				within( scroller.scrollLeft, li.offsetWidth, 5 );
+				start();
+			}, 500);
+		}, 500);
+	});
+
 };

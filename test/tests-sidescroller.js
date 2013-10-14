@@ -105,14 +105,19 @@ window.onload = function(){
 
 		scroller.scrollLeft = overkill;
 
+		// wait for the disabled nav mechanics to pick up the full scroll
 		setTimeout(function() {
+			// make sure the next button is disabled
 			next = nextDisabled();
-
 			equal( next.length, 1 );
 
+			// add a new element
 			overthrow.sidescroller( [testElem], "append", newSlide );
 
+			// wait for the disabled nav mechanics to pick up the new element
 			setTimeout(function() {
+
+				// make sure the next nav is disabled
 				next = nextDisabled();
 				equal( next.length, 0 );
 

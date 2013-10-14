@@ -4,7 +4,7 @@
 	function append( event ) {
 		var options = event.overthrow || {}, append, scroller, ul;
 
-		if( !options.name === "append" ){
+		if( options.name !== "append" ){
 			return;
 		}
 

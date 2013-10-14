@@ -6,7 +6,7 @@ window.onload = function(){
 
 	var scroller, testElem;
 
-	module( "properties", {
+	module( "disabled nav", {
 		setup: function(){
       testElem = document.querySelector( "#testelem" );
 			scroller = testElem.querySelector( ".overthrow.sidescroll" );
@@ -39,13 +39,36 @@ window.onload = function(){
 		next = nextDisabled();
 		equal( next.length, 0 );
 
-		console.log( scroller );
 		scroller.scrollLeft = 10000;
 
 		setTimeout(function() {
 			next = nextDisabled();
 
 			equal( next.length, 1 );
+			start();
+		}, 500);
+	});
+
+	asyncTest( "both should be active in center", function() {
+		var next, prev;
+
+		next = nextDisabled();
+		prev = prevDisabled();
+
+		// check the default state
+		equal( next.length, 0 );
+		equal( prev.length, 1 );
+
+		// move into the scrolling region
+		scroller.scrollLeft = 10;
+
+		setTimeout(function() {
+			prev = prevDisabled();
+			next = nextDisabled();
+
+			// both buttons should be "clickable"
+			equal( prev.length, 0 );
+			equal( next.length, 0 );
 			start();
 		}, 500);
 	});

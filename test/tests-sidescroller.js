@@ -78,7 +78,7 @@ window.onload = function(){
 		}, defaultTimeout);
 	});
 
-  var newSlide, currentSlides;
+	var newSlide, currentSlides;
 
 	module( "append method", {
 		setup: function(){
@@ -203,5 +203,26 @@ window.onload = function(){
 			near( scroller.scrollLeft, li.offsetWidth );
 			start();
 		}, defaultTimeout);
+	});
+
+	module( "events", {setup: setup} );
+
+	// TODO is there any easy way to expost the handle click so that we can test the
+	//			next and prev events. Also resizing?
+	asyncTest( "scroll, refresh events are fired", function() {
+		expect( 2 );
+
+		overthrow.sidescroller.onEvent( "overthrow-refresh", testElem, function() {
+			ok( true, "ovethrow-refresh triggered" );
+		});
+
+		overthrow.sidescroller( [testElem], "refresh" );
+
+		overthrow.sidescroller.onEvent( "overthrow-scroll", testElem, function() {
+			ok( true, "ovethrow-scroll triggered" );
+			start();
+		});
+
+		scroller.scrollLeft = li.offsetWidth + 20;
 	});
 };

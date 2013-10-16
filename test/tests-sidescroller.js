@@ -4,13 +4,14 @@
 
 window.onload = function(){
 
-	var scroller, testElem, overkill = 10000, defaultTimeout = 600;
+	var li, scroller, testElem, overkill = 10000, defaultTimeout = 600;
 
-	function setup() {
+	function setup( opts ) {
 		testElem = document.querySelector( "#testelem" );
 		scroller = testElem.querySelector( ".overthrow.sidescroll" );
 		scroller.scrollLeft = 0;
-		overthrow.sidescroller( [testElem], {fixedItemWidth: true} );
+		li = testElem.querySelector( "li" );
+		overthrow.sidescroller( [testElem], opts || {fixedItemWidth: true} );
 	}
 
 	module( "disabled nav", { setup: setup });
@@ -131,19 +132,14 @@ window.onload = function(){
 
 	var li;
 
-	function within( value, exact, range ) {
-    range = range || 1;
+	function near( value, exact, range ) {
+		range = range || 1;
 
 		ok( value < exact + range && value > exact - range,
 			  value + " should be between " + (exact - range) + " and " + (exact + range) );
 	}
 
-	module( "goTo method", {
-		setup: function() {
-			setup();
-			li = testElem.querySelector( "li" );
-		}
-	});
+	module( "goTo method", {setup: setup} );
 
 	asyncTest( "changing slides changes scroll position", function() {
 		expect( 2 );
@@ -153,7 +149,7 @@ window.onload = function(){
 		overthrow.sidescroller( [testElem], "goTo", "1" );
 
 		setTimeout(function() {
-			within( scroller.scrollLeft, li.offsetWidth );
+			near( scroller.scrollLeft, li.offsetWidth );
 			start();
 		}, defaultTimeout);
 	});
@@ -169,7 +165,7 @@ window.onload = function(){
 			overthrow.sidescroller( [testElem], "goTo", "-1" );
 
 			setTimeout(function() {
-				within( scroller.scrollLeft, li.offsetWidth );
+				near( scroller.scrollLeft, li.offsetWidth );
 				start();
 			}, defaultTimeout);
 		}, defaultTimeout);
@@ -184,9 +180,28 @@ window.onload = function(){
 			overthrow.sidescroller( [testElem], "goTo", "+1" );
 
 			setTimeout(function() {
-				within( scroller.scrollLeft, li.offsetWidth );
+				near( scroller.scrollLeft, li.offsetWidth );
 				start();
 			}, defaultTimeout);
+		}, defaultTimeout);
+	});
+
+	module( "snapping", {
+		setup: function() {
+			setup( {fixedItemWidth: true, snapScroll: true} );
+		}
+	});
+
+	asyncTest( "setting scroll position outside slide snaps to slide", function() {
+		expect( 1 );
+
+		// force snap to the first second slide
+		scroller.scrollLeft = li.offsetWidth/2 + 20;
+
+		// once the snap takes place the new offset width should be at the second slide
+		setTimeout(function() {
+			near( scroller.scrollLeft, li.offsetWidth );
+			start();
 		}, defaultTimeout);
 	});
 };

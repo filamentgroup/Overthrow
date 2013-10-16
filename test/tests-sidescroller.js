@@ -4,7 +4,7 @@
 
 window.onload = function(){
 
-	var scroller, testElem, overkill = 10000;
+	var scroller, testElem, overkill = 10000, defaultTimeout = 600;
 
 	function setup() {
 		testElem = document.querySelector( "#testelem" );
@@ -48,7 +48,7 @@ window.onload = function(){
 
 			equal( next.length, 1 );
 			start();
-		}, 500);
+		}, defaultTimeout);
 	});
 
 	asyncTest( "both should be active in center", function() {
@@ -74,7 +74,7 @@ window.onload = function(){
 			equal( prev.length, 0 );
 			equal( next.length, 0 );
 			start();
-		}, 500);
+		}, defaultTimeout);
 	});
 
   var newSlide, currentSlides;
@@ -125,15 +125,17 @@ window.onload = function(){
 				equal( next.length, 0 );
 
 				start();
-			}, 500);
-		}, 500);
+			}, defaultTimeout);
+		}, defaultTimeout);
 	});
 
 	var li;
 
 	function within( value, exact, range ) {
+    range = range || 1;
+
 		ok( value < exact + range && value > exact - range,
-			value + " should be between " + exact - range + " and " + exact + range );
+			  value + " should be between " + (exact - range) + " and " + (exact + range) );
 	}
 
 	module( "goTo method", {
@@ -151,9 +153,9 @@ window.onload = function(){
 		overthrow.sidescroller( [testElem], "goTo", "1" );
 
 		setTimeout(function() {
-			within( scroller.scrollLeft, li.offsetWidth, 5 );
+			within( scroller.scrollLeft, li.offsetWidth );
 			start();
-		}, 500);
+		}, defaultTimeout);
 	});
 
 	asyncTest( "using -1 reduces scroll position", function() {
@@ -167,10 +169,10 @@ window.onload = function(){
 			overthrow.sidescroller( [testElem], "goTo", "-1" );
 
 			setTimeout(function() {
-				within( scroller.scrollLeft, li.offsetWidth, 5 );
+				within( scroller.scrollLeft, li.offsetWidth );
 				start();
-			}, 500);
-		}, 500);
+			}, defaultTimeout);
+		}, defaultTimeout);
 	});
 
 	asyncTest( "using +1 reduces scroll position", function() {
@@ -182,10 +184,9 @@ window.onload = function(){
 			overthrow.sidescroller( [testElem], "goTo", "+1" );
 
 			setTimeout(function() {
-				within( scroller.scrollLeft, li.offsetWidth, 5 );
+				within( scroller.scrollLeft, li.offsetWidth );
 				start();
-			}, 500);
-		}, 500);
+			}, defaultTimeout);
+		}, defaultTimeout);
 	});
-
 };

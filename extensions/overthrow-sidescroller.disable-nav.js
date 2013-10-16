@@ -95,9 +95,5 @@
 		toggleNavigation({ target: thisSideScroll });
 
 		addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
-
-		if( rewind = thisSideScroll.querySelector("a.sidescroll-rwd") ) {
-			addClass( rewind, disabledClassStr );
-		}
 	});
 })( this, this.overthrow );

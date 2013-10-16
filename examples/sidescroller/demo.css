@@ -1,8 +1,8 @@
 /* DEMO CSS IS GROSS */
 body {
-	font-family: Helvetica, sans-serif;
-	max-width: 60em;
-	margin: 8em auto;
+  font-family: Helvetica, sans-serif;
+  max-width: 60em;
+  margin: 8em auto;
 }
 
 
@@ -15,23 +15,24 @@ body {
 
 .overthrow-enabled .sidescroll ul,
 .overthrow-enabled .sidescroll li {
-	float: left;
-	margin: 0;
-	padding: 0;
-	list-style: none;
+  float: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 .overthrow-enabled .sidescroll li img {
-	margin: 0;
-	padding: 0;
-	width: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
 }
 
 
 
 /* next prev arrows */
 .sidescroll-nextprev {
-	position: relative;
+  position: relative;
 }
+.sidescroll-skip-nav,
 .sidescroll-nextprev .sidescroll-nextprev-links {
   bottom: auto;
   top: 50%;
@@ -39,8 +40,9 @@ body {
   left: 0;
   width: 100%;
 }
+.sidescroll-skip-nav a,
 .sidescroll-nextprev .sidescroll-nextprev-links a {
-	position: absolute;
+  position: absolute;
   text-indent: -9999px;
   width: 2em;
   height: 2em;
@@ -58,17 +60,17 @@ body {
 }
 .sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-next {
   background-image: url(img/arrow-right.png);
-  right: 1em;
+  right: 2.5em;
 }
 .sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-prev {
   background-image: url(img/arrow-left.png);
-  left: 1em;
+  left: 2.5em;
 }
-.sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-rwd {
+.sidescroll-skip-nav a.sidescroll-rwd {
   background: #fff url(img/arrow-rwd.png) center center no-repeat;
   left: .25em;
 }
-.sidescroll-nextprev .sidescroll-nextprev-links a.sidescroll-ff {
+.sidescroll-skip-nav a.sidescroll-ff {
   background: #fff url(img/arrow-ff.png) center center no-repeat;
   right: .25em;
 }

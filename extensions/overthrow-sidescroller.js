@@ -11,23 +11,6 @@
 		return;
 	}
 
-	function sendEvent( elem, evt, args, ieID ){
-		// TODO needs IE8 support
-		if( document.createEvent ){
-			var event = document.createEvent( "Event" );
-			event.initEvent( evt, true, true );
-			event.overthrow = args;
-			elem.dispatchEvent( event );
-		}
-		else {
-			w.document.documentElement[ieID][ evt ] = {
-				e: evt,
-				overthrow: args
-			};
-			w.document.documentElement[ evt ]++;
-		}
-	}
-
 	o.sidescroller = function( elems, options ){
 		var scrolls = elems,
 			evtPrefix = "overthrow",
@@ -38,7 +21,6 @@
 			evtResize = evtPrefix + "-resize",
 			disabledClassStr = " disabled",
 			snapScroll = options && options.snapScroll,
-			skip = options && options.skipLinks,
 			rewind = options && options.rewind,
 			snapTolerance = options && options.snapTolerance !== undefined ? options.snapTolerance : 30,
 			args = arguments;
@@ -55,14 +37,12 @@
 					ieID = "overthrow" + (new Date().getTime()),
 					handled = false,
 					controls = "<a href='#' class='sidescroll-prev'>Previous</a>" +
-						"<a href='#' class='sidescroll-next'>Next</a>",
-					skiplinks = "<a href='#' class='sidescroll-rwd'>First</a>" +
-						"<a href='#' class='sidescroll-ff'>Last</a>";
+						"<a href='#' class='sidescroll-next'>Next</a>";
 
 				// The second check for options prevents methods from being run on
 				// uninitialized overthrow elements
 				if( typeof options === "string"	&& thisSideScroll.options ) {
-					sendEvent(
+					o.sidescroller.sendEvent(
 						thisSideScroll, // elem to receive event
 						evtMethod,
 						{ "name": options, "arguments": Array.prototype.slice.call(args, 2) },
@@ -105,10 +85,6 @@
 				}
 
 				nextPrev.className = "sidescroll-nextprev-links";
-
-				if( skip ) {
-					controls = controls + skiplinks;
-				}
 				nextPrev.innerHTML = controls;
 
 				function setSlideWidths(){
@@ -133,7 +109,7 @@
 						setScrollableWidth();
 					}
 
-					sendEvent(
+					o.sidescroller.sendEvent(
 						thisSideScroll, // elem to receive event
 						evtRefresh,
 						{},
@@ -205,8 +181,6 @@
 							slideWidth = slides[ 0 ].offsetWidth,
 							currScroll = thisScroll.scrollLeft,
 							slideNum = Math.round( currScroll / slideWidth ),
-							ff = target.className.indexOf( "ff" ) > -1,
-							rwd = target.className.indexOf( "rwd" ) > -1,
 							next = (e.type !== "keydown" && target.className.indexOf( "next" ) > -1) || e.keyCode === 39,
 							slideLength = determineSlideLength( getActiveSlides(), options ),
 							newSlide = slideNum + ( next ? slideLength : -slideLength ),
@@ -216,12 +190,7 @@
 						if( target && target.nodeName !== "A" ){
 							return;
 						}
-						if( rwd ) {
-							newScroll = 0;
-						}
-						if( ff ) {
-							newScroll = scrollWidth;
-						}
+
 						// if can't go left, go to end
 						if( rewind ){
 
@@ -262,7 +231,7 @@
 								easing: options.easing
 							});
 
-							sendEvent(
+							o.sidescroller.sendEvent(
 								thisSideScroll, // elem to receive event
 								next ? evtNext : evtPrev, // evt name
 								{
@@ -301,7 +270,7 @@
 					});
 
 					if( slideNum !== newSlide ){
-						sendEvent(
+						o.sidescroller.sendEvent(
 							thisSideScroll, // elem to receive event
 							newSlide > slideNum ? evtNext : evtPrev, // evt name
 							{
@@ -318,25 +287,22 @@
 				function handleResize( e ){
 					clearTimeout(debounce);
 					debounce = setTimeout(function(){
-						sendEvent( thisSideScroll, evtPrefix + "-resize", {}, thisSideScroll.ieID );
+						o.sidescroller.sendEvent( thisSideScroll, evtPrefix + "-resize", {}, thisSideScroll.ieID );
 						handleSnap( e );
 					}, 100);
 				}
 
 				var debouncedos;
 				function handleScroll( e ){
-					if( overthrow.tossing ){
-						return;
-					}
-					if( scrollStart === false ){
-						scrollStart = thisScroll.scrollLeft;
-					}
 					clearTimeout( debouncedos );
 					debouncedos = setTimeout(function(){
+						if( scrollStart === false ){
+							scrollStart = thisScroll.scrollLeft;
+						}
 						if( snapScroll ){
 							handleSnap( e );
 						} else {
-							sendEvent( thisSideScroll,	evtPrefix + "-scroll", {}, ieID );
+							o.sidescroller.sendEvent( thisSideScroll, evtPrefix + "-scroll", {}, ieID );
 						}
 
 						scrollStart = false;
@@ -371,7 +337,7 @@
 
 				// Todo this seems really fragile
 				// side scroller init for plugins
-				sendEvent(
+				o.sidescroller.sendEvent(
 					w.document.documentElement,
 					evtPrefix + "-init",
 					{ sideScroll: thisSideScroll, options: options },
@@ -390,6 +356,25 @@
 		w.document.documentElement[ initId ][ "overthrow-init" ] = 0;
 		w.document.documentElement.ieID = initId;
 	}
+
+
+	o.sidescroller.sendEvent = function( elem, evt, args, ieID ){
+		// TODO needs IE8 support
+		if( document.createEvent ){
+			var event = document.createEvent( "Event" );
+			event.initEvent( evt, true, true );
+			event.overthrow = args;
+			elem.dispatchEvent( event );
+		}
+		else {
+			w.document.documentElement[ieID][ evt ] = {
+				e: evt,
+				overthrow: args
+			};
+			w.document.documentElement[ evt ]++;
+		}
+	}
+
 
 	o.sidescroller.onEvent = function( evt, elem, callback ){
 		function cb( args ){

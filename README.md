@@ -41,11 +41,14 @@ Or, see below how to create a custom build with only the files you want.
 
 The side scroller extension (not included by default) makes a horizontal carousel-like component of an overflow area.
 
-- [Simple fluid sidescroller with  momentum scrolling (when natively supported) and with and without arrows](http://filamentgroup.github.io/Overthrow/examples/sidescroller/)
-- [Responsive slide layouts with momentum scrolling (when natively supported)](http://filamentgroup.github.io/Overthrow/examples/sidescroller/variable.html)
-- [Responsive slide layouts with scroll snapping and rewind behavior to loop through slides](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)
+- [Simple fluid sidescroller with momentum](http://filamentgroup.github.io/Overthrow/examples/sidescroller/)
+- [Responsive slide layouts with scroll snapping and rewind](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)
 
+A more extensive list of demos is available in the Sidescroller README.
 
+### Sidescroller README
+
+See the [README](tree/master/extensions/).
 
 ## Basic use
 
@@ -108,10 +111,6 @@ overthrow.toss(
 ````
 
 - `overthrow.intercept()`: Stops any `toss` currently animating.
-
-## Sidescroller
-
-See the README in the `extensions/` directory.
 
 ## Source files
 

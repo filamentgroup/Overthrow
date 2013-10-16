@@ -48,7 +48,7 @@ A more extensive list of demos is available in the Sidescroller README.
 
 ### Sidescroller README
 
-See the [README](tree/master/extensions/).
+See the [README](extensions/).
 
 ## Basic use
 

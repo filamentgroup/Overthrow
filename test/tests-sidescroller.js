@@ -253,7 +253,8 @@ window.onload = function(){
 				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
 
 			scroller.setAttribute( "class", scroller.getAttribute( "class" ) + " sidescroll-6");
-			console.log( scroller );
+			console.log( scroller ); // Getting the class, but the styles aren’t applying?
+
 			ok( rwd && !ff, "Rewind/previous links are intially disabled." );
 		}());
 
@@ -261,16 +262,9 @@ window.onload = function(){
 			var rwd = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1,
 				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
 
-			scroller.setAttribute( "class", scroller.getAttribute( "class" ) + " sidescroll-6");
-			console.log( scroller );
 			ok( !rwd && ff, "Skipping to the end disables fast-forward/previous controls." );
 		}());
 
-		(function() {
-			console.log( testElem );
-			console.log( testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ) );
-
-			ok( false, "Skipping to the start disables rewind/previous controls." );
-		}());
+		ok( false, "Skipping to the start disables rewind/previous controls." );
 	});
 };

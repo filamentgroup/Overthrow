@@ -14,7 +14,11 @@ window.onload = function(){
 		overthrow.sidescroller( [testElem], opts || {fixedItemWidth: true} );
 	}
 
-	module( "disabled nav", { setup: setup });
+	module( "disabled nav",
+		setup: function() {
+			
+		}
+	});
 
 	function nextDisabled(){
 		return testElem.querySelectorAll(".sidescroll-next.disabled");
@@ -224,5 +228,53 @@ window.onload = function(){
 		});
 
 		scroller.scrollLeft = li.offsetWidth + 20;
+	});
+
+	module( "skip links", {
+		setup: function(){
+			setup( { skipLinks: true, fixedItemWidth: true} );
+		}
+	});
+
+	test( "Nav items are added to the sidescroller.", function(){
+		expect( 1 );
+		ok( testElem.querySelector( ".sidescroll-skip-nav a" ).length !== 0 );
+	});
+
+	test( "Skip links enable/disable nav items correctly.", function(){
+		expect( 5 );
+		ok( testElem.querySelector( ".sidescroll-rwd" ).getAttribute( "class" ).indexOf( "disabled") > -1, "Rewind link starts out with `disabled` class." );
+
+		(function() {
+			var rwd = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1,
+				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
+
+			ok( rwd && ff, "Both skip links are disabled if there’s only one “page” of slides." );
+		}());
+
+		(function() {
+			var rwd = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1,
+				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
+
+			scroller.setAttribute( "class", scroller.getAttribute( "class" ) + " sidescroll-6");
+			console.log( scroller );
+			ok( rwd && !ff, "Rewind/previous links are intially disabled." );
+		}());
+
+		(function() {
+			var rwd = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1,
+				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
+
+			scroller.setAttribute( "class", scroller.getAttribute( "class" ) + " sidescroll-6");
+			console.log( scroller );
+			ok( !rwd && ff, "Skipping to the end disables fast-forward/previous controls." );
+		}());
+
+		(function() {
+			console.log( testElem );
+			console.log( testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ) );
+
+			ok( false, "Skipping to the start disables rewind/previous controls." );
+		}());
 	});
 };

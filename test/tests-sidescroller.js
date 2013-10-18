@@ -231,8 +231,8 @@ window.onload = function(){
 	});
 
 	module( "skip links", {
-		setup: function(){
-			setup( { skipLinks: true, fixedItemWidth: true} );
+		setup: function() {
+			setup( {fixedItemWidth: true, snapScroll: true, skipLinks: true} );
 		}
 	});
 
@@ -242,28 +242,33 @@ window.onload = function(){
 	});
 
 	test( "Skip links enable/disable nav items correctly.", function(){
-		expect( 5 );
 		ok( testElem.querySelector( ".sidescroll-rwd" ).getAttribute( "class" ).indexOf( "disabled") > -1, "Rewind link starts out with `disabled` class." );
 
+/*
 		(function() {
 			var rwd = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1,
 				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
+
+		//	console.log( scroller ); // Getting the class, but the styles aren’t applying?
 
 			ok( rwd && ff, "Both skip links are disabled if there’s only one “page” of slides." );
 		}());
-
+*/
 		(function() {
-			var rwd = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1,
+			var rwd = testElem.querySelector( ".sidescroll-rwd" ).getAttribute( "class" ).indexOf( "disabled") > -1,
 				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
-
-			scroller.setAttribute( "class", scroller.getAttribute( "class" ) + " sidescroll-6");
-			console.log( scroller ); // Getting the class, but the styles aren’t applying?
 
 			ok( rwd && !ff, "Rewind/previous links are intially disabled." );
 		}());
 
 		(function() {
-			var rwd = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1,
+			overthrow.toss( testElem.querySelector( ".sidescroll" ), {
+				left: overkill
+			});
+
+			console.log( testElem.querySelector( ".sidescroll" ) );
+
+			var rwd = testElem.querySelector( ".sidescroll-rwd" ).getAttribute( "class" ).indexOf( "disabled") > -1,
 				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
 
 			ok( !rwd && ff, "Skipping to the end disables fast-forward/previous controls." );

@@ -16,7 +16,7 @@
 				return;
 			}
 
-			window.overthrow.toss( scroller, {
+			w.overthrow.toss( scroller, {
 				left: rwd ? 0 : ( scroller.querySelector( "ul" ).offsetWidth - oEl.offsetWidth )
 			});
 		}

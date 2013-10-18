@@ -237,7 +237,7 @@ window.onload = function(){
 		ok( testElem.querySelector( ".sidescroll-skip-nav a" ).length !== 0 );
 	});
 
-	test( "Skip links enable/disable nav items correctly.", function(){
+	asyncTest( "Skip links enable/disable nav items correctly.", function(){
 		ok( testElem.querySelector( ".sidescroll-rwd" ).getAttribute( "class" ).indexOf( "disabled") > -1, "Rewind link starts out with `disabled` class." );
 
 /*
@@ -257,19 +257,13 @@ window.onload = function(){
 			ok( rwd && !ff, "Rewind/previous links are intially disabled." );
 		}());
 
-		(function() {
-			overthrow.toss( testElem.querySelector( ".sidescroll" ), {
-				left: overkill
-			});
-
-			console.log( testElem.querySelector( ".sidescroll" ) );
-
+		scroller.scrollLeft = overkill;
+		setTimeout(function() {
 			var rwd = testElem.querySelector( ".sidescroll-rwd" ).getAttribute( "class" ).indexOf( "disabled") > -1,
 				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
 
 			ok( !rwd && ff, "Skipping to the end disables fast-forward/previous controls." );
-		}());
-
-		ok( false, "Skipping to the start disables rewind/previous controls." );
+			start();
+		},defaultTimeout);
 	});
 };

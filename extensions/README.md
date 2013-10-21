@@ -189,10 +189,7 @@ The horizontal scrollbar at the bottom of the scrollable area can be hidden usin
 Including the disabled navigation extension with the sidescroller adds a `disabled` class to the navigation anchors when the region reaches it's ends.
 
 ```html
-	<script src="../../src/overthrow-detect.js"></script>
-	<script src="../../src/overthrow-polyfill.js"></script>
-	<script src="../../src/overthrow-toss.js"></script>
-	<script src="../../src/overthrow-init.js"></script>
+	<script src="../../dist/overthrow.js"></script>
 	<script src="../../extensions/overthrow-sidescroller.js"></script>
 
 	<!-- INCLUDE THE EXTENSION -->
@@ -205,10 +202,7 @@ Setting `rewind` to true will disable this behavior. You can view a demo at `$PR
 Including the `append` extension provides a method for gracefully handling the addition of list items to the child list
 
 ```html
-	<script src="../../src/overthrow-detect.js"></script>
-	<script src="../../src/overthrow-polyfill.js"></script>
-	<script src="../../src/overthrow-toss.js"></script>
-	<script src="../../src/overthrow-init.js"></script>
+	<script src="../../dist/overthrow.js"></script>
 	<script src="../../extensions/overthrow-sidescroller.js"></script>
 
 	<!-- INCLUDE THE EXTENSION -->

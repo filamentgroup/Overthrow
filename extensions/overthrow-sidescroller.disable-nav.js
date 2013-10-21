@@ -81,23 +81,25 @@
 		var thisSideScroll = event.overthrow.sideScroll,
 			options = event.overthrow.options || {}, rewind;
 
-		// alert the toggle nav function that it should be disabled on rewind
-		rewind = options.rewind;
+		if( options.disabledNav === true ) {
+			// alert the toggle nav function that it should be disabled on rewind
+			rewind = options.rewind;
 
-		lib.onEvent( "overthrow-scroll", thisSideScroll, toggleNavigation);
-		lib.onEvent( "overthrow-next", thisSideScroll, toggleNavigation);
-		lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigation);
-		lib.onEvent( "overthrow-refresh", thisSideScroll, toggleNavigation);
-		lib.onEvent( "overthrow-resize", thisSideScroll, toggleNavigation);
+			lib.onEvent( "overthrow-scroll", thisSideScroll, toggleNavigation);
+			lib.onEvent( "overthrow-next", thisSideScroll, toggleNavigation);
+			lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigation);
+			lib.onEvent( "overthrow-refresh", thisSideScroll, toggleNavigation);
+			lib.onEvent( "overthrow-resize", thisSideScroll, toggleNavigation);
 
-		// toggle on init to account for a small number of initial elements
-		// in fixed width scrollers
-		toggleNavigation({ target: thisSideScroll });
+			// toggle on init to account for a small number of initial elements
+			// in fixed width scrollers
+			toggleNavigation({ target: thisSideScroll });
 
-		addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
+			addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
 
-		if( rewind = thisSideScroll.querySelector("a.sidescroll-rwd") ) {
-			addClass( rewind, disabledClassStr );
+			if( rewind = thisSideScroll.querySelector("a.sidescroll-rwd") ) {
+				addClass( rewind, disabledClassStr );
+			}
 		}
 	});
 })( this, this.overthrow );

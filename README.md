@@ -37,44 +37,6 @@ Or, see below how to create a custom build with only the files you want.
 - [2-Column scrolling layout](http://filamentgroup.github.io/Overthrow/examples/2-column/)
 - [Scrolling fake dialog contents](http://filamentgroup.github.io/Overthrow/examples/dialog/)
 
-### Sidescroller
-
-#### [Simple sidescroller with momentum scrolling](http://filamentgroup.github.io/Overthrow/examples/sidescroller/)
-
-The sidescroller extension (not included by default) makes a horizontal carousel-like component of an overflow area. This provides you with carousel-like functionality, built on a system of tiered fallbacks.
-
-We’ve produced a number of self-contained extensions that alter the basic Sidescroller functionality:
-
-#### [Fixed width extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/fixed-width.html)
-
-The “fixed width” extension contains any logic required to use the Sidescroller with fixed-width child elements.
-
-#### [Snap extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/snap.html)
-
-The `snap` extension ensures that the Sidescroller’s child elements are always aligned flush with the Overthrow container.
-
-#### [Disable nav extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/disable-nav.html)
-
-Will add a `disabled` class to nav items upon reaching the start/end of a Sidescroller region.
-
-#### [Rewind extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)
-
-The `rewind` extension will allow the Sidescroller to animate back to the first child element upon navigating beyond the last element.
-
-#### [Goto extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/goto.html)
-
-The `goto` extension provides a method for programmatically scrolling to individual child elements.
-
-#### [Append extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)
-
-The `append` extension provides a method for gracefully handling the addition of child elements.
-
-A more extensive list of demos is available in the Sidescroller README.
-
-### Sidescroller README
-
-See the [README](extensions/README.md).
-
 ## Basic use
 
 First, download and reference overthrow.js from your document. Anywhere's fine.
@@ -162,6 +124,57 @@ Overthrow's `extensions` directory incudes several behavioral extensions you mig
 These both depend on `overthrow-detect.js`, `overthrow-toss.js`, and `overthrow-init.js`.
 
 
+#### Sidescroller
+
+##### [Simple sidescroller with momentum scrolling](http://filamentgroup.github.io/Overthrow/examples/sidescroller/)
+
+The sidescroller extension (not included by default) makes a horizontal carousel-like component of an overflow area. This provides you with carousel-like functionality, built on a system of tiered fallbacks. The Sidescroller area’s child elements can be fixed-width
+
+##### [Fixed width styling](http://filamentgroup.github.io/Overthrow/examples/sidescroller/fixed-width.html)
+
+##### [Variable width styling](http://filamentgroup.github.io/Overthrow/examples/sidescroller/variable.html)
+
+#### Sidescroller README
+
+See the [README](extensions/README.md).
+
+We’ve produced a number of self-contained extensions that alter the basic Sidescroller functionality:
+
+##### [Snap extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/snap.html)
+
+The `snap` extension ensures that the Sidescroller’s child elements are always aligned flush with the Overthrow container.
+
+##### [Hidden scrollbar](http://filamentgroup.github.io/Overthrow/examples/sidescroller/hiddenscrollbar.html)
+
+A small snippet of CSS that hides the Sidescroller’s sidebar, giving it a carousel-like appearance.
+
+##### [Disable nav extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/disabled-nav.html)
+
+Will add a `disabled` class to nav items upon reaching the start/end of a Sidescroller region.
+
+##### [Rewind extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)
+
+The `rewind` extension will allow the Sidescroller to animate back to the first child element upon navigating beyond the last element.
+
+##### [Goto extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/goto.html)
+
+The `goto` extension provides a method for programmatically scrolling to individual child elements.
+
+##### [Append extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/append.html)
+
+The `append` extension provides a method for gracefully handling the addition of child elements.
+
+A more extensive list of demos is available in the Sidescroller README.
+
+#### Functional tests
+
+##### [Two basic sidescrollers](http://filamentgroup.github.io/Overthrow/test/functional/sidescroller/kitchensink.html)
+
+Two simple Sidescroller elements on a single page, ensuring that there are no conflicts or overlaps in the logic between the two.
+
+##### [Kitchen sink](http://filamentgroup.github.io/Overthrow/test/functional/sidescroller/kitchensink.html)
+
+All of the above Sidescroller demos on a single page.
 
 ## Browser Support
 

@@ -29,27 +29,47 @@
 	
 </head>
 <body>
-	
-		<p>Basic side-scroller w/arrows</p>
-		
-		<div class="sidescroll-nextprev">
-			<div class="overthrow sidescroll">
-					<ul>
-						<li><img src="img/angkor.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monkey.jpg"></li>
-						<li><img src="img/monks.jpg"></li>
-					</ul>
-			</div>
-		</div>
 
-		<script>
-			overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {snapScroll:true} );
-		</script>
+	<h1>Variable width Sidescroller items</h1>
+
+	<code><pre>	.overthrow-enabled .sidescroll ul {
+	width: 800%;
+}
+@media (min-width: 40em){
+	.overthrow-enabled .sidescroll ul {
+		width: 400%;
+	}
+}
+@media (min-width: 60em){
+	.overthrow-enabled .sidescroll ul {
+		width: 200%;
+	}
+}</pre></code>
+
+	<p>One Sidescroller item is shown at a time given a browser window smaller than 40em. Eight items occupying a container set to 800% of the available Sidescroller “viewport,” leaving one visible at a time.</p>
+	
+	<p>Two Sidescroller items are shown at a time given a browser window smaller than than 60em. Eight items occupying a container set to 400% of the available Sidescroller “viewport,” leaving two visible at a time.</p>
+
+	<p>Four items are shown at a time given a browser window larger than 60em. Eight itemsm occupying a container set to 200% of the available Sidescroller “viewport,” leaving four visible at a time.</p>
+
+	<div class="sidescroll-nextprev">
+		<div class="overthrow sidescroll">
+			<ul>
+				<li><img src="img/angkor.jpg"></li>
+				<li><img src="img/monkey.jpg"></li>
+				<li><img src="img/monks.jpg"></li>
+				<li><img src="img/monkey.jpg"></li>
+				<li><img src="img/monks.jpg"></li>
+				<li><img src="img/monkey.jpg"></li>
+				<li><img src="img/monkey.jpg"></li>
+				<li><img src="img/monks.jpg"></li>
+			</ul>
+		</div>
+	</div>
+
+	<script>
+		overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {snapScroll:true} );
+	</script>
 
 </body>
 </html>

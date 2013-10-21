@@ -6,28 +6,33 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href="demo.css" rel="stylesheet">
 	<style>
-		body {
-			max-width: 55em;
-		}
 		.overthrow-enabled .overthrow {
-			overflow-x: scroll;
-			overflow-y: hidden;
 			-webkit-overflow-scrolling: touch;
 		}
-
-		.overthrow.sidescroll li {
-			width: 200px;
+	    .overthrow-enabled .sidescroll ul {
+			width: 800%;
+		}
+		@media (min-width: 40em){
+			.overthrow-enabled .sidescroll ul {
+				width: 400%;
+			}
+		}
+		@media (min-width: 60em){
+			.overthrow-enabled .sidescroll ul {
+				width: 200%;
+			}
 		}
 
-		.sidescroll-nextprev .sidescroll-nextprev-links a {
-			opacity: 0.9;
+		.sidescroll-nextprev {
+			overflow: hidden;
+		}
+		.sidescroll-nextprev .sidescroll {
+			margin-top: -50px;
+			padding-bottom: 50px;
+			bottom: -50px;
+			position: relative;
 		}
 
-		.sidescroll-nextprev .sidescroll-nextprev-links a.disabled {
-			opacity: 0.7;
-			pointer-events: none;
-			background-color: gray;
-		}
 		h1 {
 			font-size: 1.6em;
 		}
@@ -37,12 +42,21 @@
 	<script src="../../src/overthrow-toss.js"></script>
 	<script src="../../src/overthrow-init.js"></script>
 	<script src="../../extensions/overthrow-sidescroller.js"></script>
-	<script src="../../extensions/overthrow-sidescroller.disable-nav.js"></script>
+	
 </head>
 <body>
-	<h1>Fixed-width Sidescroller items</h1>
-	<code><pre>.overthrow.sidescroll li {
-	width: 200px;
+
+	<h1>Hidden scrollbar</h1>
+	<p>The Sidescroller’s scrollbar can be hidden through application of the following CSS:</p>
+
+<code><pre>.sidescroll-nextprev {
+  overflow: hidden;
+}
+.sidescroll-nextprev .sidescroll {
+  margin-top: -50px;
+  padding-bottom: 50px;
+  bottom: -50px;
+  position: relative;
 }</pre></code>
 
 	<div class="sidescroll-nextprev">
@@ -61,7 +75,8 @@
 	</div>
 
 	<script>
-		overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), {fixedItemWidth: true} );
+		overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ) );
 	</script>
+
 </body>
 </html>

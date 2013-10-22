@@ -139,7 +139,7 @@ The sidescroller extension (not included by default) makes a horizontal carousel
 
 See the [README](extensions/README.md).
 
-We’ve produced a number of self-contained extensions that alter the basic Sidescroller functionality:
+We’ve produced a number of self-contained extensions that add to or alter the basic Sidescroller functionality:
 
 <ul> 
     <li>
@@ -150,16 +150,6 @@ We’ve produced a number of self-contained extensions that alter the basic Side
     <li>
         *[Hidden scrollbar](http://filamentgroup.github.io/Overthrow/examples/sidescroller/hiddenscrollbar.html)*
         A small snippet of CSS that hides the Sidescroller’s sidebar, giving it a carousel-like appearance.
-    </li>
-    <li>
-        *[Disable nav extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/disabled-nav.html)*
-
-        Will add a `disabled` class to nav items upon reaching the start/end of a Sidescroller region.
-    </li>
-    <li>
-        *[Rewind extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)*
-
-        The `rewind` extension will allow the Sidescroller to animate back to the first child element upon navigating beyond the last element.
     </li>
     <li>
         *[Goto extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/goto.html)*
@@ -175,6 +165,21 @@ We’ve produced a number of self-contained extensions that alter the basic Side
         *[Skiplink extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/skiplinks.html)*
 
         The `skiplink` extension adds controls that allow the user to skip to the start/end of Sidescroller.
+    </li>
+</ul>
+
+By default, the Sidescroller controls will do nothing at the start/end of navigation. There are two methods for changing this behavior:
+
+<ul>
+    <li>
+        *[Disable nav extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/disabled-nav.html)*
+
+        Will add a `disabled` class to nav items upon reaching the start/end of a Sidescroller region.
+    </li>
+    <li>
+        *[Rewind extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)*
+
+        The `rewind` extension will allow the Sidescroller to animate back to the first child element upon navigating beyond the last element.
     </li>
 </ul>
 

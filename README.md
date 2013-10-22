@@ -131,8 +131,12 @@ These both depend on `overthrow-detect.js`, `overthrow-toss.js`, and `overthrow-
 The sidescroller extension (not included by default) makes a horizontal carousel-like component of an overflow area. This provides you with carousel-like functionality, built on a system of tiered fallbacks. The Sidescroller area’s child elements can be fixed-width
 
 <ul> 
-    <li>[Fixed width styling](http://filamentgroup.github.io/Overthrow/examples/sidescroller/fixed-width.html)</li>
-    <li>[Variable width styling](http://filamentgroup.github.io/Overthrow/examples/sidescroller/variable.html)</li>
+    <li>
+        <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/fixed-width.html">Fixed width styling</a></h5>
+    </li>
+    <li>
+        <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/variable.html">Variable width styling</a></h5>
+    </li>
 </ul>
 
 #### Sidescroller README
@@ -143,27 +147,23 @@ We’ve produced a number of self-contained extensions that add to or alter the 
 
 <ul> 
     <li>
-        *[Snap extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/snap.html)*
-
+        <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/snap.html">Snap extension</a></h5>
         The `snap` extension ensures that the Sidescroller’s child elements are always aligned flush with the Overthrow container when scrolling ends.
     </li>
     <li>
-        *[Hidden scrollbar](http://filamentgroup.github.io/Overthrow/examples/sidescroller/hiddenscrollbar.html)*
+        <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/hiddenscrollbar.html">Hidden scrollbar</a></h5>
         A small snippet of CSS that hides the Sidescroller’s sidebar, giving it a carousel-like appearance.
     </li>
     <li>
-        *[Goto extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/goto.html)*
-
+        <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/goto.html">Goto extension</a></h5>
         The `goto` extension provides a method for programmatically scrolling to individual child elements.
     </li>
     <li>
-        *[Append extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/append.html)*
-
+        <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/append.html">Append extension</a></h5>
         The `append` extension provides a method for gracefully handling the addition of child elements.
     </li>
      <li>
-        *[Skiplink extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/skiplinks.html)*
-
+        <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/skiplinks.html">Skiplink extension</a></h5>
         The `skiplink` extension adds controls that allow the user to skip to the start/end of Sidescroller.
     </li>
 </ul>

@@ -328,11 +328,11 @@
 					if( overthrow.tossing ){
 						return;
 					}
-					if( scrollStart === false ){
-						scrollStart = thisScroll.scrollLeft;
-					}
 					clearTimeout( debouncedos );
 					debouncedos = setTimeout(function(){
+						if( scrollStart === false ){
+							scrollStart = thisScroll.scrollLeft;
+						}
 						if( snapScroll ){
 							handleSnap( e );
 						} else {

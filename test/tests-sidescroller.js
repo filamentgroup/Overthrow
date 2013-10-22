@@ -14,9 +14,9 @@ window.onload = function(){
 		overthrow.sidescroller( [testElem], opts || {fixedItemWidth: true} );
 	}
 
-	module( "disabled nav",
+	module( "disabled nav", {
 		setup: function() {
-			
+			setup({ fixedItemWidth: true, disableNav: true });
 		}
 	});
 
@@ -76,8 +76,8 @@ window.onload = function(){
 			next = nextDisabled();
 
 			// both buttons should be "clickable"
-			equal( prev.length, 0 );
-			equal( next.length, 0 );
+			equal( prev.length, 0, "Prev link is clickable" );
+			equal( next.length, 0, "Next link is clickable" );
 			start();
 		}, defaultTimeout);
 	});
@@ -86,7 +86,7 @@ window.onload = function(){
 
 	module( "append method", {
 		setup: function(){
-			setup();
+			setup({ fixedItemWidth: true, disableNav: true });
 
 			var img = document.createElement( "img");
 
@@ -232,7 +232,7 @@ window.onload = function(){
 
 	module( "skip links", {
 		setup: function() {
-			setup( {fixedItemWidth: true, snapScroll: true, skipLinks: true} );
+			setup({ disableNav: true, fixedItemWidth: true, snapScroll: true, skipLinks: true });
 		}
 	});
 
@@ -244,16 +244,6 @@ window.onload = function(){
 	asyncTest( "Skip links enable/disable nav items correctly.", function(){
 		ok( testElem.querySelector( ".sidescroll-rwd" ).getAttribute( "class" ).indexOf( "disabled") > -1, "Rewind link starts out with `disabled` class." );
 
-/*
-		(function() {
-			var rwd = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1,
-				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
-
-		//	console.log( scroller ); // Getting the class, but the styles aren’t applying?
-
-			ok( rwd && ff, "Both skip links are disabled if there’s only one “page” of slides." );
-		}());
-*/
 		(function() {
 			var rwd = testElem.querySelector( ".sidescroll-rwd" ).getAttribute( "class" ).indexOf( "disabled") > -1,
 				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;

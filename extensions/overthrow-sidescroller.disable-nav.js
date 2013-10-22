@@ -81,7 +81,7 @@
 		var thisSideScroll = event.overthrow.sideScroll,
 			options = event.overthrow.options || {}, rewind;
 
-		if( options.disabledNav === true ) {
+		if( options.disableNav === true ) {
 			// alert the toggle nav function that it should be disabled on rewind
 			rewind = options.rewind;
 
@@ -96,10 +96,6 @@
 			toggleNavigation({ target: thisSideScroll });
 
 			addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
-
-			if( rewind = thisSideScroll.querySelector("a.sidescroll-rwd") ) {
-				addClass( rewind, disabledClassStr );
-			}
 		}
 	});
 })( this, this.overthrow );

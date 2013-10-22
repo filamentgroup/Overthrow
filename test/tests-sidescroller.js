@@ -257,7 +257,7 @@ window.onload = function(){
 				ff = testElem.querySelector( ".sidescroll-ff" ).getAttribute( "class" ).indexOf( "disabled") > -1;
 
 			ok( !rwd && ff, "Skipping to the end disables fast-forward/previous controls." );
-			start();
 		},defaultTimeout);
+		start();
 	});
 };

@@ -145,7 +145,7 @@ We’ve produced a number of self-contained extensions that alter the basic Side
     <li>
         *[Snap extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/snap.html)*
 
-        The `snap` extension ensures that the Sidescroller’s child elements are always aligned flush with the Overthrow container.
+        The `snap` extension ensures that the Sidescroller’s child elements are always aligned flush with the Overthrow container when scrolling ends.
     </li>
     <li>
         *[Hidden scrollbar](http://filamentgroup.github.io/Overthrow/examples/sidescroller/hiddenscrollbar.html)*
@@ -157,7 +157,7 @@ We’ve produced a number of self-contained extensions that alter the basic Side
         Will add a `disabled` class to nav items upon reaching the start/end of a Sidescroller region.
     </li>
     <li>
-        *[Rewind extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)**
+        *[Rewind extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)*
 
         The `rewind` extension will allow the Sidescroller to animate back to the first child element upon navigating beyond the last element.
     </li>
@@ -167,9 +167,14 @@ We’ve produced a number of self-contained extensions that alter the basic Side
         The `goto` extension provides a method for programmatically scrolling to individual child elements.
     </li>
     <li>
-        *[Append extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/append.html)**
+        *[Append extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/append.html)*
 
         The `append` extension provides a method for gracefully handling the addition of child elements.
+    </li>
+     <li>
+        *[Skiplink extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/skiplinks.html)*
+
+        The `skiplink` extension adds controls that allow the user to skip to the start/end of Sidescroller.
     </li>
 </ul>
 
@@ -178,7 +183,7 @@ A more extensive list of demos is available in the Sidescroller README.
 #### Functional tests
 <ul>
     <li>
-        *[Two basic sidescrollers](http://filamentgroup.github.io/Overthrow/test/functional/sidescroller/kitchensink.html)**
+        *[Two basic sidescrollers](http://filamentgroup.github.io/Overthrow/test/functional/sidescroller/two-test.html)**
 
         Two simple Sidescroller elements on a single page, ensuring that there are no conflicts or overlaps in the logic between the two.
     </li>

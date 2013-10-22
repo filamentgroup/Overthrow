@@ -7,21 +7,36 @@
 	<link href="../../../examples/sidescroller/demo.css" rel="stylesheet">
 	<style>
 		.overthrow-enabled .overthrow {
-	        -webkit-overflow-scrolling: touch;
-	    }
-
-	    .overthrow-enabled .sidescroll ul {
-			width: 300%;
+			-webkit-overflow-scrolling: touch;
+		}
+		.overthrow-enabled .sidescroll ul {
+			width: 800%;
+		}
+		@media (min-width: 40em){
+			.overthrow-enabled .sidescroll ul {
+				width: 400%;
+			}
 		}
 		@media (min-width: 60em){
 			.overthrow-enabled .sidescroll ul {
-				width: 100%;
+				width: 200%;
 			}
 		}
 
+		.append-demo .overthrow.sidescroll li {
+			width: 200px !important;
+		}
+
+		.sidescroll-nextprev.skiplinks .sidescroll-next {
+			right: 2.75em !important;
+		}
+		.sidescroll-nextprev.skiplinks .sidescroll-prev {
+			left: 2.75em !important;
+		}
 		.disabled {
 			opacity: .5;
 		}
+
 		h1 {
 			font-size: 1.6em;
 		}
@@ -43,7 +58,7 @@
 
 	<code>overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .sidescroll-nextprev" ), { snapScroll: true });</code>
 
-	<div class="snap">
+	<div class="sidescroll-nextprev snap">
 		<div class="overthrow sidescroll ">
 			<ul>
 				<li><img src="../../../examples/sidescroller/img/angkor.jpg"></li>
@@ -64,8 +79,9 @@
 
 	<h1><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/disabled-nav.html">Disable nav extension</a></h1>
 	<p>Will add a <code>disabled</code> class to nav items upon reaching the start/end of a Sidescroller region.</p>
+	<code>overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .disable-nav" ), { disabledNav: true });</code>
 
-	<div class="disable-nav">
+	<div class="sidescroll-nextprev disable-nav">
 		<div class="overthrow sidescroll ">
 			<ul>
 				<li><img src="../../../examples/sidescroller/img/angkor.jpg"></li>
@@ -84,10 +100,11 @@
 		overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .disable-nav" ), { disabledNav: true });
 	</script>
 
-	<h1><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/goto.html">Rewind extension</a></h1>
-	<p>The <code>rewind</code> extension will allow the Sidescroller to animate back to the first child element upon navigating beyond the last element.</p>
+	<h1><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/skiplinks.html">Skiplinks extension</a></h1>
+	<p>The <code>skiplink</code> extension adds controls that allow the user to skip to the start/end of Sidescroller.</p>
+	<code>overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .skiplinks" ), { skipLinks: true });</code>
 
-	<div class="disable-nav">
+	<div class="sidescroll-nextprev skiplinks">
 		<div class="overthrow sidescroll ">
 			<ul>
 				<li><img src="../../../examples/sidescroller/img/angkor.jpg"></li>
@@ -103,14 +120,43 @@
 	</div>
 
 	<script>
-		overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .disable-nav" ), { rewind: true });
+		overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .skiplinks" ), { skipLinks: true });
+	</script>
+
+	<h1><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html">Rewind extension</a></h1>
+	<p>The <code>rewind</code> extension will allow the Sidescroller to animate back to the first child element upon navigating beyond the last element.</p>
+	<code>overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .rewind" ), { rewind: true });</code>
+
+	<div class="sidescroll-nextprev rewind">
+		<div class="overthrow sidescroll ">
+			<ul>
+				<li><img src="../../../examples/sidescroller/img/angkor.jpg"></li>
+				<li><img src="../../../examples/sidescroller/img/monkey.jpg"></li>
+				<li><img src="../../../examples/sidescroller/img/monks.jpg"></li>
+				<li><img src="../../../examples/sidescroller/img/monkey.jpg"></li>
+				<li><img src="../../../examples/sidescroller/img/monks.jpg"></li>
+				<li><img src="../../../examples/sidescroller/img/monkey.jpg"></li>
+				<li><img src="../../../examples/sidescroller/img/angkor.jpg"></li>
+				<li><img src="../../../examples/sidescroller/img/monkey.jpg"></li>
+			</ul>
+		</div>
+	</div>
+
+	<script>
+		overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .rewind" ), { rewind: true });
 	</script>
 
 	<h1><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/goto.html">Goto extension</a></h1>
 	<p>The <code>goto</code> extension provides a method for programmatically scrolling to individual child elements.</p>
+<code><pre>overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .goto-nav" ), { snapScroll: true });
+document.querySelector( "a.goto" ).onclick = function( e ){
+	overthrow.sidescroller( document.querySelectorAll( ".overthrow-enabled .goto-nav" ), "goTo", 3 );
+	e.preventDefault();
+}</pre>
+</code>
 
 	<a href="#" class="goto">Skip to the third slide</a>
-	<div class="goto-nav">
+	<div class="sidescroll-nextprev goto-nav">
 		<div class="overthrow sidescroll ">
 			<ul>
 				<li><img src="../../../examples/sidescroller/img/angkor.jpg"></li>
@@ -133,10 +179,13 @@
 		}
 	</script>
 
-	<h1>Append extension</h1>
-	<p>The `append` extension provides a method for gracefully handling the addition of child elements.</p>
+	<h1><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/append.html">Append extension</a></h1>
+	<p>The `append` extension provides a method for gracefully handling the addition and removal of child elements.</p>
+<code><pre>
+		
+</pre></code>
 	
-	<div class="append-demo">
+	<div class="sidescroll-nextprev append-demo">
 		<div class="overthrow sidescroll">
 			<ul>
 				<li><img src="../../../examples/sidescroller/img/angkor.jpg"></li>
@@ -156,8 +205,7 @@
 	<script>
 		var scrollers = document.querySelectorAll( ".overthrow-enabled .append-demo" );
 
-		console.log( scrollers );
-		overthrow.sidescroller( scrollers );
+		overthrow.sidescroller( scrollers, { fixedItemWidth: true });
 
 		document.querySelector( "a.append" ).onclick = function( e ){
 			var li = document.createElement( "li" ),

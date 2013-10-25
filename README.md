@@ -188,12 +188,11 @@ A more extensive list of demos is available in the Sidescroller README.
 #### Functional tests
 <ul>
     <li>
-        *[Two basic sidescrollers](http://filamentgroup.github.io/Overthrow/test/functional/sidescroller/two-test.html)**
-
+        <a href="http://filamentgroup.github.io/Overthrow/test/functional/sidescroller/two-test.html">Two basic sidescrollers</a>
         Two simple Sidescroller elements on a single page, ensuring that there are no conflicts or overlaps in the logic between the two.
     </li>
     <li>
-        *[Kitchen sink](http://filamentgroup.github.io/Overthrow/test/functional/sidescroller/kitchensink.html)*
+        <a href="http://filamentgroup.github.io/Overthrow/test/functional/sidescroller/kitchensink.html">Kitchen sink</a>
         All of the above Sidescroller demos on a single page.
     </li>
 </ul>

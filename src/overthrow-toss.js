@@ -39,12 +39,10 @@
 				top: "+0",
 				left: "+0",
 				duration: 50,
-				easing: o.easing
+				easing: o.easing,
+				finished: function() {}
 			},
 			endLeft, endTop, finished = false;
-
-		// use a no-op for the finished callback
-		options.finished = options.finished || function() {};
 
 		// Mixin based on predefined defaults
 		if( options ){
@@ -90,7 +88,7 @@
 					// we know that we're done here call the callback
 					// otherwise signal that horizontal scrolling is complete
 					if( finished ) {
-						options.finished();
+						op.finished();
 					}
 					finished = true;
 				}
@@ -101,7 +99,7 @@
 					// if the end of the horizontal scrolling has taken place
 					// we know that we're done here call the callback
 					if( finished ) {
-						options.finished();
+						op.finished();
 					}
 					finished = true;
 				}

@@ -64,6 +64,11 @@
 
 		var newActive = scroller.getActiveSlides( newScroll );
 
+		sendEvent( scroller,
+			"before-goto.overthrow",
+			goto,
+			thisScroll.ieID );
+
 		overthrow.toss( thisScroll, {
 			left: newScroll,
 			easing: options.easing,

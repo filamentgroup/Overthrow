@@ -1,6 +1,9 @@
 
 (function(w, overthrow) {
-	var lib = overthrow.sidescroller;
+	var lib = overthrow.sidescroller,
+		beforeEvt = "overthrow-before-goto",
+		evt = "overthrow-goto";
+
 	function sendEvent( elem, evt, args, ieID ){
 		// TODO needs IE8 support
 		if( document.createEvent ){
@@ -65,18 +68,18 @@
 		var newActive = scroller.getActiveSlides( newScroll );
 
 		sendEvent( scroller,
-			"before-goto.overthrow",
+			beforeEvt,
 			goto,
-			thisScroll.ieID );
+			scroller.ieID );
 
 		overthrow.toss( thisScroll, {
 			left: newScroll,
 			easing: options.easing,
 			finished: function() {
 				sendEvent( scroller,
-					"goto.overthrow",
+					evt,
 					goto,
-					thisScroll.ieID );
+					scroller.ieID );
 			}
 		});
 	}
@@ -84,6 +87,15 @@
 	lib.onEvent( "overthrow-init", w.document.documentElement, function( event ) {
 		var scroller = event.overthrow.sideScroll,
 			options = event.overthrow.options || {};
+
+		// register the events
+		if( w.document.attachEvent ){
+			w.document.documentElement[ evt ] = 0;
+			w.document.documentElement[ beforeEvt ] = 0;
+
+			w.document.documentElement[ scroller.ieID ][ evt ] = {};
+			w.document.documentElement[ scroller.ieID ][ beforeEvt ] = {};
+		}
 
 		lib.onEvent( "overthrow-method", scroller, goTo);
 	});

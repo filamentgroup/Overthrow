@@ -12,30 +12,33 @@
 		element.setAttribute( "class", element.getAttribute( "class" ).replace( classStr, "" ));
 	}
 
-	function toggleNavigation( event ) {
+	function toggleNavigationEvent( event ) {
+		event = event || w.event;
+
+		// if this comes from a click or a snap use the active pages
+		// calculation provided as an event property, otherwise use
+		// the scroll calculation
+		toggleNavigation( event.target || event.srcElement, event && event.overthrow && event.overthrow.active );
+	}
+
+	function toggleNavigation( target, active, useActiveSlide ) {
 		if( rewind ) {
 			return;
 		}
 
 		var disablePrev = false, disableNext = false,
-				active, slides, slidesWidth, currScroll, scrollWidth,
-				target, nextAnchor, prevAnchor, thisScroll, rwdAnchor, ffAnchor;
+				slides, slidesWidth, currScroll, scrollWidth, activeSlide,
+				nextAnchor, prevAnchor, thisScroll, rwdAnchor, ffAnchor;
 
-		event = event || w.event;
-		target = event.target || event.srcElement;
 
 		nextAnchor = target.querySelector( "a.sidescroll-next" );
 		prevAnchor = target.querySelector( "a.sidescroll-prev" );
 		rwdAnchor = target.querySelector( "a.sidescroll-rwd" );
 		ffAnchor = target.querySelector( "a.sidescroll-ff" );
-
+		activeSlide = target.querySelector( "li.active" );
 		thisScroll = target.querySelector( ".overthrow" );
 
-		// if this comes from a click or a snap use the active pages
-		// calculation provided as an event property, otherwise use
-		// the scroll calculation
-		// NOTE the assignment is deliberate
-		if( active = (event && event.overthrow && event.overthrow.active) ) {
+		if( active ) {
 			slides = thisScroll.querySelectorAll( "li" );
 
 			disablePrev = (active[0] == 0);
@@ -45,7 +48,11 @@
 			currScroll = thisScroll.scrollLeft,
 			scrollWidth = thisScroll.scrollWidth - slidesWidth;
 
-			disablePrev = currScroll < 5;
+			if( useActiveSlide && activeSlide ) {
+				disablePrev = !activeSlide.previousElementSibling;
+			} else {
+				disablePrev = currScroll < 5;
+			}
 			disableNext = currScroll > scrollWidth - 5;
 		}
 
@@ -79,23 +86,29 @@
 
 	lib.onEvent( "overthrow-init", w.document.documentElement, function( event ) {
 		var thisSideScroll = event.overthrow.sideScroll,
-			options = event.overthrow.options || {}, rewind;
+			options = event.overthrow.options || {}, rewind, rwdButton;
 
 		if( options.disableNav === true ) {
 			// alert the toggle nav function that it should be disabled on rewind
 			rewind = options.rewind;
 
-			lib.onEvent( "overthrow-scroll", thisSideScroll, toggleNavigation);
-			lib.onEvent( "overthrow-next", thisSideScroll, toggleNavigation);
-			lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigation);
-			lib.onEvent( "overthrow-refresh", thisSideScroll, toggleNavigation);
-			lib.onEvent( "overthrow-resize", thisSideScroll, toggleNavigation);
+			lib.onEvent( "overthrow-scroll", thisSideScroll, toggleNavigationEvent);
+			lib.onEvent( "overthrow-next", thisSideScroll, toggleNavigationEvent);
+			lib.onEvent( "overthrow-prev", thisSideScroll, toggleNavigationEvent);
+			lib.onEvent( "overthrow-refresh", thisSideScroll, toggleNavigationEvent);
+			lib.onEvent( "overthrow-resize", thisSideScroll, toggleNavigationEvent);
 
 			// toggle on init to account for a small number of initial elements
 			// in fixed width scrollers
-			toggleNavigation({ target: thisSideScroll });
+			toggleNavigationEvent({ target: thisSideScroll });
 
 			addClass(thisSideScroll.querySelector( "a.sidescroll-prev"), disabledClassStr );
+
+			if( rwdButton = thisSideScroll.querySelector( "a.sidescroll-rwd") ){
+				addClass(rwdButton, disabledClassStr );
+			}
 		}
 	});
+
+	lib._toggleNavigation = toggleNavigation;
 })( this, this.overthrow );

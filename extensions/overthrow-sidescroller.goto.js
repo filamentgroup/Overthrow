@@ -56,22 +56,24 @@
 			newScroll = slideWidth * newSlide,
 			scrollWidth = thisScroll.scrollWidth - slidesWidth;
 
-			if( newScroll < 0 ){
-				newScroll = 0;
-			} else if( newScroll > scrollWidth ){
-				newScroll = scrollWidth;
+		if( newScroll < 0 ){
+			newScroll = 0;
+		} else if( newScroll > scrollWidth ){
+			newScroll = scrollWidth;
+		}
+
+		var newActive = scroller.getActiveSlides( newScroll );
+
+		overthrow.toss( thisScroll, {
+			left: newScroll,
+			easing: options.easing,
+			finished: function() {
+				sendEvent( scroller,
+					"goto.overthrow",
+					goto,
+					thisScroll.ieID );
 			}
-			var newActive = scroller.getActiveSlides( newScroll );
-
-			overthrow.toss( thisScroll, {
-				left: newScroll,
-				easing: options.easing
-			});
-
-			sendEvent( scroller,
-				"goto.overthrow",
-				goto,
-				thisScroll.ieID );
+		});
 	}
 
 	lib.onEvent( "overthrow-init", w.document.documentElement, function( event ) {

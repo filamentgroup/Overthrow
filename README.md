@@ -172,13 +172,11 @@ By default, the Sidescroller controls will do nothing at the start/end of naviga
 
 <ul>
     <li>
-        *[Disable nav extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/disabled-nav.html)*
-
+        <a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/disabled-nav.html">Disable nav extension</a>
         Will add a `disabled` class to nav items upon reaching the start/end of a Sidescroller region.
     </li>
     <li>
-        *[Rewind extension](http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html)*
-
+        <a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/rewind.html">Rewind extension</a>
         The `rewind` extension will allow the Sidescroller to animate back to the first child element upon navigating beyond the last element.
     </li>
 </ul>

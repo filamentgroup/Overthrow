@@ -27,9 +27,7 @@ The goals of Overthrow are simple: create a reliable way to safely use CSS overf
 
 ## Download
 
-You can grab the latest build of all core overthrow.js files in the `dist` folder: [https://github.com/filamentgroup/Overthrow/blob/master/dist/overthrow.js](https://github.com/filamentgroup/Overthrow/blob/master/dist/overthrow.js)
-
-Or, see below how to create a custom build with only the files you want.
+You can grab the latest of the core and extensions on the [releases pages](https://github.com/filamentgroup/Overthrow/releases), or see how to do a custom build below.
 
 ## Demos
 
@@ -130,7 +128,7 @@ These both depend on `overthrow-detect.js`, `overthrow-toss.js`, and `overthrow-
 
 The sidescroller extension (not included by default) makes a horizontal carousel-like component of an overflow area. This provides you with carousel-like functionality, built on a system of tiered fallbacks. The Sidescroller area’s child elements can be fixed-width
 
-<ul> 
+<ul>
     <li>
         <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/fixed-width.html">Fixed width styling</a></h5>
     </li>
@@ -145,7 +143,7 @@ See the [README](extensions/README.md).
 
 We’ve produced a number of self-contained extensions that add to or alter the basic Sidescroller functionality:
 
-<ul> 
+<ul>
     <li>
         <h5><a href="http://filamentgroup.github.io/Overthrow/examples/sidescroller/snap.html">Snap extension</a></h5>
         The `snap` extension ensures that the Sidescroller’s child elements are always aligned flush with the Overthrow container when scrolling ends.

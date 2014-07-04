@@ -32,9 +32,9 @@
 		// If nativeOverflow or it doesn't look like the browser canBeFilledWithPoly, our job is done here. Exit viewport left.
 		if( enabled || nativeOverflow || !canBeFilledWithPoly ){
 			return;
-		}
+		};
 
-		w.overthrow.addClass();
+		o.addClass();
 
 		enabled = true;
 

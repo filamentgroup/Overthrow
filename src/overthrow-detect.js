@@ -53,41 +53,41 @@
 			})();
 
 	// Expose overthrow API
-	w.overthrow = {};
+	var overthrow = w.overthrow = {};
 
-	w.overthrow.enabledClassName = enabledClassName;
+	overthrow.enabledClassName = enabledClassName;
 
-	w.overthrow.addClass = function(){
-		if( docElem.className.indexOf( w.overthrow.enabledClassName ) === -1 ){
-			docElem.className += " " + w.overthrow.enabledClassName;
+	overthrow.addClass = function(){
+		if( docElem.className.indexOf( overthrow.enabledClassName ) === -1 ){
+			docElem.className += " " + overthrow.enabledClassName;
 		}
 	};
 
-	w.overthrow.removeClass = function(){
-		docElem.className = docElem.className.replace( w.overthrow.enabledClassName, "" );
+	overthrow.removeClass = function(){
+		docElem.className = docElem.className.replace( overthrow.enabledClassName, "" );
 	};
 
 	// Enable and potentially polyfill overflow
-	w.overthrow.set = function(){
+	overthrow.set = function(){
 			
 		// If nativeOverflow or at least the element canBeFilledWithPoly, add a class to cue CSS that assumes overflow scrolling will work (setting height on elements and such)
 		if( nativeOverflow ){
-			w.overthrow.addClass();
+			overthrow.addClass();
 		}
 
 	};
 
 	// expose polyfillable 
-	w.overthrow.canBeFilledWithPoly = canBeFilledWithPoly;
+	overthrow.canBeFilledWithPoly = canBeFilledWithPoly;
 
 	// Destroy everything later. If you want to.
-	w.overthrow.forget = function(){
+	overthrow.forget = function(){
 
-		w.overthrow.removeClass();
+		overthrow.removeClass();
 		
 	};
 		
 	// Expose overthrow API
-	w.overthrow.support = nativeOverflow ? "native" : "none";
+	overthrow.support = nativeOverflow ? "native" : "none";
 		
 })( this );

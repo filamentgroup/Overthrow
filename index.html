@@ -5,13 +5,13 @@
 	<title>Overthrow</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<style>
-	    /* Overthrow CSS:
-		   Enable overflow: auto on elements with overthrow class when html element has overthrow-enabled class */
-	    .overthrow-enabled .overthrow {
-	        overflow: auto;
-	        -webkit-overflow-scrolling: touch;
-	        z-index: 0
-	    }
+		/* Overthrow CSS:
+		 Enable overflow: auto on elements with overthrow class when html element has overthrow-enabled class */
+		.overthrow-enabled .overthrow {
+			overflow: auto;
+			-webkit-overflow-scrolling: touch;
+			z-index: 0
+		}
 		.overthrow-enabled #content.overthrow {
 			height: 14em;
 		}
@@ -61,7 +61,7 @@
 			display: inline-block;
 			letter-spacing: -0.03em;
 			padding-right: .07em;
-			
+
 		}
 		.version {
 			background: orange;
@@ -129,7 +129,7 @@
 		}
 		#content p, #content li {
 			line-height: 1.5;
-			
+
 		}
 		#content li {
 			margin-bottom: 1em;
@@ -153,7 +153,7 @@
 		}
 		#browserstatus {
 			text-align: center;
-			
+
 		}
 		#browserstatus p {
 			display: inline-block;
@@ -173,9 +173,9 @@
 		}
 		#browserstatus p.none strong, span.none {
 			background: red;
-			
+
 		}
-		
+
 		table {
 			width: 100%;
 			border-collapse: collapse;
@@ -192,7 +192,7 @@
 			border-radius: .3em;
 			display: inline-block;
 		}
-		
+
 		input, select, textarea, label, button {
 			font-size: 1.2em;
 			padding: .3em;
@@ -214,14 +214,14 @@
 			text-align: center;
 		}
 		#nav ul {
-		max-width: 43em;
-		padding: 0;
-		margin: 0 auto;
+			max-width: 43em;
+			padding: 0;
+			margin: 0 auto;
 		}
 		#nav ul, #nav li {
 			display: block;
 			list-style: none;
-		}	
+		}
 		#nav li {
 			font-size: .9em;
 			text-align: center;
@@ -245,7 +245,7 @@
 			margin: 0 auto;
 		}
 
-		
+
 		@media (min-width: 40em){
 			.version {
 				font-size: .2em;
@@ -295,68 +295,67 @@
 <body>
 	<div id="header">
 		<p>Crafted with care by Scott@<a href="http://filamentgroup.com">Filament Group</a></p>
-		
 	</div>
-	
- 	<h1 class="project-hed"><i>Overthrow</i> <span class="version" title="Initial development release">0.2.1</span></h1> 
-	
+
+	<h1 class="project-hed"><i>Overthrow</i> <span class="version" title="Initial development release">0.2.1</span></h1>
+
 
 	<div id="content" class="overthrow">
-		
-		  <p id="top" class="project-sub">A <em><span title="1.6kb min/gz">tiny</span>, no-frills, framework-independent, targeted</em> <code>overflow: auto</code> polyfill for use in responsive design.</p>
-	
-		  
-		  <p id="toggleContain" class="code"></p>
-		 
-		  <h2 id="wat">What is this all about?</h2>
-		  
-		  <p>You want to use CSS <code>overflow</code> in your designs, but <code>overflow</code> doesn't work properly in many browsers, particularly mobile ones. Many popular mobile browsers treat <code>overflow: auto</code> the same as <code>overflow: hidden</code>, cropping overflow content from view, and leaving users no way to access it.</p>
-		  
-		  <p>But wait - many browsers actually support <code>overflow</code> very well! In particular, desktop browsers tend to support it without a hitch, and many of the latest versions of most mobile platforms do too. The trouble is, it's hard – perhaps impossible – to test for <code>overflow</code> support, and even if we could use it safely where supported, many popular browsers lack that support and would be left with a degraded experience.</p>
-		  
-		  <h2 id="wat-overthrow">What is Overthrow?</h2>
-		  
-		  <p>Overthrow is a conservative attempt at filling the gaps in <code>overflow</code> support, with an emphasis on letting native implementations do their thing, and in touch-supporting browsers, providing a very minimal polyfill in browsers where native support is not available. Out of necessity, Overthrow examines the user agent string to whitelist the current and future versions of mobile platforms that are known to have native <code>overflow</code> support, but not before checking through more reliable and agnostic means: namely, iOS5's (and now Chrome Android's too!) touch scrolling CSS property, and a broad desktop browser inference test (no touch event support with a screen greater than 1200px wide).  </p>
-		  
-		  <p>First and foremost, Overthrow is designed to simply enable native CSS <code>overflow</code> in browsers it deems to have native support, but it includes a touch-scrolling polyfill too! In platforms that don't appear to support <code>overflow</code> natively, but do support touch events, Overthrow will polyfill the feature, allowing momentum-based scrolling in browsers that might otherwise be left with an innaccessible experience.</p>
-		  
-		  <p>Perhaps most importantly, Overthrow enables <code>overflow</code> support as a qualified, progressive enhancement, meaning your content starts out uncropped and accessible, and properties like <code>width</code> and <code>height</code> are assigned only in browsers where overflow content can reliably be scrolled (either natively or with the polyfill). In browsers that don't support overflow natively, and also don't support touch events, the content will not receive dimensions at all, leaving users with a degraded but<em></em> accessible experience.</p>
-		  
-		  <h2 id="examples">A few example pages</h2>
-		  <p>The examples directory has some sample responsive layouts that use overthrow. If you're in a browser that supports overthrow, you'll find a link in the header to toggle it on and off, demonstrating the fallback experience for non-overflow browsers.</p>
+
+			<p id="top" class="project-sub">A <em><span title="1.6kb min/gz">tiny</span>, no-frills, framework-independent, targeted</em> <code>overflow: auto</code> polyfill for use in responsive design.</p>
+
+
+			<p id="toggleContain" class="code"></p>
+
+			<h2 id="wat">What is this all about?</h2>
+
+			<p>You want to use CSS <code>overflow</code> in your designs, but <code>overflow</code> doesn't work properly in many browsers, particularly mobile ones. Many popular mobile browsers treat <code>overflow: auto</code> the same as <code>overflow: hidden</code>, cropping overflow content from view, and leaving users no way to access it.</p>
+
+			<p>But wait - many browsers actually support <code>overflow</code> very well! In particular, desktop browsers tend to support it without a hitch, and many of the latest versions of most mobile platforms do too. The trouble is, it's hard – perhaps impossible – to test for <code>overflow</code> support, and even if we could use it safely where supported, many popular browsers lack that support and would be left with a degraded experience.</p>
+
+			<h2 id="wat-overthrow">What is Overthrow?</h2>
+
+			<p>Overthrow is a conservative attempt at filling the gaps in <code>overflow</code> support, with an emphasis on letting native implementations do their thing, and in touch-supporting browsers, providing a very minimal polyfill in browsers where native support is not available. Out of necessity, Overthrow examines the user agent string to whitelist the current and future versions of mobile platforms that are known to have native <code>overflow</code> support, but not before checking through more reliable and agnostic means: namely, iOS5's (and now Chrome Android's too!) touch scrolling CSS property, and a broad desktop browser inference test (no touch event support with a screen greater than 1200px wide).  </p>
+
+			<p>First and foremost, Overthrow is designed to simply enable native CSS <code>overflow</code> in browsers it deems to have native support, but it includes a touch-scrolling polyfill too! In platforms that don't appear to support <code>overflow</code> natively, but do support touch events, Overthrow will polyfill the feature, allowing momentum-based scrolling in browsers that might otherwise be left with an innaccessible experience.</p>
+
+			<p>Perhaps most importantly, Overthrow enables <code>overflow</code> support as a qualified, progressive enhancement, meaning your content starts out uncropped and accessible, and properties like <code>width</code> and <code>height</code> are assigned only in browsers where overflow content can reliably be scrolled (either natively or with the polyfill). In browsers that don't support overflow natively, and also don't support touch events, the content will not receive dimensions at all, leaving users with a degraded but<em></em> accessible experience.</p>
+
+			<h2 id="examples">A few example pages</h2>
+			<p>The examples directory has some sample responsive layouts that use overthrow. If you're in a browser that supports overthrow, you'll find a link in the header to toggle it on and off, demonstrating the fallback experience for non-overflow browsers.</p>
 		 <ul>
-		 	 <li><a href="examples/2-column/">Responsive Columned Layout</a></li>
+			 <li><a href="examples/2-column/">Responsive Columned Layout</a></li>
 			 <li><a href="examples/dialog/">Responsive Dialog Layout</a></li>
 		 </ul>
-		  
-		 
-		
+
+
+
 
 	<h2>That's about it.</h2>
 
 		<h3>Here's some extra demo content to scroll through...</h3>
 
-	    
+
 
 		<h3>Example Embedded Overthrow Block</h3>
 		<p>Note: this may be a little clunky at the moment, as nesting isn't quite finished. Check out the nesting branch for progress.</p>
 		<div class="overthrow embedder">
-		
+
 		<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
 		<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p><p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p><p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p><p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-		
+
 			</div>
-		
+
 		<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-		
-		
+
+
 		<h3>Form elements</h3>
-			
+
 		<form action="#" method="get">
 
 			<div>
-	       	 	<label for="name">Text Input:</label>
-	        	<input type="text" name="name" id="name" value=""  />
+						<label for="name">Text Input:</label>
+						<input type="text" name="name" id="name" value=""  />
 			</div>
 
 			<div>
@@ -375,10 +374,10 @@
 			</div>
 
 		<h2>Header Level 2</h2>
-	       
+
 		<ol>
-		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-		   <li>Aliquam tincidunt mauris eu risus.</li>
+			 <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+			 <li>Aliquam tincidunt mauris eu risus.</li>
 		</ol>
 
 		<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
@@ -386,18 +385,18 @@
 		<h3>Header Level 3</h3>
 
 		<ul>
-		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-		   <li>Aliquam tincidunt mauris eu risus.</li>
+			 <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+			 <li>Aliquam tincidunt mauris eu risus.</li>
 		</ul>
 
 
-		
+
 
 		<h2>Header Level 2</h2>
-	       
+
 		<ol>
-		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-		   <li>Aliquam tincidunt mauris eu risus.</li>
+			 <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+			 <li>Aliquam tincidunt mauris eu risus.</li>
 		</ol>
 
 		<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
@@ -405,21 +404,21 @@
 		<h3>Header Level 3</h3>
 
 		<ul>
-		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-		   <li>Aliquam tincidunt mauris eu risus.</li>
+			 <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+			 <li>Aliquam tincidunt mauris eu risus.</li>
 		</ul>
 
 		<p>Okay, <a href="#top">Back to top, then?</a></p>
-		
+
 	</div><!-- overthrow content -->
-	
+
 	<div id="nav">
 	<ul>
 			<li><a href="#top" class="throw">Home</a></li>
 			<li><a href="#wat" class="throw">What is this all about?</a></li>
 			<li><a href="#wat-overthrow" class="throw">What is Overthrow?</a></li>
 			<li><a href="#features" class="throw">Features</a></li>
-			<li><a href="#support" class="throw">Support</a></li>			
+			<li><a href="#support" class="throw">Support</a></li>
 	</ul>
 	</div>
 	<script src="examples/togglelink.js"></script>
@@ -429,14 +428,14 @@
 		var doc = w.document,
 			o = overthrow;
 		// Enhance this page a bit
-		
+
 		// report the browser enhancement status
 		var tbody = doc.getElementsByTagName("tbody")[0],
 			tr = doc.createElement( "tr" );
 		tr.className = "you";
 		tr.innerHTML = "<td>Your Browser</td><td><span class='"+  o.support + "'>" + o.support + "</span></td>";
 		tbody.insertBefore( tr, tbody.firstChild );
-	
+
 		w.onload = function(){
 			setTimeout(function(){
 				if(!location.hash){

@@ -5,6 +5,7 @@
 	<title>Overthrow Demo</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<link href="demo.css" rel="stylesheet">
+	<link rel="stylesheet" href="/demo-head/demohead.css" />
 	<style>
 		.overthrow-enabled .overthrow {
 			-webkit-overflow-scrolling: touch;
@@ -59,10 +60,23 @@
 	<script src="../../src/overthrow-init.js"></script>
 	<script src="../../extensions/overthrow-sidescroller.js"></script>
 	<script src="../../extensions/overthrow-sidescroller.disable-nav.js"></script>
+	<script src="/demo-head/loadfont.js"></script>
 </head>
 <body>
-	<div class="header">
-		<a href="http://filamentgroup.com/"><h1 id="fg-logo">Filament Group</h1></a>
+	<div class="demo-header">
+		<div class="company">
+			<img src="http://filamentgroup.com/images/fg-logo-positive-sm-crop.png">
+		</div>
+		<div class="details">
+			<p class="description-container">Demo of <span class="repo-name">Overthrow</span>
+				<span class="description">A <em><span title="1.6kb min/gz">tiny</span>, no-frills, framework-independent, targeted</em> <code>overflow: auto</code> polyfill for use in responsive design.</span>
+			</p>
+			<ul class="outbound-links">
+				<li><a href="https://github.com/filamentgroup/Overthrow">Code</a></li>
+				<li><a href="http://filamentgroup.com/lab/overthrow.html">Article</a></li>
+				<li><a href="https://github.com/filamentgroup/Overthrow/issues">Issues</a></li>
+			</ul>
+		</div>
 	</div>
 	<h2>Basic side-scroller w/arrows</h2>
 	<p>Will add a <code>disabled</code> class to nav items upon reaching the start/end of a Sidescroller region.</p>

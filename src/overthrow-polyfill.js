@@ -20,7 +20,7 @@
 
 	// find closest overthrow (elem or a parent)
 	o.closest = function( target, ascend ){
-		return !ascend && target.className && target.className.indexOf( scrollIndicatorClassName ) > -1 && target || o.closest( target.parentNode );
+		return !ascend && target.className && target.className.toString().indexOf( scrollIndicatorClassName ) > -1 && target || o.closest( target.parentNode );
 	};
 		
 	// polyfill overflow

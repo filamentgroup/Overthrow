@@ -9,7 +9,8 @@ module.exports = function(grunt) {
   grunt.initConfig({
     // Metadata.
     pkg: pkg = grunt.file.readJSON('package.json'),
-    banner: '/*! <%= pkg.title || pkg.name %> - <%= pkg.description %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+    scriptname: 'overthrow',
+    banner: '/*! <%= pkg.title ||  scriptname %> - <%= pkg.description %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>; Licensed <%= pkg.license %> */\n',
     // Task configuration.
     concat: {
@@ -19,11 +20,11 @@ module.exports = function(grunt) {
       },
       main: {
         src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        dest: 'dist/<%=  scriptname %>.js'
       },
       sidescroller: {
         src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js','extensions/overthrow-sidescroller.js'],
-        dest: 'dist/<%= pkg.name %>.sidescroller.js'
+        dest: 'dist/<%=  scriptname %>.sidescroller.js'
       }
     },
     qunit: {
@@ -36,11 +37,11 @@ module.exports = function(grunt) {
       },
       main: {
         src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js'],
-        dest: 'dist/<%= pkg.name %>.min.js'
+        dest: 'dist/<%= scriptname %>.min.js'
       },
       sidescroller: {
         src: ['src/overthrow-detect.js','src/overthrow-toss.js','src/overthrow-polyfill.js','src/overthrow-init.js','extensions/overthrow-sidescroller.js'],
-        dest: 'dist/<%= pkg.name %>.sidescroller.min.js'
+        dest: 'dist/<%=  scriptname %>.sidescroller.min.js'
       },
 
       sidescrollerExtensions: {

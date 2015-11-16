@@ -3,7 +3,7 @@
 
 	// o is overthrow reference from overthrow-polyfill.js
 	if( o === undefined ){
-		return;
+		w.overthrow = o = {};
 	}
 
 	// Easing can use any of Robert Penner's equations (http://www.robertpenner.com/easing_terms_of_use.html). By default, overthrow includes ease-out-cubic

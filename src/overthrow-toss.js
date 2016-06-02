@@ -23,8 +23,14 @@
 			};
 	})();
 
-	// tossing property is true during a programatic scroll
-	o.tossing = false;
+	// tossing object keeps track of currently tossing elements. true during a programatic scroll
+	var tossingElems = {};
+	o.tossing = function( elem, state ){
+		if( state !== undefined ){
+			tossingElems[ elem ] = state;
+		}
+		return tossingElems[ elem ];
+	};
 
 	// Keeper of intervals
 	var timeKeeper;
@@ -40,7 +46,7 @@
 
 	*/
 	o.toss = function( elem, options ){
-		o.intercept();
+		o.tossing( elem, false );
 		var i = 0,
 			sLeft = elem.scrollLeft,
 			sTop = elem.scrollTop,
@@ -84,26 +90,32 @@
 			op.top = op.top - sTop;
 		}
 
-		o.tossing = true;
+		o.tossing( elem, true );
 		var startTime = new Date().getTime();
 		var endTime = startTime + op.duration;
 		var run = function(){
 			var curTime = new Date().getTime();
-			i = ( ( curTime - startTime ) / op.duration ) * op.duration;
-			if( curTime < endTime ){
-				elem.scrollLeft = op.easing( i, sLeft, op.left, op.duration );
-				elem.scrollTop = op.easing( i, sTop, op.top, op.duration );
-				if( o.tossing ){
-					return raf( run );
+			// if tossing is suddenly not true, return the callback
+			if( !o.tossing( elem ) ){
+				if( op.finished ){
+					op.finished();
 				}
 			}
+			// if the time is still less than the end of duration, keep scrolling
+			else if( curTime < endTime ){
+				i = ( ( curTime - startTime ) / op.duration ) * op.duration;
+				elem.scrollLeft = op.easing( i, sLeft, op.left, op.duration );
+				elem.scrollTop = op.easing( i, sTop, op.top, op.duration );
+				return raf( run );
+			}
+			// if time is up,
 			else{
 				elem.scrollLeft = endLeft;
 				elem.scrollTop = endTop;
 				if( op.finished ){
 					op.finished();
 				}
-				o.intercept();
+				o.tossing( elem, false );
 			}
 		};
 
@@ -113,9 +125,12 @@
 		return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
 	};
 
-	// Intercept any throw in progress
-	o.intercept = function(){
-		o.tossing = false;
+	// Intercept any throw in progress. deprecate
+	o.intercept = function( elem ){
+		if( !elem ){
+			return;
+		}
+		o.tossing( elem, false );
 	};
 
 })( this, this.overthrow );

@@ -13,6 +13,16 @@
 		return c*((t=t/d-1)*t*t + 1) + b;
 	};
 
+	// requestAnimationFrame pfill
+	var raf = (function(){
+		return  window.requestAnimationFrame       ||
+			window.webkitRequestAnimationFrame ||
+			window.mozRequestAnimationFrame    ||
+			function( callback ){
+				w.setTimeout(callback, 1000 / 60);
+			};
+	})();
+
 	// tossing property is true during a programatic scroll
 	o.tossing = false;
 
@@ -38,7 +48,7 @@
 			op = {
 				top: "+0",
 				left: "+0",
-				duration: 50,
+				duration: 200,
 				easing: o.easing,
 				finished: function() {}
 			},
@@ -75,10 +85,17 @@
 		}
 
 		o.tossing = true;
-		timeKeeper = setInterval(function(){
-			if( i++ < op.duration ){
+		var startTime = new Date().getTime();
+		var endTime = startTime + op.duration;
+		var run = function(){
+			var curTime = new Date().getTime();
+			i = ( ( curTime - startTime ) / op.duration ) * op.duration;
+			if( curTime < endTime ){
 				elem.scrollLeft = op.easing( i, sLeft, op.left, op.duration );
 				elem.scrollTop = op.easing( i, sTop, op.top, op.duration );
+				if( o.tossing ){
+					return raf( run );
+				}
 			}
 			else{
 				if( endLeft !== elem.scrollLeft ){
@@ -106,7 +123,9 @@
 
 				o.intercept();
 			}
-		}, 1 );
+		};
+
+		raf( run );
 
 		// Return the values, post-mixin, with end values specified
 		return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
@@ -114,7 +133,6 @@
 
 	// Intercept any throw in progress
 	o.intercept = function(){
-		clearInterval( timeKeeper );
 		o.tossing = false;
 	};
 

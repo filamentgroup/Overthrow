@@ -52,7 +52,7 @@
 				easing: o.easing,
 				finished: function() {}
 			},
-			endLeft, endTop, finished = false;
+			endLeft, endTop;
 
 		// Mixin based on predefined defaults
 		if( options ){
@@ -98,29 +98,11 @@
 				}
 			}
 			else{
-				if( endLeft !== elem.scrollLeft ){
-					elem.scrollLeft = endLeft;
-				} else {
-					// if the end of the vertical scrolling has taken place
-					// we know that we're done here call the callback
-					// otherwise signal that horizontal scrolling is complete
-					if( finished ) {
-						op.finished();
-					}
-					finished = true;
+				elem.scrollLeft = endLeft;
+				elem.scrollTop = endTop;
+				if( op.finished ){
+					op.finished();
 				}
-
-				if( endTop !== elem.scrollTop ){
-					elem.scrollTop = endTop;
-				} else {
-					// if the end of the horizontal scrolling has taken place
-					// we know that we're done here call the callback
-					if( finished ) {
-						op.finished();
-					}
-					finished = true;
-				}
-
 				o.intercept();
 			}
 		};

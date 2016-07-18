@@ -1,6 +1,6 @@
 {
   "name": "fg-overthrow",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "An overflow:auto polyfill for responsive design.",
   "author": {
     "name": "Scott Jehl, Filament Group, Inc.",

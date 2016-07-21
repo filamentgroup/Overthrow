@@ -69,7 +69,19 @@ module.exports = function(grunt) {
 						flatten: true
 					}
 				]
-			}
+			},
+      toss: {
+				files: [
+          {
+						expand: true,
+						// NOTE prevent overwritting by only pulling namespaced files
+						src: "lib/toss/toss.js",
+						dest: "lib/toss/",
+						filter: "isFile",
+						flatten: true
+					},
+				]
+			},
 		}
   });
 

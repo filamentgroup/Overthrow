@@ -91,6 +91,6 @@ module.exports = function(grunt) {
   // Default task.
   grunt.registerTask('default', ['copy', 'concat', 'uglify']);
   grunt.registerTask('stage', ['copy', 'concat', 'uglify']);
-   grunt.registerTask('jenkins', ['copy', 'concat', 'uglify', 'qunit']);
+   grunt.registerTask('travis', ['qunit']);
 
 };

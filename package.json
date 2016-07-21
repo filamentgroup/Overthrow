@@ -25,6 +25,9 @@
   "bugs": {
     "url": "https://github.com/filamentgroup/Overthrow/issues"
   },
+  "dependencies": {
+    "fg-toss": "0.2.1"
+  },
   "devDependencies": {
     "grunt": "0.4.1",
     "grunt-contrib-concat": "0.1.3",

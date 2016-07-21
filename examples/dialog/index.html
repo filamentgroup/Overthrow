@@ -23,7 +23,7 @@
 			border-top: 1px solid #eee;
 		}
 		header h1, footer p {
-			margin: 0;	
+			margin: 0;
 			font-size: 1em;
 			padding: 0;
 			text-align: center;
@@ -36,7 +36,7 @@
 		}
 		.dialog {
 			background: #fff;
-			
+
 		}
 		button {
 			position: absolute;
@@ -50,7 +50,7 @@
 			cursor: pointer;
 			border: 0;
 		}
-		
+
 		/* overthrow layout enhancements */
 	    /* Enable overflow: auto on elements with overthrow class when html element has overthrow class too */
 		.overthrow-enabled .overthrow {
@@ -62,8 +62,8 @@
 		.overthrow-enabled footer {
 			height: 15%;
 		}
-		
-		
+
+
 		#toggleContain a {
 			display: inline-block;
 			border: 1px solid #aaa;
@@ -73,22 +73,22 @@
 			color: #000;
 			background: #ddd;
 			border-radius: .5em;
-		
+
 		}
-		
-		
-		
+
+
+
 		@media (min-height: 15em) {
 			html.overthrow-enabled, html.overthrow-enabled body, .overthrow-enabled .dialog {
 				height: 99.8%;
 				margin: 0;
 			}
-			
+
 			.overthrow-enabled article {
 				height: 70%;
 				position: relative;
 			}
-		
+
 		}
 
 		@media (min-width: 30em) and (min-height: 20em){
@@ -112,7 +112,7 @@
 				-o-box-shadow: 0 0 8px #666;
 				box-shadow: 0 0 8px #666;
 				border-radius: 2em;
-				
+
 			}
 			.overthrow-enabled body {
 				overflow: hidden;
@@ -128,35 +128,36 @@
 				position: relative;
 				width: 30em;
 				margin: 8% auto -8%;
-			}	
+			}
 			.overthrow-enabled .dialog {
 				height: 70%;
 				margin: 8% auto -8%;
-			}		
+			}
 		}
 	</style>
+	<script src="../../node_modules/fg-toss/src/toss.js"></script>
 	<script src="../../src/overthrow-detect.js"></script>
 	<script src="../../src/overthrow-polyfill.js"></script>
 	<script src="../../src/overthrow-toss.js"></script>
 	<script src="../../src/overthrow-init.js"></script>
 </head>
 <body>
-	
+
 	<div class="dialog">
-	
+
 		<header>
 			<h1>A Responsive Dialog</h1>
 
 			<button class="close">Close</button>
 		</header>
-	
+
 		<article class="overthrow">
 				<h1>Primary page content</h1>
 	       	 	<p id="toggleContain"><!-- overthrow toggle link will go here --></p>
 				<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
 
 				<h2>Header Level 2</h2>
-	       
+
 				<ol>
 				   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
 				   <li>Aliquam tincidunt mauris eu risus.</li>
@@ -172,17 +173,17 @@
 				</ul>
 
 				<pre><code>
-				#header h1 a { 
-					display: block; 
-					width: 300px; 
-					height: 80px; 
+				#header h1 a {
+					display: block;
+					width: 300px;
+					height: 80px;
 				}
 				</code></pre>
-			
+
 				<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
 
 				<h2>Header Level 2</h2>
-	       
+
 				<ol>
 				   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
 				   <li>Aliquam tincidunt mauris eu risus.</li>
@@ -198,18 +199,18 @@
 				</ul>
 
 				<pre><code>
-				#header h1 a { 
-					display: block; 
-					width: 300px; 
-					height: 80px; 
+				#header h1 a {
+					display: block;
+					width: 300px;
+					height: 80px;
 				}
 				</code></pre>
-			
-			
+
+
 				<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
 
 				<h2>Header Level 2</h2>
-	       
+
 				<ol>
 				   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
 				   <li>Aliquam tincidunt mauris eu risus.</li>
@@ -225,17 +226,17 @@
 				</ul>
 
 				<pre><code>
-				#header h1 a { 
-					display: block; 
-					width: 300px; 
-					height: 80px; 
+				#header h1 a {
+					display: block;
+					width: 300px;
+					height: 80px;
 				}
 				</code></pre>
-		
+
 		</article>
-	
-	
-	
+
+
+
 		<footer>
 			<p>Page Footer</p>
 		</footer>

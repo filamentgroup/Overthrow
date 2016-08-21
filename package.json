@@ -12,7 +12,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "grunt qunit --verbose"
+    "test": "grunt qunit --verbose",
+    "default": "grunt default"
   },
   "repository": {
     "type": "git",

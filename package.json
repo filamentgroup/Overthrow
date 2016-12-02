@@ -6,7 +6,7 @@
     "name": "Scott Jehl, Filament Group, Inc.",
     "url": "http://filamentgroup.com"
   },
-  "main": "overthrow-detect.js",
+  "main": "src/overthrow-detect.js",
   "directories": {
     "example": "examples",
     "test": "test"

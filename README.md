@@ -1,3 +1,5 @@
+:warning: This project is archived and the repository is no longer maintained. 
+
 # Overthrow #
 
 A framework-independent, `overflow: auto` polyfill for use in responsive design.
